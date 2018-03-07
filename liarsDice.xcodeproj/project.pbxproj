@@ -12,6 +12,9 @@
 		19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF659203F09FB0078F878 /* Main.storyboard */; };
 		19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF65C203F09FB0078F878 /* Assets.xcassets */; };
 		19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF65E203F09FB0078F878 /* LaunchScreen.storyboard */; };
+		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
+		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
+		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		19CCF65C203F09FB0078F878 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19CCF65F203F09FB0078F878 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19CCF661203F09FB0078F878 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
+		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
+		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +66,19 @@
 				19CCF65C203F09FB0078F878 /* Assets.xcassets */,
 				19CCF65E203F09FB0078F878 /* LaunchScreen.storyboard */,
 				19CCF661203F09FB0078F878 /* Info.plist */,
+				D9ADB6C2204FEE60007CB047 /* model */,
 			);
 			path = liarsDice;
+			sourceTree = "<group>";
+		};
+		D9ADB6C2204FEE60007CB047 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				D9ADB6C0204FEE5D007CB047 /* Dice.swift */,
+				D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */,
+				D9ADB6C7204FF073007CB047 /* Player.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */,
 				19CCF658203F09FB0078F878 /* ViewController.swift in Sources */,
+				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
+				D9ADB6C8204FF073007CB047 /* Player.swift in Sources */,
 				19CCF656203F09FB0078F878 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
