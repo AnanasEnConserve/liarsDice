@@ -33,9 +33,6 @@ class ViewController: UIViewController {
     var currentRoll = [" "," "," "," "," "]
     
     @IBAction func rollDice(_ sender: UIButton) {
-        for index in 0...4 {
-            allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
-        }
         rollDice()
     }
     
@@ -169,35 +166,11 @@ class ViewController: UIViewController {
     
    
     func rollDice() {
-        if removed.count > 0 {
-            for index in 0..<currentRoll.count {
-                if removed.contains(index) ==  false {
-                    currentRoll[index] = " "
-                }
-            }
-        }
-      
-        
-        //DispatchQueue thingy ensures a delay in showing the roll (to possibly allow for an animation to be shown)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            for value in 0..<self.allDice.count {
-                if self.removed.contains(value) == false {
-                    let currentDice = self.allDice[value]
-                let randomValue = Int(arc4random_uniform(6))
-                    currentDice.setTitle(self.diceValues[randomValue], for: UIControlState.normal)
-                currentDice.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
-                    self.currentRoll[value] = self.diceValues[randomValue]
-                //currentRoll.insert(diceValues[randomValue], at: value)
-                //currentRoll.append(diceValues[randomValue])
-            }
-           // else {
-             //       self.diceInPlay[value].setTitle(" ", for: UIControlState.normal)
-            //}
-        }
-        })
-        for index in 0..<allDice.count {
-            allDice[index].setTitle(currentRoll[index], for: UIControlState.normal)
-            //diceInPlay[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+        game.rollDice()
+        for i in 0..<5 {
+            let value = game.getDiceNumber(i)
+            allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
+            currentRoll[i] = diceValues[value-1]
         }
         
         print("Array of Current Roll: ", currentRoll)
