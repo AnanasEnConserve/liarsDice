@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
-    // these should from now on be accessed through the variable 'game'
-    //Declare variables to keep track of the score
+// these should from now on be accessed through the variable 'game'
+//Declare variables to keep track of the score
 //    var playerScore = 0
 //    var opponentScore = 0
 //    var playerStreak = 0
@@ -148,6 +148,7 @@ class ViewController: UIViewController {
     
     //Function to reset the game (start new round && reset scores)
     func reset() {
+        game = LiarsDiceGame()
         removed.removeAll()
         selected.removeAll()
         

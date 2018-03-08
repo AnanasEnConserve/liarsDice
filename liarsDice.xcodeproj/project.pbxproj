@@ -15,6 +15,7 @@
 		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
+		D9BB055D2051893300F07073 /* String+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BB055C2051893300F07073 /* String+Index.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		D9BB055C2051893300F07073 /* String+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Index.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				19CCF65E203F09FB0078F878 /* LaunchScreen.storyboard */,
 				19CCF661203F09FB0078F878 /* Info.plist */,
 				D9ADB6C2204FEE60007CB047 /* model */,
+				D9BB055C2051893300F07073 /* String+Index.swift */,
 			);
 			path = liarsDice;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
 				D9ADB6C8204FF073007CB047 /* Player.swift in Sources */,
 				19CCF656203F09FB0078F878 /* AppDelegate.swift in Sources */,
+				D9BB055D2051893300F07073 /* String+Index.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
