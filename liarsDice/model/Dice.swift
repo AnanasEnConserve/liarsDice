@@ -12,6 +12,7 @@ class Dice {
     private var eyes = 1
     private var inPlay = true
     
+    
     init() {
         roll()
     }
@@ -30,6 +31,9 @@ class Dice {
         return eyes
     }
     
+    func fix() {
+        inPlay = false
+    }
     func isInPlay() -> Bool {
         return inPlay
     }
