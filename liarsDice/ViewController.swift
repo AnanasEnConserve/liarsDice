@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     @IBAction func rollDice(_ sender: UIButton) {
         for index in 0...4 {
-            diceInPlay[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+            allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
         }
         rollDice()
     }
@@ -180,9 +180,9 @@ class ViewController: UIViewController {
         
         //DispatchQueue thingy ensures a delay in showing the roll (to possibly allow for an animation to be shown)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            for value in 0..<self.diceInPlay.count {
+            for value in 0..<self.allDice.count {
                 if self.removed.contains(value) == false {
-                    let currentDice = self.diceInPlay[value]
+                    let currentDice = self.allDice[value]
                 let randomValue = Int(arc4random_uniform(6))
                     currentDice.setTitle(self.diceValues[randomValue], for: UIControlState.normal)
                 currentDice.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
@@ -195,8 +195,8 @@ class ViewController: UIViewController {
             //}
         }
         })
-        for index in 0..<diceInPlay.count {
-            diceInPlay[index].setTitle(currentRoll[index], for: UIControlState.normal)
+        for index in 0..<allDice.count {
+            allDice[index].setTitle(currentRoll[index], for: UIControlState.normal)
             //diceInPlay[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
         }
         
