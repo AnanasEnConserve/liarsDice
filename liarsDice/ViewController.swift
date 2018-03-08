@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     //Declare array of values the dice can take
-    var  diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+    var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
     // these should from now on be accessed through the variable 'game'
     //Declare variables to keep track of the score
