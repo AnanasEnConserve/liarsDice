@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
+    @IBAction func Bid(_ sender: UIButton) {
+    }
+    
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
