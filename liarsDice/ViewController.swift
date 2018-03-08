@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
 
     
+    let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
+    
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
@@ -26,15 +28,19 @@ class ViewController: UIViewController {
     
     
     @IBAction func rollDice(_ sender: UIButton) {
+        for index in 0...4 {
+            diceInPlay[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+        }
         rollDice()
     }
     
-    //TODO: Allow the player to only take out as much as four dice (!! IMPORTANT AS THIS WILL CRASH THE GAME)
-    // Only show the 'Hold' button when appropriate (disable it otherwise and set opacity to 0%)
-    // Hide taken out dice at the start of the game and only show when appropriate
-    // Create animation or something to indicate to the player that the opponent is rolling
+    //TODO:
+    // Only show the 'Hold' button when appropriate (disable it otherwise and possibly hide it/set opacity to 0%)
+    // Create animation or something to indicate to the player that the opponent is rolling**
+    // If same value is rolled by same dice, the image remains static and it appears the player did not roll (FIX by opacity 0% at the start of the roll?)
     // Create menu to allow the player to register their bid
     // Create menu displaying the opponents bid and allow to Accept/Challenge
+    // Create game instructions (start page?)
     
     //Array containing the selected dice
     var selected = [Int]()
@@ -146,20 +152,33 @@ class ViewController: UIViewController {
             for index in 0..<currentRoll.count {
                 if removed.contains(index) ==  false {
                     currentRoll[index] = " "
-                    
                 }
             }
         }
-        for value in 0..<diceInPlay.count {
-            if removed.contains(value) == false {
-                let currentDice = diceInPlay[value]
+      
+        
+        //DispatchQueue thingy ensures a delay in showing the roll (to possibly allow for an animation to be shown)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            for value in 0..<self.diceInPlay.count {
+                if self.removed.contains(value) == false {
+                    let currentDice = self.diceInPlay[value]
                 let randomValue = Int(arc4random_uniform(6))
-                currentDice.setTitle(diceValues[randomValue], for: UIControlState.normal)
-                currentRoll[value] = diceValues[randomValue]
+                    currentDice.setTitle(self.diceValues[randomValue], for: UIControlState.normal)
+                currentDice.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+                    self.currentRoll[value] = self.diceValues[randomValue]
                 //currentRoll.insert(diceValues[randomValue], at: value)
                 //currentRoll.append(diceValues[randomValue])
             }
+           // else {
+             //       self.diceInPlay[value].setTitle(" ", for: UIControlState.normal)
+            //}
         }
+        })
+        for index in 0..<diceInPlay.count {
+            diceInPlay[index].setTitle(currentRoll[index], for: UIControlState.normal)
+            //diceInPlay[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+        }
+        
         print("Array of Current Roll: ", currentRoll)
     }
     
