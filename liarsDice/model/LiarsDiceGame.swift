@@ -21,7 +21,6 @@ class LiarsDiceGame {
     private var NUMBER_OF_DICE = 5
     // number of dice already taken out of play. Must never exceed 5
     private var fixed = 0
-    
     // initialize the game: put the dices on the table, basically
     init() {
         for _ in 0..<NUMBER_OF_DICE {
@@ -52,5 +51,7 @@ class LiarsDiceGame {
             }
         }
     }
+    
+    func compareRank() {String }
     
 }
