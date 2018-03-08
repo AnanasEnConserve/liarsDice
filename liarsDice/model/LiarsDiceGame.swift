@@ -51,6 +51,35 @@ class LiarsDiceGame {
             }
         }
     }
+    // todo: make these private
+    func normalizeBid(bid: String) -> String{
+        // replace 1 with 7 for sorting purposes
+        let newBid = bid.replacingOccurrences(of: "1", with: "7")
+        var counts: [Character:Int] = [:]
+        for i in newBid {
+            counts[i] = (counts[i] ?? 0) + 1
+        }
+        // I know this is a mess but it works! Sorts by (1) number of occurrences and (2) value if they both appear equally often
+        let result = counts.sorted { if($0.value != $1.value){ return $0.value > $1.value} else {return $0.key > $1.key}}.map {String.init(repeating: $0.key, count: $0.value)}
+        return result.joined().replacingOccurrences(of: "7", with: "1")
+    }
+    func calculateRank(bid: String){
+        let normalizedBid = normalizeBid(bid: bid)
+        print("normalized bid: " + normalizedBid)
+        var pattern = [Int]()
+        var currentCount = 0
+        for i in 0..<normalizedBid.count{
+            if i == 0 || normalizedBid[i] == normalizedBid[i-1] {
+                currentCount += 1
+            }
+            else{
+                pattern.append(currentCount)
+                currentCount = 1
+            }
+        }
+        pattern.append(currentCount)
+        print(pattern)
+    }
     
     // returns true if the bid is higher, meaning that it is a valid bid
     func bidIsHigher() -> Bool {
