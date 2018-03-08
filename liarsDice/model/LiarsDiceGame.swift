@@ -52,6 +52,10 @@ class LiarsDiceGame {
         }
     }
     
-    func compareRank() {String }
+    // returns true if the bid is higher, meaning that it is a valid bid
+    func bidIsHigher() -> Bool {
+        return true
+    }
+    
     
 }

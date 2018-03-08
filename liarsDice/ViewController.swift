@@ -142,6 +142,7 @@ class ViewController: UIViewController {
     
     //Function to reset the game (start new round && reset scores)
     func reset() {
+        game = LiarsDiceGame()
         removed.removeAll()
         selected.removeAll()
         
