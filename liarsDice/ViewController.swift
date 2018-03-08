@@ -9,23 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    // model that contains all data
+    var game = LiarsDiceGame()
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
+    // these should from now on be accessed through the variable 'game'
     //Declare variables to keep track of the score
-    var playerScore = 0
-    var opponentScore = 0
-    var playerStreak = 0
-    var opponentStreak = 0
+//    var playerScore = 0
+//    var opponentScore = 0
+//    var playerStreak = 0
+//    var opponentStreak = 0
     
-
-    
+    // The dice buttons displayed on the side, representing the fixed ones
     @IBOutlet var diceTakenOut: [UIButton]!
+    // ALL Dice, including the ones taken out. The ones that are taken out are simply set to "hidden" but they are still there
+    @IBOutlet var allDice: [UIButton]!
     
+    //Array to store all strings as rolled in the current turn
+    var currentRoll = [" "," "," "," "," "]
     
     @IBAction func rollDice(_ sender: UIButton) {
         for index in 0...4 {
@@ -48,17 +53,17 @@ class ViewController: UIViewController {
     //Function to highlight selected dices
     @IBAction func touchDice(_ sender: UIButton) {
         var getIndex = 0
-        if let selectedDice = diceInPlay.index(of: sender){
+        if let selectedDice = allDice.index(of: sender){
             if selected.contains(selectedDice) == false {
-                selected.append(diceInPlay.index(of: sender)!)
-                diceInPlay[selectedDice].setTitleColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), for: UIControlState.normal)
+                selected.append(allDice.index(of: sender)!)
+                allDice[selectedDice].setTitleColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), for: UIControlState.normal)
             }
             else {
                 while selected[getIndex] != selectedDice {
                     getIndex += 1
                 }
                 selected.remove(at: getIndex)
-                diceInPlay[selectedDice].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+                allDice[selectedDice].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
             }
         }
             print(selected)
@@ -71,37 +76,57 @@ class ViewController: UIViewController {
     @IBAction func removeDice(_ sender: UIButton) {
         if removed.count + selected.count == 5 {
             print("I'm afraid I can't let you do that Dave")
+            return
         }
-        else {
-        //let removedPreviously = removed.count
-            for appending in 0..<selected.count {
-                if removed.contains(selected[appending]) == false {
-                    removed.append(selected[appending])
-                }
-            }
-            print("Array of Removed dice ",removed)
-            for copying in 0..<removed.count {
-                diceTakenOut[copying].setTitle(currentRoll[removed[copying]], for: UIControlState.normal)
-            diceTakenOut[copying].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+        // fix dice in the model
+        game.fixDice(selected)
+        // make the dice disappear in the UI
+        for buttonIndex in selected{
+            allDice[buttonIndex].isHidden = true
         }
+        // todo: is this needed? Also add sanity check?
+        removed.append(contentsOf: selected)
+        // make them appear in the fixed row
+        for i in 0..<selected.count {
+            diceTakenOut[removed.count - selected.count + i].setTitle(currentRoll[selected[i]], for: UIControlState.normal)
+        }
+        // clear selection
+        selected.removeAll()
         
-        //Make taken out dice disappear;; Revert others back to original color
-            for updateColor in 0...4 {
-                if removed.contains(updateColor) {
-                    diceInPlay[updateColor].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
-                    diceInPlay[updateColor].isEnabled = false
-                } else {
-                    diceInPlay[updateColor].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
-                }
-            }
-            selected.removeAll()
-        }
+//        if removed.count + selected.count == 5 {
+//            print("I'm afraid I can't let you do that Dave")
+//        }
+//        else {
+//        //let removedPreviously = removed.count
+//            for appending in 0..<selected.count {
+//                if removed.contains(selected[appending]) == false {
+//                    removed.append(selected[appending])
+//                }
+//            }
+//            print("Array of Removed dice ",removed)
+//            for copying in 0..<removed.count {
+//                diceTakenOut[copying].setTitle(currentRoll[removed[copying]], for: UIControlState.normal)
+//            diceTakenOut[copying].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+//        }
+//
+//        //Make taken out dice disappear;; Revert others back to original color
+//            for updateColor in 0...4 {
+//                if removed.contains(updateColor) {
+//                    diceInPlay[updateColor].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+//                    diceInPlay[updateColor].isEnabled = false
+//                } else {
+//                    diceInPlay[updateColor].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+//                }
+//            }
+//            selected.removeAll()
+//        }
     }
       //TODO: Only allow to Hold once per turn;
     
     
     //Function to reset things at the start of a new round
     func startGame() {
+        game = LiarsDiceGame()
         removed.removeAll()
         selected.removeAll()
         for value in 0..<diceTakenOut.count {
@@ -127,25 +152,21 @@ class ViewController: UIViewController {
         selected.removeAll()
         
         //Revert colors && enable buttons for dice
-        for index in 0..<diceInPlay.count {
-            diceInPlay[index].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
-            diceInPlay[index].isEnabled = true
+        for index in 0..<allDice.count {
+            allDice[index].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+            allDice[index].isEnabled = true
+            allDice[index].isHidden = false
         }
-        
         
         for value in 0..<diceTakenOut.count {
             diceTakenOut[value].setTitle(" ", for: UIControlState.normal)
-            diceTakenOut[value].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+            //diceTakenOut[value].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
         }
         
         //TODO: Reset scores
         //Call function startGame() to set up a new round?
     }
     
-    @IBOutlet var diceInPlay: [UIButton]!
-    
-    //Array to store all strings as rolled in the current turn
-    var currentRoll = [" "," "," "," "," "]
    
     func rollDice() {
         if removed.count > 0 {
