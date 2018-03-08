@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     // model that contains all data
     var game = LiarsDiceGame()
     
+    let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
+    
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
@@ -34,12 +36,13 @@ class ViewController: UIViewController {
         rollDice()
     }
     
-    //TODO: Allow the player to only take out as much as four dice (!! IMPORTANT AS THIS WILL CRASH THE GAME)
-    // Only show the 'Hold' button when appropriate (disable it otherwise and set opacity to 0%)
-    // Hide taken out dice at the start of the game and only show when appropriate
-    // Create animation or something to indicate to the player that the opponent is rolling
+    //TODO:
+    // Only show the 'Hold' button when appropriate (disable it otherwise and possibly hide it/set opacity to 0%)
+    // Create animation or something to indicate to the player that the opponent is rolling**
+    // If same value is rolled by same dice, the image remains static and it appears the player did not roll (FIX by opacity 0% at the start of the roll?)
     // Create menu to allow the player to register their bid
     // Create menu displaying the opponents bid and allow to Accept/Challenge
+    // Create game instructions (start page?)
     
     //Array containing the selected dice
     var selected = [Int]()
@@ -165,30 +168,12 @@ class ViewController: UIViewController {
    
     func rollDice() {
         game.rollDice()
-        for i in 0..<5{
+        for i in 0..<5 {
             let value = game.getDiceNumber(i)
             allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
             currentRoll[i] = diceValues[value-1]
         }
         
-//        if removed.count > 0 {
-//            for index in 0..<currentRoll.count {
-//                if removed.contains(index) ==  false {
-//                    currentRoll[index] = " "
-//
-//                }
-//            }
-//        }
-//        for value in 0..<diceInPlay.count {
-//            if removed.contains(value) == false {
-//                let currentDice = diceInPlay[value]
-//                let randomValue = Int(arc4random_uniform(6))
-//                currentDice.setTitle(diceValues[randomValue], for: UIControlState.normal)
-//                currentRoll[value] = diceValues[randomValue]
-//                //currentRoll.insert(diceValues[randomValue], at: value)
-//                //currentRoll.append(diceValues[randomValue])
-//            }
-//        }
         print("Array of Current Roll: ", currentRoll)
     }
     
