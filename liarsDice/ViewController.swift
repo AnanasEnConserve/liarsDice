@@ -36,6 +36,17 @@ class ViewController: UIViewController {
     var currentRoll = [" "," "," "," "," "]
     
     @IBAction func rollDice(_ sender: UIButton) {
+        // dont mind me this is just for model testing
+//        print("rank" + String(game.calculateRank("12345")))
+//        print("rank" + String(game.calculateRank("33333")))
+//        print("rank" + String(game.calculateRank("43434")))
+//        print("rank" + String(game.calculateRank("32222")))
+//        print("rank" + String(game.calculateRank("66553")))
+//        game.setBid("23456")
+//        game.setBid("22345")
+//        game.setBid("23456")
+//        game.setBid("11345")
+//        game.setBid("55346")
         rollDice()
     }
     
