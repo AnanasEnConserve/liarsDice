@@ -34,6 +34,15 @@ class Dice {
     func fix() {
         inPlay = false
     }
+    
+    /**
+    * brings dice back into play and rerolls
+    */
+    func reset(){
+        inPlay = true
+        roll()
+    }
+    
     func isInPlay() -> Bool {
         return inPlay
     }

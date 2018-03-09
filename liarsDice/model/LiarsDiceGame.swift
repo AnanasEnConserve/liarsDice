@@ -8,10 +8,11 @@
 
 import Foundation
 
+
 class LiarsDiceGame {
     // The players
-    private var human = Player()
-    private var opponent = Player()
+    private var human = Player("Player")
+    private var opponent = Player("Dumb AI")
     // The bid made by the previous player; it should always be saved in the "normalized" form,
     // meaning that the dice values are sorted by frequency and value
     private var normalizedLastBid = ""
@@ -53,8 +54,7 @@ class LiarsDiceGame {
             }
         }
     }
-    // todo: make these private
-    func normalizeBid(_ bid: String) -> String{
+    private func normalizeBid(_ bid: String) -> String{
         // replace 1 with 7 for sorting purposes
         let newBid = bid.replacingOccurrences(of: "1", with: "7")
         var counts: [Character:Int] = [:]
@@ -153,5 +153,64 @@ class LiarsDiceGame {
             print("WARNING: Could not set bid because it was invalid (doesn't rank higher than current one)")
         }
     }
+    
+    // Toggles the turn and returns true if it is now the player's turn, false if it is the opponent's turn
+    func toggleTurn() -> Bool{
+        playerturn = !playerturn
+        return self.playerturn
+    }
+    
+    func getLastBid() -> String {
+        return normalizedLastBid
+    }
+    func getLastBidRank() -> Int {
+        return lastBidRank
+    }
+    
+    private func getAllDiceValues() -> String{
+        var values = String()
+        for i in 0..<NUMBER_OF_DICE{
+            values.append(String(getDiceNumber(i)))
+        }
+        return values
+    }
+    
+    /**
+     * compares the last bid to the current state of dice
+     * returns true if it was a bluff indeed
+     */
+    func callBluff() -> Bool {
+        // instead of comparing the ranks etc compare dice directly by removing them one by one from the pattern
+        var dice = getAllDiceValues()
+        print("Dice values: ")
+        print(dice)
+        print("Bid: ")
+        print(normalizedLastBid)
+        for i in getLastBid() {
+            if(dice.contains(i)){
+                if let index = dice.index(of: i) {
+                    dice.remove(at: index)
+                }
+            } else {
+                // this case means that one dice value in the bid wasn't found in the actual bid so it was a bluff
+                print("Caught bluffing!")
+                return true
+            }
+        }
+        // if all are removed it was not a bluff
+        print("Not a bluff")
+        return false
+    }
+    
+    func reset(){
+        lastBidRank = 0
+        normalizedLastBid = ""
+        playerturn = true
+        fixed = 0
+        for i in dice{
+            i.reset()
+        }
+    }
+    
     
 }
