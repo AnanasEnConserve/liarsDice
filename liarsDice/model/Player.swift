@@ -16,6 +16,10 @@ class Player {
     // Player's current winning streak
     private var streak = 0
     
+    init(_ playerName : String){
+        name = playerName
+    }
+    
     // Resets the streak to zero
     func resetStreak() {
         streak = 0

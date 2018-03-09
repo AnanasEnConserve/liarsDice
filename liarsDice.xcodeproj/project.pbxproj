@@ -14,11 +14,22 @@
 		19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF65C203F09FB0078F878 /* Assets.xcassets */; };
 		19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF65E203F09FB0078F878 /* LaunchScreen.storyboard */; };
 		D93D702A2052770600C95FA4 /* EBid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D70292052770600C95FA4 /* EBid.swift */; };
+		D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */; };
 		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
 		D9BB055D2051893300F07073 /* String+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BB055C2051893300F07073 /* String+Index.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D93D703920528CBC00C95FA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19CCF64A203F09FB0078F878 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19CCF651203F09FB0078F878;
+			remoteInfo = liarsDice;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		191A3A5C20528D48004B9ADE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = liarsDice/SecondViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +41,9 @@
 		19CCF65F203F09FB0078F878 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19CCF661203F09FB0078F878 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D93D70292052770600C95FA4 /* EBid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBid.swift; sourceTree = "<group>"; };
+		D93D703420528CBC00C95FA4 /* liarsDiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = liarsDiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = liarsDiceTests.swift; sourceTree = "<group>"; };
+		D93D703820528CBC00C95FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -44,6 +58,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D93D703120528CBC00C95FA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +73,7 @@
 			children = (
 				191A3A5C20528D48004B9ADE /* SecondViewController.swift */,
 				19CCF654203F09FB0078F878 /* liarsDice */,
+				D93D703520528CBC00C95FA4 /* liarsDiceTests */,
 				19CCF653203F09FB0078F878 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				19CCF652203F09FB0078F878 /* liarsDice.app */,
+				D93D703420528CBC00C95FA4 /* liarsDiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +100,15 @@
 				D9BB055C2051893300F07073 /* String+Index.swift */,
 			);
 			path = liarsDice;
+			sourceTree = "<group>";
+		};
+		D93D703520528CBC00C95FA4 /* liarsDiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */,
+				D93D703820528CBC00C95FA4 /* Info.plist */,
+			);
+			path = liarsDiceTests;
 			sourceTree = "<group>";
 		};
 		D9ADB6C2204FEE60007CB047 /* model */ = {
@@ -110,6 +142,24 @@
 			productReference = 19CCF652203F09FB0078F878 /* liarsDice.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D93D703320528CBC00C95FA4 /* liarsDiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D93D703B20528CBC00C95FA4 /* Build configuration list for PBXNativeTarget "liarsDiceTests" */;
+			buildPhases = (
+				D93D703020528CBC00C95FA4 /* Sources */,
+				D93D703120528CBC00C95FA4 /* Frameworks */,
+				D93D703220528CBC00C95FA4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D93D703A20528CBC00C95FA4 /* PBXTargetDependency */,
+			);
+			name = liarsDiceTests;
+			productName = liarsDiceTests;
+			productReference = D93D703420528CBC00C95FA4 /* liarsDiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -123,6 +173,11 @@
 					19CCF651203F09FB0078F878 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					D93D703320528CBC00C95FA4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 19CCF651203F09FB0078F878;
 					};
 				};
 			};
@@ -140,6 +195,7 @@
 			projectRoot = "";
 			targets = (
 				19CCF651203F09FB0078F878 /* liarsDice */,
+				D93D703320528CBC00C95FA4 /* liarsDiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -152,6 +208,13 @@
 				19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */,
 				19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */,
 				19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D93D703220528CBC00C95FA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +236,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D93D703020528CBC00C95FA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D93D703A20528CBC00C95FA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19CCF651203F09FB0078F878 /* liarsDice */;
+			targetProxy = D93D703920528CBC00C95FA4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		19CCF659203F09FB0078F878 /* Main.storyboard */ = {
@@ -332,6 +411,38 @@
 			};
 			name = Release;
 		};
+		D93D703C20528CBC00C95FA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8VPYVQ3H3Q;
+				INFOPLIST_FILE = liarsDiceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rug.liarsDiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liarsDice.app/liarsDice";
+			};
+			name = Debug;
+		};
+		D93D703D20528CBC00C95FA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8VPYVQ3H3Q;
+				INFOPLIST_FILE = liarsDiceTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rug.liarsDiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/liarsDice.app/liarsDice";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -349,6 +460,15 @@
 			buildConfigurations = (
 				19CCF665203F09FB0078F878 /* Debug */,
 				19CCF666203F09FB0078F878 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D93D703B20528CBC00C95FA4 /* Build configuration list for PBXNativeTarget "liarsDiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D93D703C20528CBC00C95FA4 /* Debug */,
+				D93D703D20528CBC00C95FA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
