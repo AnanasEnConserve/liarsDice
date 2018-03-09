@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "biddingSegue", sender: self)
     }
     
     //Declare array of values the dice can take
@@ -192,11 +193,13 @@ class ViewController: UIViewController {
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -204,4 +207,5 @@ class ViewController: UIViewController {
 
 
 }
+
 
