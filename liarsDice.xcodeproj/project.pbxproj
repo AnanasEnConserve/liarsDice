@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191A3A5D20528D48004B9ADE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A3A5C20528D48004B9ADE /* SecondViewController.swift */; };
 		19CCF656203F09FB0078F878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CCF655203F09FB0078F878 /* AppDelegate.swift */; };
 		19CCF658203F09FB0078F878 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CCF657203F09FB0078F878 /* ViewController.swift */; };
 		19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF659203F09FB0078F878 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191A3A5C20528D48004B9ADE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = liarsDice/SecondViewController.swift; sourceTree = "<group>"; };
 		19CCF652203F09FB0078F878 /* liarsDice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liarsDice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19CCF655203F09FB0078F878 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19CCF657203F09FB0078F878 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		19CCF649203F09FB0078F878 = {
 			isa = PBXGroup;
 			children = (
+				191A3A5C20528D48004B9ADE /* SecondViewController.swift */,
 				19CCF654203F09FB0078F878 /* liarsDice */,
 				D93D703520528CBC00C95FA4 /* liarsDiceTests */,
 				19CCF653203F09FB0078F878 /* Products */,
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191A3A5D20528D48004B9ADE /* SecondViewController.swift in Sources */,
 				D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */,
 				19CCF658203F09FB0078F878 /* ViewController.swift in Sources */,
 				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
