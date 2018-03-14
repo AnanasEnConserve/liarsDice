@@ -85,9 +85,20 @@ class LiarsDiceGame {
         return self.playerturn
     }
     
+    func isPlayerTurn() -> Bool{
+        return playerturn
+    }
+    
+    func isOpponentTurn() -> Bool{
+        return !playerturn
+    }
+    
+    
     // STUFF ABOUT BIDDING AND RANKING --------------------------------------------------------
     // (this stuff is bad and ugly but works)
     
+    // converts a string of dice values into the desired format
+    // bids are stored as strings, and elements in string are sorted by (1) frequency and (2) number rank
     private func normalizeBid(_ bid: String) -> String{
         // replace 1 with 7 for sorting purposes
         let newBid = bid.replacingOccurrences(of: "1", with: "7")
@@ -187,7 +198,6 @@ class LiarsDiceGame {
             print("WARNING: Could not set bid because it was invalid (doesn't rank higher than current one)")
         }
     }
-    
     
     func getLastBid() -> String {
         return normalizedLastBid

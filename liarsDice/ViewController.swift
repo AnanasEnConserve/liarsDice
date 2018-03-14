@@ -183,6 +183,16 @@ class ViewController: UIViewController {
     
    
     func rollDice() {
+        for j in 0..<5{
+            self.allDice[j].setTitle(" ", for: UIControlState.normal)
+        }
+        for _ in 0..<5{
+             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    for j in 0..<5{
+                        self.allDice[j].setTitle(self.diceValues[Int(arc4random_uniform(6))], for: UIControlState.normal)
+                        }
+                    }
+        }
         game.rollDice()
         for i in 0..<5 {
             let value = game.getDiceNumber(i)
