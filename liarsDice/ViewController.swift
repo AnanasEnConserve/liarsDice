@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     // model that contains all data
     var game = LiarsDiceGame()
     
+    
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
