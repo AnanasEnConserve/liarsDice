@@ -24,12 +24,17 @@ class LiarsDiceGame {
     private var NUMBER_OF_DICE = 5
     // number of dice already taken out of play. Must never exceed 5
     private var fixed = 0
+    // turn count
+    private var turnCount = 0
     // initialize the game: put the dices on the table, basically
     init() {
         for _ in 0..<NUMBER_OF_DICE {
             dice.append(Dice())
         }
     }
+    
+    // BASIC DICE FUNCTIONS ----------------------------------------------------------------
+    
     // rolls all dice that are still in play
     func rollDice() {
         for d in dice{
@@ -54,6 +59,46 @@ class LiarsDiceGame {
             }
         }
     }
+    
+    // OVERALL GAME MECHANICS ----------------------------------------------------------------
+    func reset(){
+        lastBidRank = 0
+        normalizedLastBid = ""
+        playerturn = true
+        fixed = 0
+        for i in dice{
+            i.reset()
+        }
+    }
+    
+    func incrementTurnCount(){
+        turnCount += 1
+    }
+    
+    func getTurnCount() -> Int {
+        return turnCount
+    }
+    
+    // Toggles the turn and returns true if it is now the player's turn, false if it is the opponent's turn
+    func toggleTurn() -> Bool{
+        playerturn = !playerturn
+        return self.playerturn
+    }
+    
+    func isPlayerTurn() -> Bool{
+        return playerturn
+    }
+    
+    func isOpponentTurn() -> Bool{
+        return !playerturn
+    }
+    
+    
+    // STUFF ABOUT BIDDING AND RANKING --------------------------------------------------------
+    // (this stuff is bad and ugly but works)
+    
+    // converts a string of dice values into the desired format
+    // bids are stored as strings, and elements in string are sorted by (1) frequency and (2) number rank
     private func normalizeBid(_ bid: String) -> String{
         // replace 1 with 7 for sorting purposes
         let newBid = bid.replacingOccurrences(of: "1", with: "7")
@@ -154,12 +199,6 @@ class LiarsDiceGame {
         }
     }
     
-    // Toggles the turn and returns true if it is now the player's turn, false if it is the opponent's turn
-    func toggleTurn() -> Bool{
-        playerturn = !playerturn
-        return self.playerturn
-    }
-    
     func getLastBid() -> String {
         return normalizedLastBid
     }
@@ -202,13 +241,26 @@ class LiarsDiceGame {
         return false
     }
     
-    func reset(){
-        lastBidRank = 0
-        normalizedLastBid = ""
-        playerturn = true
-        fixed = 0
-        for i in dice{
-            i.reset()
+    // rocket science
+    // check if a bid is the highest possible bid for a rank (so that bidding on that rank on next turn will be impossible)
+    func isHighestOfRank() -> Bool {
+        switch lastBidRank {
+        case 0:
+            return getLastBid().starts(with: "1")
+        case 1:
+            return getLastBid().starts(with: "11")
+        case 2:
+            return getLastBid().starts(with: "1166")
+        case 3:
+            return getLastBid().starts(with: "111")
+        case 4:
+            return getLastBid().starts(with: "11166")
+        case 5:
+            return getLastBid().starts(with: "1111")
+        case 6:
+            return getLastBid().starts(with: "11111")
+        default:
+            return false
         }
     }
     

@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     // model that contains all data
     var game = LiarsDiceGame()
     
+    
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
@@ -182,6 +183,16 @@ class ViewController: UIViewController {
     
    
     func rollDice() {
+        for j in 0..<5{
+            self.allDice[j].setTitle(" ", for: UIControlState.normal)
+        }
+        for _ in 0..<5{
+             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    for j in 0..<5{
+                        self.allDice[j].setTitle(self.diceValues[Int(arc4random_uniform(6))], for: UIControlState.normal)
+                        }
+                    }
+        }
         game.rollDice()
         for i in 0..<5 {
             let value = game.getDiceNumber(i)
