@@ -50,9 +50,15 @@ class SecondViewController: UIViewController {
     @IBAction func touchFirst(_ sender: UIButton) {
         let selectedOne = rowOne.index(of: sender)
         
+        for index in 0...5{
+            rowThree[index].isEnabled = true
+        }
+        
+        
         if selectedFirst == false {
             rowOne[selectedOne!].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
             selectedFirst = true
+            rowThree[selectedOne!].isEnabled = false
         }
         else {
             for index in 0...5 {
@@ -61,6 +67,7 @@ class SecondViewController: UIViewController {
                 }
                 else {
                     rowOne[index].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
+                    rowThree[index].isEnabled = false
                 }
             }
         }
@@ -74,18 +81,26 @@ class SecondViewController: UIViewController {
     
     @IBAction func touchSecond(_ sender: UIButton) {
         let selectedTwo = rowThree.index(of: sender)
+
+        for index in 0...5{
+            rowOne[index].isEnabled = true
+        }
         
         if selectedSecond == false {
             rowThree[selectedTwo!].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
             selectedSecond = true
+            rowOne[selectedTwo!].isEnabled = false
         }
         else {
             for index in 0...5 {
+                //rowThree[index].setTitle(eyes[index], for: UIControlState.normal)
                 if index != selectedTwo {
+
                     rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
                 }
                 else {
                     rowThree[index].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
+                    rowOne[index].isEnabled = false
                 }
             }
         }
@@ -174,6 +189,7 @@ class SecondViewController: UIViewController {
             for idx in 0...5 {
                 rowOne[idx].setTitle(eyes[idx]+eyes[idx], for: UIControlState.normal)
                 rowThree[idx].setTitle(eyes[idx]+eyes[idx], for: UIControlState.normal)
+
             }
         }
         if selectedButton == 4 {
