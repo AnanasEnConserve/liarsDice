@@ -12,6 +12,7 @@ class SecondViewController: UIViewController {
     
     var eyes = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
+   // var currentroll: currentRoll?
     
     var selectedRank = false
     

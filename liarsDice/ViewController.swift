@@ -203,6 +203,22 @@ class ViewController: UIViewController {
         print("Array of Current Roll: ", currentRoll)
     }
     
+    //Work in progress to get the current dice values to display when bidding
+        func presentDestinationViewController() {
+            let currentroll = currentRoll
+            let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
+            destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
+           // present(destinationViewController, animated: false, completion: nil)
+        }
+    
+    
+    
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      //  let currentroll = currentRoll
+        //if let SecondViewController = segue.destination as? SecondViewController {
+         //   SecondViewController.currentroll = currentroll
+        //}
+    //}
     
     
     override func viewDidLoad() {
