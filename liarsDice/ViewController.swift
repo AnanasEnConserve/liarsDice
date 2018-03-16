@@ -200,12 +200,22 @@ class ViewController: UIViewController {
         for j in 0..<5{
             self.allDice[j].setTitle(" ", for: UIControlState.normal)
         }
-        for _ in 0..<5{
-             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        for i in 0..<6{
+             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)*0.1) {
+                if(i < 5){
                     for j in 0..<5{
                         self.allDice[j].setTitle(self.diceValues[Int(arc4random_uniform(6))], for: UIControlState.normal)
-                        }
                     }
+                    
+                }
+                else{
+                    for j in 0..<5 {
+                        let value = self.game.getDiceNumber(j)
+                        self.allDice[j].setTitle(self.diceValues[value-1], for: UIControlState.normal)
+                        self.currentRoll[j] = self.diceValues[value-1]
+                    }
+                }
+             }
         }
         game.rollDice()
         for i in 0..<5 {
