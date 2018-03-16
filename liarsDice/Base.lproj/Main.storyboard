@@ -151,7 +151,7 @@
                                 <state key="normal" title="Bid"/>
                                 <connections>
                                     <action selector="Bid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lU1-bh-5fv"/>
-                                    <segue destination="GJN-Ms-1cc" kind="show" id="vYc-gz-fgz"/>
+                                    <segue destination="GJN-Ms-1cc" kind="show" identifier="goToBidding" id="vYc-gz-fgz"/>
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="inm-Qh-TlO">
@@ -325,6 +325,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="singleTouch:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="sDd-N7-qnb"/>
+                                    <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="8bT-Pf-WLZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJt-GO-bzk">
@@ -411,7 +412,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="JSj-1M-dsC"/>
+                                    <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="eIT-9l-Cxi"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="vVa-vi-BI5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXA-ME-INh">
@@ -427,7 +429,7 @@
                     </view>
                     <connections>
                         <outlet property="rollDisplay" destination="Zfg-Dn-o7f" id="LYw-NC-r3S"/>
-                        <outlet property="submitBid" destination="CuW-6g-70X" id="mLz-lf-duc"/>
+                        <outlet property="submitBid" destination="CuW-6g-70X" id="lXj-bw-a3e"/>
                         <outletCollection property="rankButtons" destination="6ea-n6-EoN" collectionClass="NSMutableArray" id="Ez5-Do-GNi"/>
                         <outletCollection property="rankButtons" destination="6fI-rT-8AS" collectionClass="NSMutableArray" id="v15-5i-Atx"/>
                         <outletCollection property="rankButtons" destination="t3k-3L-dUQ" collectionClass="NSMutableArray" id="UbY-1D-ei2"/>
@@ -462,6 +464,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JSj-1M-dsC"/>
+        <segue reference="AOi-qT-hQj"/>
     </inferredMetricsTieBreakers>
 </document>

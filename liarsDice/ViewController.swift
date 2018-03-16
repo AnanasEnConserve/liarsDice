@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,SecondViewControllerDelegate {
+
+    
     // model that contains all data
     var game = LiarsDiceGame()
     
