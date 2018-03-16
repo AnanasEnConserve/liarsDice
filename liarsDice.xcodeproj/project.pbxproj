@@ -19,6 +19,7 @@
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
 		D9BB055D2051893300F07073 /* String+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BB055C2051893300F07073 /* String+Index.swift */; };
+		D9EE0A16205BCC0000F4B7E3 /* OpponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D9BB055C2051893300F07073 /* String+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Index.swift"; sourceTree = "<group>"; };
+		D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */,
 				D9ADB6C7204FF073007CB047 /* Player.swift */,
 				D93D70292052770600C95FA4 /* EBid.swift */,
+				D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				191A3A5D20528D48004B9ADE /* SecondViewController.swift in Sources */,
 				D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */,
 				19CCF658203F09FB0078F878 /* ViewController.swift in Sources */,
+				D9EE0A16205BCC0000F4B7E3 /* OpponentModel.swift in Sources */,
 				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
 				D9ADB6C8204FF073007CB047 /* Player.swift in Sources */,
 				D93D702A2052770600C95FA4 /* EBid.swift in Sources */,
