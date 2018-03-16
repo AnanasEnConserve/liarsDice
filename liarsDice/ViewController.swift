@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
-        presentDestinationViewController()
+       // presentDestinationViewController()
         //self.performSegue(withIdentifier: "biddingSegue", sender: self)
     }
     
@@ -228,23 +228,8 @@ class ViewController: UIViewController {
     }
     
     //Work in progress to get the current dice values to display when bidding
-        func presentDestinationViewController() {
-            let currentroll = currentRoll
-            let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
-            if destinationViewController.rollDisplay != nil {
-            destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
-                present(destinationViewController, animated: false, completion: nil)
-                print("succes?")
-            }
-            else {
-               print("Failure")
-            }
-           // present(destinationViewController, animated: false, completion: nil)
-        }
-    
-    
-    
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //var rollAsText = "Test"
+  
       //  let currentroll = currentRoll
         //if let SecondViewController = segue.destination as? SecondViewController {
          //   SecondViewController.currentroll = currentroll
