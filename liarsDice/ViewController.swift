@@ -13,12 +13,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     // model that contains all data
     var game = LiarsDiceGame()
-    
+    var currentRollAsString = String()
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
-       // presentDestinationViewController()
         //self.performSegue(withIdentifier: "biddingSegue", sender: self)
     }
     
@@ -51,8 +50,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     //TODO:
     // Only show the 'Hold' button when appropriate (disable it otherwise and possibly hide it/set opacity to 0%)
     // Create animation or something to indicate to the player that the opponent is rolling**
-    // If same value is rolled by same dice, the image remains static and it appears the player did not roll (FIX by opacity 0% at the start of the roll?)
-    // Create menu to allow the player to register their bid
     // Create menu displaying the opponents bid and allow to Accept/Challenge
     // Create game instructions (start page?)
     
@@ -225,19 +222,36 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
             currentRoll[i] = diceValues[value-1]
         }
-        
-        print("Array of Current Roll: ", currentRoll)
+        currentRollAsString = currentRoll.joined(separator: " ")
+        print(currentRollAsString)
+       // print("Array of Current Roll: ", currentRoll)
     }
     
     //Work in progress to get the current dice values to display when bidding
-    //var rollAsText = "Test"
-  
-      //  let currentroll = currentRoll
-        //if let SecondViewController = segue.destination as? SecondViewController {
-         //   SecondViewController.currentroll = currentroll
-        //}
-    //}
+        func presentDestinationViewController() {
+            let currentroll = currentRoll
+            let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
+            destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
+           // present(destinationViewController, animated: false, completion: nil)
+        }
     
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // let currentroll = currentRoll
+        if segue.identifier == "goToBidding"{
+            let biddingScreen = segue.destination as! SecondViewController
+            biddingScreen.setCurrentRoll(currentRoll: self.currentRoll)
+            biddingScreen.setCurrentRollAsString(currentRollAsString: currentRollAsString)
+            biddingScreen.delegate = self
+        }
+//        if let SecondViewController = segue.destination as? SecondViewController {
+//            SecondViewController.currentroll = currentroll
+//        }
+    }
+    func didSetBid(controller: SecondViewController, bid: String) {
+        print(bid)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

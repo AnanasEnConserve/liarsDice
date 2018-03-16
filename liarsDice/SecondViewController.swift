@@ -12,13 +12,13 @@ class SecondViewController: UIViewController {
     
     var delegate:SecondViewControllerDelegate! = nil
     var eyes = ["⚀","⚁","⚂","⚃","⚄","⚅"]
-    //var rollToDisplay : String!
-   // var currentroll: currentRoll?
+    
+    var currentRoll: [String] = []
+    var currentRollAsString = String()
     
     var selectedRank = false
-    var swapChoices = -1
-    var displayRoll = [String]()
     
+ 
     @IBOutlet var rankButtons: [UIButton]!
     
     var singleSelected = false
@@ -152,7 +152,6 @@ class SecondViewController: UIViewController {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
                 }
             }
-            //selectedRank = true
         }
      
         //Adjust visibility of buttons below
@@ -229,9 +228,6 @@ class SecondViewController: UIViewController {
         submitBid.isEnabled = false
     }
     
-    //TODO: Send message to user after trying to submit two pair with same value (did you mean: 4 of a kind??) ;; Or make this selection impossible.
-    
-    
     @IBOutlet var rowOne: [UIButton]!
     
     @IBOutlet var rowTwo: [UIButton]!
@@ -244,23 +240,26 @@ class SecondViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
-        
-       
         super.viewDidLoad()
+        rollDisplay.text = currentRollAsString
+        //String(describing: currentRoll)
+        
         
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func setCurrentRoll(currentRoll: [String]){
         self.currentRoll = currentRoll
+       
+    }
     
+    func setCurrentRollAsString(currentRollAsString: String) {
+         self.currentRollAsString = currentRollAsString
     }
 
     /*
