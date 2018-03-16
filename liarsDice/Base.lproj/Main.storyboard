@@ -76,7 +76,7 @@
                                 <rect key="frame" x="135" y="589" width="105" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="0.13876083880000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYj-6y-yO2">
@@ -138,7 +138,7 @@
                                 <rect key="frame" x="135" y="9" width="137" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-46-t4V">
@@ -159,6 +159,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="labelOpponent" destination="jm7-My-WFv" id="XQy-FH-YWe"/>
+                        <outlet property="labelOpponentScore" destination="Qb8-fa-9gl" id="c7a-Gp-Yps"/>
+                        <outlet property="labelOpponentStreak" destination="Ysn-ii-qOq" id="pju-Ca-UoM"/>
+                        <outlet property="labelPlayer" destination="7OO-hK-hSj" id="IEt-9M-f3x"/>
+                        <outlet property="labelPlayerScore" destination="tYj-6y-yO2" id="Y1K-sr-n4o"/>
+                        <outlet property="labelPlayerStreak" destination="g5V-A8-gsA" id="hnY-Ol-JXd"/>
                         <outletCollection property="allDice" destination="QY9-wT-tBb" collectionClass="NSMutableArray" id="Xr6-nN-09G"/>
                         <outletCollection property="allDice" destination="lg9-SX-wpo" collectionClass="NSMutableArray" id="Z77-mN-iUL"/>
                         <outletCollection property="allDice" destination="ag2-BO-poP" collectionClass="NSMutableArray" id="LLR-WJ-92K"/>
