@@ -14,13 +14,14 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     // model that contains all data
     var game = LiarsDiceGame()
     var currentRollAsString = String()
+    var playerName = String()
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
         //self.performSegue(withIdentifier: "biddingSegue", sender: self)
     }
-    
+  
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 
@@ -235,8 +236,13 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
            // present(destinationViewController, animated: false, completion: nil)
         }
     
+    func setPlayerName(playerName: String) {
+        self.playerName = playerName
+    }
     
     
+    //Segue to transfer player name to main view controller (AND model)
+    //This does NOT work as of yet, needs attention
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // let currentroll = currentRoll
         if segue.identifier == "goToBidding"{
@@ -254,7 +260,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        labelPlayer.text = playerName
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
         // Do any additional setup after loading the view, typically from a nib.
