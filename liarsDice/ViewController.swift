@@ -21,13 +21,17 @@ class ViewController: UIViewController {
     
     //Declare array of values the dice can take
     var diceValues = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+
+    @IBOutlet weak var labelOpponent: UILabel!
+    @IBOutlet weak var labelPlayer: UILabel!
+    @IBOutlet weak var labelOpponentScore: UILabel!
+    @IBOutlet weak var labelOpponentStreak: UILabel!
+    @IBOutlet weak var labelPlayerScore: UILabel!
+    @IBOutlet weak var labelPlayerStreak: UILabel!
     
-// these should from now on be accessed through the variable 'game'
-//Declare variables to keep track of the score
-//    var playerScore = 0
-//    var opponentScore = 0
-//    var playerStreak = 0
-//    var opponentStreak = 0
+    let colorNormal = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    let colorHighlighted = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+    
     
     // The dice buttons displayed on the side, representing the fixed ones
     @IBOutlet var diceTakenOut: [UIButton]!
@@ -38,17 +42,6 @@ class ViewController: UIViewController {
     var currentRoll = [" "," "," "," "," "]
     
     @IBAction func rollDice(_ sender: UIButton) {
-        // dont mind me this is just for model testing
-//        print("rank" + String(game.calculateRank("12345")))
-//        print("rank" + String(game.calculateRank("33333")))
-//        print("rank" + String(game.calculateRank("43434")))
-//        print("rank" + String(game.calculateRank("32222")))
-//        print("rank" + String(game.calculateRank("66553")))
-//        game.setBid("23456")
-//        game.setBid("22345")
-//        game.setBid("23456")
-//        game.setBid("11345")
-//        game.setBid("55346")
         rollDice()
     }
     
@@ -69,14 +62,14 @@ class ViewController: UIViewController {
         if let selectedDice = allDice.index(of: sender){
             if selected.contains(selectedDice) == false {
                 selected.append(allDice.index(of: sender)!)
-                allDice[selectedDice].setTitleColor(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1), for: UIControlState.normal)
+                allDice[selectedDice].setTitleColor(colorHighlighted, for: UIControlState.normal)
             }
             else {
                 while selected[getIndex] != selectedDice {
                     getIndex += 1
                 }
                 selected.remove(at: getIndex)
-                allDice[selectedDice].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+                allDice[selectedDice].setTitleColor(colorNormal, for: UIControlState.normal)
             }
         }
             print(selected)
@@ -136,17 +129,37 @@ class ViewController: UIViewController {
     }
       //TODO: Only allow to Hold once per turn;
     
+    func highlightTurn() {
+        if game.isPlayerTurn(){
+            labelPlayer.textColor = colorHighlighted
+            labelOpponent.textColor = colorNormal
+        } else {
+            labelPlayer.textColor = colorNormal
+            labelOpponent.textColor = colorHighlighted
+        }
+    }
+    
+    func updateScores(){
+        labelPlayerScore.text = "Score: " + String(game.getPlayer().getScore())
+        labelPlayerStreak.text = "Streak: " + String(game.getPlayer().getScore())
+        labelOpponentScore.text = "Score: " + String(game.getOpponent().getScore())
+        labelOpponentStreak.text = "Streak: " + String(game.getOpponent().getScore())
+    }
     
     //Function to reset things at the start of a new round
     func startGame() {
         game = LiarsDiceGame()
         removed.removeAll()
         selected.removeAll()
+        highlightTurn()
         for value in 0..<diceTakenOut.count {
             let currentDice = diceTakenOut[value]
             currentDice.setTitle(" ", for: UIControlState.normal)
             currentDice.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
         }
+        
+        
+        
             // if playerStart == false {
         // for value in 0..<diceInPLay.count {
         //diceInPlay[value].setTitleColor(Opacity 0%, for: UIControlState.normal)
@@ -161,13 +174,13 @@ class ViewController: UIViewController {
     
     //Function to reset the game (start new round && reset scores)
     func reset() {
-        game = LiarsDiceGame()
+        game.reset()
         removed.removeAll()
         selected.removeAll()
-        
+        highlightTurn()
         //Revert colors && enable buttons for dice
         for index in 0..<allDice.count {
-            allDice[index].setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+            allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
             allDice[index].isEnabled = true
             allDice[index].isHidden = false
         }
@@ -223,6 +236,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        labelPlayer.text = game.getPlayer().getName()
+        labelOpponent.text = game.getOpponent().getName()
         // Do any additional setup after loading the view, typically from a nib.
     }
 

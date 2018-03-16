@@ -93,6 +93,13 @@ class LiarsDiceGame {
         return !playerturn
     }
     
+    func getPlayer() -> Player{
+        return human
+    }
+    
+    func getOpponent() -> Player{
+        return opponent
+    }
     
     // STUFF ABOUT BIDDING AND RANKING --------------------------------------------------------
     // (this stuff is bad and ugly but works)
