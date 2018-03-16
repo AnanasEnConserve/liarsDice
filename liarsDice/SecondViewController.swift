@@ -15,7 +15,7 @@ class SecondViewController: UIViewController {
    // var currentroll: currentRoll?
     
     var selectedRank = false
-    
+    var swapChoices = -1
  
     @IBOutlet var rankButtons: [UIButton]!
     
@@ -41,7 +41,7 @@ class SecondViewController: UIViewController {
             }
         }
         
-        if singleSelected == true {
+        if singleSelected == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
@@ -73,7 +73,7 @@ class SecondViewController: UIViewController {
             }
         }
         
-        if selectedFirst == true && selectedSecond == true {
+        if selectedFirst == true && selectedSecond == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
@@ -106,7 +106,7 @@ class SecondViewController: UIViewController {
             }
         }
         
-        if selectedFirst == true && selectedSecond == true {
+        if selectedFirst == true && selectedSecond == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
@@ -132,6 +132,7 @@ class SecondViewController: UIViewController {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
                 }
             }
+            //selectedRank = true
         }
      
         //Adjust visibility of buttons below
