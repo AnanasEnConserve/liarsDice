@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,SecondViewControllerDelegate {
+
+    
     // model that contains all data
     var game = LiarsDiceGame()
     
@@ -236,13 +238,20 @@ class ViewController: UIViewController {
     
     
     
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      //  let currentroll = currentRoll
-        //if let SecondViewController = segue.destination as? SecondViewController {
-         //   SecondViewController.currentroll = currentroll
-        //}
-    //}
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // let currentroll = currentRoll
+        if segue.identifier == "goToBidding"{
+            let biddingScreen = segue.destination as! SecondViewController
+            biddingScreen.setCurrentRoll(currentRoll: self.currentRoll)
+            biddingScreen.delegate = self
+        }
+//        if let SecondViewController = segue.destination as? SecondViewController {
+//            SecondViewController.currentroll = currentroll
+//        }
+    }
+    func didSetBid(controller: SecondViewController, bid: String) {
+        print(bid)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

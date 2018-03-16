@@ -10,9 +10,10 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    var delegate:SecondViewControllerDelegate! = nil
     var eyes = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     
-   // var currentroll: currentRoll?
+    var currentRoll: [String] = []
     
     var selectedRank = false
     
@@ -23,6 +24,25 @@ class SecondViewController: UIViewController {
     var selectedFirst = false
     var selectedSecond = false
     
+    @IBAction func submitBid(_ sender: Any) {
+                print("submit")
+                guard let delegate = self.delegate else {
+                    print("Delegate not set")
+                    return
+                }
+                delegate.didSetBid(controller: self,
+                                   bid: "I made a bid")
+    }
+    //    @IBAction func submitBid(_ sender: Any) {
+//        print("submit")
+//        guard let delegate = self.delegate else {
+//            print("Delegate not set")
+//            return
+//        }
+//        delegate.didSetBid(controller: self,
+//                           bid: "I made a bid")
+//
+//    }
     @IBAction func singleTouch(_ sender: Any) {
         let selectedDie = rowTwo.index(of: sender as! UIButton)
         
@@ -111,7 +131,6 @@ class SecondViewController: UIViewController {
             submitBid.isEnabled = true
         }
     }
-    
     
     @IBOutlet weak var submitBid: UIButton!
     
@@ -224,7 +243,7 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rollDisplay.text = String(describing: currentRoll)
         
         
         // Do any additional setup after loading the view.
@@ -235,6 +254,10 @@ class SecondViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setCurrentRoll(currentRoll: [String]){
+        self.currentRoll = currentRoll
+    
+    }
 
     /*
     // MARK: - Navigation
@@ -245,6 +268,10 @@ class SecondViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
 
+protocol SecondViewControllerDelegate {
+    func didSetBid(controller: SecondViewController,bid:String)
+}
