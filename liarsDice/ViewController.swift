@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
     @IBAction func Bid(_ sender: UIButton) {
+        presentDestinationViewController()
         //self.performSegue(withIdentifier: "biddingSegue", sender: self)
     }
     
@@ -220,7 +221,14 @@ class ViewController: UIViewController {
         func presentDestinationViewController() {
             let currentroll = currentRoll
             let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
+            if destinationViewController.rollDisplay != nil {
             destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
+                present(destinationViewController, animated: false, completion: nil)
+                print("succes?")
+            }
+            else {
+               print("Failure")
+            }
            // present(destinationViewController, animated: false, completion: nil)
         }
     
