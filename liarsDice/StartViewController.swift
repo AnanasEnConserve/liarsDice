@@ -8,8 +8,9 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
+class StartViewController: UIViewController, UITextFieldDelegate {
 
+    //var playerInfo = Player(playerName)
     var playerName = String()
     
     @IBOutlet weak var textBox: UITextField!
@@ -25,6 +26,11 @@ class StartViewController: UIViewController {
     }
     
     
+    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "startGame" {
         let mainScreen = segue.destination as! ViewController
@@ -38,6 +44,8 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        textBox.delegate = self
+        textBox.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,9 +67,4 @@ class StartViewController: UIViewController {
     */
 }
 
-extension StartViewController : UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+
