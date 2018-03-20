@@ -10,6 +10,7 @@ import Foundation
 class OpponentModel: Model{
     var game: LiarsDiceGame
 
+    // initialize, set the game and load player profile
     init(game: LiarsDiceGame) {
         self.game = game
     }
@@ -53,6 +54,12 @@ class OpponentModel: Model{
         }
         fixDice()
         makeBid()
+        
+        //var chunk = Chunk(s: "name",m: self)
+        //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
+        
+        
+        
     }
     
 }

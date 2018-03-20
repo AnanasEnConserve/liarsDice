@@ -35,6 +35,7 @@
 		D9F7A09A20614E53000EC7CC /* BufferCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7A08D20614E52000EC7CC /* BufferCondition.swift */; };
 		D9F7A09B20614E53000EC7CC /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7A08E20614E53000EC7CC /* Parser.swift */; };
 		D9F7A09C20614E53000EC7CC /* Declarative.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7A08F20614E53000EC7CC /* Declarative.swift */; };
+		D9F7A09F206153EE000EC7CC /* load-profile.actr in Resources */ = {isa = PBXBuildFile; fileRef = D9F7A09E206153EE000EC7CC /* load-profile.actr */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		D9F7A08D20614E52000EC7CC /* BufferCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferCondition.swift; sourceTree = "<group>"; };
 		D9F7A08E20614E53000EC7CC /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		D9F7A08F20614E53000EC7CC /* Declarative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Declarative.swift; sourceTree = "<group>"; };
+		D9F7A09E206153EE000EC7CC /* load-profile.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "load-profile.actr"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,8 @@
 		D9ADB6C2204FEE60007CB047 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				D9F7A09E206153EE000EC7CC /* load-profile.actr */,
+				D9F7A09D206153D5000EC7CC /* ACT-R Models */,
 				D9F7A08020614E32000EC7CC /* Core ACT-R */,
 				D9ADB6C0204FEE5D007CB047 /* Dice.swift */,
 				D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */,
@@ -176,6 +180,13 @@
 				D9F7A08120614E4A000EC7CC /* Chunk.swift */,
 			);
 			path = "Core ACT-R";
+			sourceTree = "<group>";
+		};
+		D9F7A09D206153D5000EC7CC /* ACT-R Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "ACT-R Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +275,7 @@
 				19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */,
 				19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */,
 				19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */,
+				D9F7A09F206153EE000EC7CC /* load-profile.actr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
