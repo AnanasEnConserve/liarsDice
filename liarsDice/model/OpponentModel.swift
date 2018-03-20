@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class OpponentModel{
+class OpponentModel: Model{
     var game: LiarsDiceGame
 
     init(game: LiarsDiceGame) {
