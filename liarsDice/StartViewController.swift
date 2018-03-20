@@ -10,8 +10,9 @@ import UIKit
 
 class StartViewController: UIViewController, UITextFieldDelegate {
 
-    //var playerInfo = Player(playerName)
+    //var game = LiarsDiceGame()
     var playerName = String()
+    //var playerInfo = Player(playerName)
     
     @IBOutlet weak var textBox: UITextField!
     
@@ -28,17 +29,31 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
         self.view.endEditing(true)
+        playerName = textBox.text!
+        print(playerName)
         return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "startGame" {
+       // let game = LiarsDiceGame(pName: playerName)
+        
         let mainScreen = segue.destination as! ViewController
-        mainScreen.setPlayerName(playerName: self.playerName)
-        mainScreen.labelPlayer.text = playerName
+        mainScreen.game = LiarsDiceGame(pName: playerName)
+        //mainScreen.labelPlayer.text = playerName
         }
     }
 
+    
+    @IBAction func init_Game(_ sender: UIButton) {
+        //Initialize the game and set up the start of a new game here
+        //let game = LiarsDiceGame(pName: playerName)
+        //game.getPlayer()
+        //game.getPlayer().getName()
+        performSegue(withIdentifier: "startGame", sender: self)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
