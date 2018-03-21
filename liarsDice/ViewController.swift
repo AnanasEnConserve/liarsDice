@@ -12,7 +12,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 
     
     // model that contains all data
-    var game = LiarsDiceGame()
+    var game : LiarsDiceGame! // = LiarsDiceGame()
     var currentRollAsString = String()
     var playerName = String()
     
@@ -149,7 +149,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     //Function to reset things at the start of a new round
     func startGame() {
-        game = LiarsDiceGame()
+        game.reset()
         removed.removeAll()
         selected.removeAll()
         highlightTurn()
@@ -262,7 +262,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        labelPlayer.text = playerName
+        //labelPlayer.text = playerName
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
         // Do any additional setup after loading the view, typically from a nib.

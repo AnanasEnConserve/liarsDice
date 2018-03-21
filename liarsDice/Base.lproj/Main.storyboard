@@ -23,15 +23,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <action selector="startGame:" destination="X4v-2u-DAg" eventType="touchUpInside" id="8WD-XC-yuc"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="MvX-FZ-SAO"/>
+                                    <action selector="init_Game:" destination="X4v-2u-DAg" eventType="touchUpInside" id="vya-nY-80b"/>
+                                    <action selector="startGame:" destination="X4v-2u-DAg" eventType="touchUpInside" id="quQ-uU-Mdi"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="startGame" id="MvX-FZ-SAO"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter a username" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JNl-hh-K95">
                                 <rect key="frame" x="93" y="318" width="173" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" spellCheckingType="no" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Liars Dice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWG-Dz-JHD">
                                 <rect key="frame" x="72" y="52" width="231" height="154"/>
@@ -265,14 +266,6 @@
                                     <action selector="buttonTouch:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="4nG-Z7-Xbx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-VW-UWJ">
-                                <rect key="frame" x="16" y="599" width="94" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="AOi-qT-hQj"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You rolled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I76-cv-frh">
                                 <rect key="frame" x="149" y="20" width="76" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -476,7 +469,7 @@
                                 </state>
                                 <connections>
                                     <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="eIT-9l-Cxi"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="vVa-vi-BI5"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="submitBid" id="vVa-vi-BI5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXA-ME-INh">
@@ -484,6 +477,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="touchSecond:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="YLA-Fa-sN4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc5-yX-79y">
+                                <rect key="frame" x="31" y="588" width="62" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="showDetail" identifier="back" action="showViewController:sender:" id="S6M-Bg-b22"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -527,6 +528,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MvX-FZ-SAO"/>
+        <segue reference="S6M-Bg-b22"/>
     </inferredMetricsTieBreakers>
 </document>

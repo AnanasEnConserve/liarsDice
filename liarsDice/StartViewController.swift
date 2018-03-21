@@ -8,9 +8,11 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
+class StartViewController: UIViewController, UITextFieldDelegate {
 
+    //var game = LiarsDiceGame()
     var playerName = String()
+    //var playerInfo = Player(playerName)
     
     @IBOutlet weak var textBox: UITextField!
     
@@ -25,19 +27,40 @@ class StartViewController: UIViewController {
     }
     
     
+    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
+        self.view.endEditing(true)
+        playerName = textBox.text!
+        print(playerName)
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "startGame" {
+       // let game = LiarsDiceGame(pName: playerName)
+        
         let mainScreen = segue.destination as! ViewController
-        mainScreen.setPlayerName(playerName: self.playerName)
-        mainScreen.labelPlayer.text = playerName
+        mainScreen.game = LiarsDiceGame(pName: playerName)
+        //mainScreen.labelPlayer.text = playerName
         }
     }
 
+    
+    @IBAction func init_Game(_ sender: UIButton) {
+        //Initialize the game and set up the start of a new game here
+        //let game = LiarsDiceGame(pName: playerName)
+        //game.getPlayer()
+        //game.getPlayer().getName()
+        performSegue(withIdentifier: "startGame", sender: self)
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        textBox.delegate = self
+        textBox.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,9 +82,4 @@ class StartViewController: UIViewController {
     */
 }
 
-extension StartViewController : UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+

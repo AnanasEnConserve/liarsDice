@@ -27,10 +27,11 @@ class LiarsDiceGame {
     // turn count
     private var turnCount = 0
     // initialize the game: put the dices on the table, basically
-    init() {
+    init(pName : String) {
         for _ in 0..<NUMBER_OF_DICE {
             dice.append(Dice())
         }
+        human.setName(newName: pName)
     }
     
     // BASIC DICE FUNCTIONS ----------------------------------------------------------------
