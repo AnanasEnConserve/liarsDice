@@ -468,6 +468,7 @@
                                 </state>
                                 <connections>
                                     <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="eIT-9l-Cxi"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="submitBid" id="V91-fc-DfF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXA-ME-INh">
@@ -526,6 +527,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S6M-Bg-b22"/>
+        <segue reference="vYc-gz-fgz"/>
+        <segue reference="V91-fc-DfF"/>
     </inferredMetricsTieBreakers>
 </document>
