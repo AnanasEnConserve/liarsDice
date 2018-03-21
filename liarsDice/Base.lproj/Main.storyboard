@@ -381,7 +381,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="singleTouch:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="sDd-N7-qnb"/>
-                                    <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="8bT-Pf-WLZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJt-GO-bzk">
@@ -469,7 +468,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="eIT-9l-Cxi"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="submitBid" id="vVa-vi-BI5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXA-ME-INh">

@@ -10,22 +10,58 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    var game : LiarsDiceGame!
     var delegate:SecondViewControllerDelegate! = nil
     var eyes = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+    var currentBid = [String]()
+    var submittedBid = String()
     
     var currentRoll: [String] = []
     var currentRollAsString = String()
     
     var selectedRank = false
-    
+    var selectedRankValue = Int()
  
     @IBOutlet var rankButtons: [UIButton]!
     
     var singleSelected = false
     var selectedFirst = false
     var selectedSecond = false
+    var singleBidValue = String()
+    var doubleBidFirstValue = String()
+    var doubleBidSecondValue = String()
+    
     
     @IBAction func submitBid(_ sender: Any) {
+        currentBid.removeAll()
+        //0, 1, 3, 5, 6 :: single value
+        if singleSelected == true {
+        var loopAmount = 3
+        if selectedRankValue == 5 || selectedRankValue == 6 {
+            loopAmount = selectedRankValue - 1
+        }
+        if selectedRankValue == 0 || selectedRankValue == 1 {
+            loopAmount = selectedRankValue + 1
+        }
+        for _ in 0..<loopAmount {
+            currentBid.append(singleBidValue)
+        }
+        submittedBid = currentBid.joined()
+        print(submittedBid)
+        }
+        
+        if selectedRankValue == 2 || selectedRankValue == 4 {
+            if selectedRankValue == 4 {
+                currentBid.append(doubleBidFirstValue)
+            }
+            for _ in 0..<2 {
+                currentBid.append(doubleBidFirstValue)
+                currentBid.append(doubleBidSecondValue)
+            }
+        }
+        submittedBid = currentBid.joined()
+        print(submittedBid)
+        
                 print("submit")
                 guard let delegate = self.delegate else {
                     print("Delegate not set")
@@ -61,7 +97,8 @@ class SecondViewController: UIViewController {
                 }
             }
         }
-        
+        let selectedDieValue = rowTwo.index(of: sender as! UIButton)! + 1
+        singleBidValue = String(selectedDieValue)
         if singleSelected == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
@@ -93,6 +130,7 @@ class SecondViewController: UIViewController {
                 }
             }
         }
+        doubleBidFirstValue = String(rowOne.index(of: sender)! + 1)
         
         if selectedFirst == true && selectedSecond == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
@@ -126,6 +164,7 @@ class SecondViewController: UIViewController {
                 }
             }
         }
+        doubleBidSecondValue = String(rowThree.index(of: sender)! + 1)
         
         if selectedFirst == true && selectedSecond == true && selectedRank == true {
             submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
@@ -220,7 +259,7 @@ class SecondViewController: UIViewController {
             }
         }
         
-
+        selectedRankValue = rankButtons.index(of: sender as! UIButton)!
         singleSelected = false
         selectedFirst = false
         selectedSecond = false
@@ -271,7 +310,11 @@ class SecondViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     //   if segue.identifier == "submitBid" {
+       //     game.setBid(<#T##newBid: String##String#>)
+        //}
+    }
 
 }
 
