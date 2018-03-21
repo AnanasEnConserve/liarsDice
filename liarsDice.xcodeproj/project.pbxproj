@@ -16,6 +16,9 @@
 		19F15468205C077F00B620D5 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F15467205C077F00B620D5 /* StartViewController.swift */; };
 		D93D702A2052770600C95FA4 /* EBid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D70292052770600C95FA4 /* EBid.swift */; };
 		D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */; };
+		D988B69A2062664800AB91F0 /* OpponentModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988B6992062664800AB91F0 /* OpponentModelTest.swift */; };
+		D988B69D20626AE000AB91F0 /* load-profile.actr in Resources */ = {isa = PBXBuildFile; fileRef = D988B69C20626AE000AB91F0 /* load-profile.actr */; };
+		D988B69F2062747200AB91F0 /* profiles.txt in Resources */ = {isa = PBXBuildFile; fileRef = D988B69E2062747200AB91F0 /* profiles.txt */; };
 		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
@@ -61,6 +64,9 @@
 		D93D703420528CBC00C95FA4 /* liarsDiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = liarsDiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = liarsDiceTests.swift; sourceTree = "<group>"; };
 		D93D703820528CBC00C95FA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D988B6992062664800AB91F0 /* OpponentModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentModelTest.swift; sourceTree = "<group>"; };
+		D988B69C20626AE000AB91F0 /* load-profile.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "load-profile.actr"; sourceTree = "<group>"; };
+		D988B69E2062747200AB91F0 /* profiles.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = profiles.txt; sourceTree = "<group>"; };
 		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 		19CCF654203F09FB0078F878 /* liarsDice */ = {
 			isa = PBXGroup;
 			children = (
+				D988B69B20626AB300AB91F0 /* Models */,
 				19CCF655203F09FB0078F878 /* AppDelegate.swift */,
 				19CCF657203F09FB0078F878 /* ViewController.swift */,
 				19CCF659203F09FB0078F878 /* Main.storyboard */,
@@ -139,9 +146,19 @@
 			isa = PBXGroup;
 			children = (
 				D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */,
+				D988B6992062664800AB91F0 /* OpponentModelTest.swift */,
 				D93D703820528CBC00C95FA4 /* Info.plist */,
 			);
 			path = liarsDiceTests;
+			sourceTree = "<group>";
+		};
+		D988B69B20626AB300AB91F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D988B69C20626AE000AB91F0 /* load-profile.actr */,
+				D988B69E2062747200AB91F0 /* profiles.txt */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		D9ADB6C2204FEE60007CB047 /* model */ = {
@@ -262,8 +279,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */,
+				D988B69F2062747200AB91F0 /* profiles.txt in Resources */,
 				19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */,
 				19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */,
+				D988B69D20626AE000AB91F0 /* load-profile.actr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D988B69A2062664800AB91F0 /* OpponentModelTest.swift in Sources */,
 				D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

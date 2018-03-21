@@ -82,7 +82,6 @@ class Model {
     func loadModel(fileName fname: String) {
         let bundle = Bundle.main
         let path = bundle.path(forResource: fname, ofType: "actr")!
-        
         modelText = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
         print("Got model text")
         //        println("\(modelText)")

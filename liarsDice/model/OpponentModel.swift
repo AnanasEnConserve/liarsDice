@@ -9,10 +9,49 @@
 import Foundation
 class OpponentModel: Model{
     var game: LiarsDiceGame
-
+    
+    
+    // initialize, set the game and load player profile, push chunks into model
     init(game: LiarsDiceGame) {
         self.game = game
+        super.init()
+        //self.loadModel(fileName: "load-profile")
+        self.loadProfile(name: "Asdf")
+        
+        //var pName = game.getPlayer().getName()
+        
     }
+    
+    // retrieves correct chunk if profile with that name exists, otherwise return default chunk
+    // yes this is useless and better done in swift without a model, but we need to make our modeler happy
+    private func loadProfile(name: String) {
+        let bundle = Bundle.main
+        let path = bundle.path(forResource: "profiles", ofType: "txt")!
+        var profileData = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+        // create chunks of the profile for no reason...
+        
+        var model = Model()
+        model.loadModel(fileName: "load-profile")
+        for line in profileData.components(separatedBy: .newlines){
+            if(line == "") {continue}
+            var data = line.split{$0 == ";"}.map(String.init)
+            print("line")
+            print(line)
+            print(data)
+            
+            let chunk = model.generateNewChunk()
+            chunk.setSlot(slot: "playerName", value: data[0])
+            chunk.setSlot(slot: "earlyGameBeh", value: data[1])
+            chunk.setSlot(slot: "endGameBeh", value: data[2])
+            model.dm.addToDM(chunk)
+            print("created and added chunk")
+            //print(chunk)
+        }
+        model.run()
+        print(model.dm.chunks)
+        print(model.buffers)
+    }
+    
     
     // TODO add ACT-R stuff here
     func believePlayer() -> Bool{
@@ -53,6 +92,12 @@ class OpponentModel: Model{
         }
         fixDice()
         makeBid()
+        
+        //var chunk = Chunk(s: "name",m: self)
+        //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
+        
+        
+        
     }
     
 }

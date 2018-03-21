@@ -263,6 +263,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         
         super.viewDidLoad()
         //labelPlayer.text = playerName
+        print(game)
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
         // Do any additional setup after loading the view, typically from a nib.
