@@ -252,12 +252,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             biddingScreen.delegate = self
             
             biddingScreen.playerName = labelPlayer.text
-//            
+//
 //            for index in 0..<allDice.count {
 //                if allDice[index].isHidden == true {
 //                    removedDice.append(allDice[index].currentTitle!)
 //                }
-//                
+//
 //            }
             
         }
