@@ -13,7 +13,14 @@ class OpponentModel: Model{
     // initialize, set the game and load player profile
     init(game: LiarsDiceGame) {
         self.game = game
+        super.init()
+        self.loadModel(fileName: "Models/load-profile.actr")
+        
+        //var pName = game.getPlayer().getName()
+        
+        
     }
+    
     
     // TODO add ACT-R stuff here
     func believePlayer() -> Bool{

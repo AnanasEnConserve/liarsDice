@@ -149,8 +149,7 @@
 		D9ADB6C2204FEE60007CB047 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				D9F7A09E206153EE000EC7CC /* load-profile.actr */,
-				D9F7A09D206153D5000EC7CC /* ACT-R Models */,
+				D9F7A09D206153D5000EC7CC /* Models */,
 				D9F7A08020614E32000EC7CC /* Core ACT-R */,
 				D9ADB6C0204FEE5D007CB047 /* Dice.swift */,
 				D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */,
@@ -182,11 +181,12 @@
 			path = "Core ACT-R";
 			sourceTree = "<group>";
 		};
-		D9F7A09D206153D5000EC7CC /* ACT-R Models */ = {
+		D9F7A09D206153D5000EC7CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D9F7A09E206153EE000EC7CC /* load-profile.actr */,
 			);
-			path = "ACT-R Models";
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
