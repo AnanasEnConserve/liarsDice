@@ -34,7 +34,7 @@ class SecondViewController: UIViewController {
     
     @IBAction func submitBid(_ sender: Any) {
         currentBid.removeAll()
-        //0, 1, 3, 5, 6 :: single value
+        //0, 1, 3, 5, 6 ::  single value
         if singleSelected == true {
         var loopAmount = 3
         if selectedRankValue == 5 || selectedRankValue == 6 {
