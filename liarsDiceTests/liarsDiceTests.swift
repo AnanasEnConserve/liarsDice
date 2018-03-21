@@ -10,7 +10,7 @@ import XCTest
 @testable import liarsDice
 
 class liarsDiceTests: XCTestCase {
-    var game = LiarsDiceGame()
+    var game = LiarsDiceGame(pName: "test")
 
     override func setUp() {
         super.setUp()

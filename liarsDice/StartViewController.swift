@@ -30,6 +30,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
         self.view.endEditing(true)
         playerName = textBox.text!
+        print("Player Name:")
         print(playerName)
         return true
     }
