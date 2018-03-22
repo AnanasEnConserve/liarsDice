@@ -35,7 +35,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     let colorNormal = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
     let colorHighlighted = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
     
-    
+    var removedDice = [String]()
     // The dice buttons displayed on the side, representing the fixed ones
     @IBOutlet var diceTakenOut: [UIButton]!
     // ALL Dice, including the ones taken out. The ones that are taken out are simply set to "hidden" but they are still there
@@ -251,6 +251,16 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             biddingScreen.setCurrentRollAsString(currentRollAsString: currentRollAsString)
             biddingScreen.setGame(game: game)
             biddingScreen.delegate = self
+            
+            biddingScreen.playerName = labelPlayer.text
+//
+//            for index in 0..<allDice.count {
+//                if allDice[index].isHidden == true {
+//                    removedDice.append(allDice[index].currentTitle!)
+//                }
+//
+//            }
+            
         }
 //        if let SecondViewController = segue.destination as? SecondViewController {
 //            SecondViewController.currentroll = currentroll
@@ -263,6 +273,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         controller.navigationController?.popViewController(animated: true)
     }
     
+    var hasLoaded = false
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -272,6 +283,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         print(game.getPlayer())
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
+            hasLoaded = true
+       // }
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 

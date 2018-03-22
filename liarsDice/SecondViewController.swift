@@ -10,8 +10,11 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    var diceTakenOut: [String]!
+    var playerName : String!
     var game : LiarsDiceGame!
     var delegate:SecondViewControllerDelegate! = nil
+   
     var eyes = ["⚀","⚁","⚂","⚃","⚄","⚅"]
     var currentBid = [String]()
     var submittedBid = String()
@@ -37,7 +40,7 @@ class SecondViewController: UIViewController {
     
     @IBAction func submitBid(_ sender: Any) {
         currentBid.removeAll()
-        //0, 1, 3, 5, 6 :: single value
+        //0, 1, 3, 5, 6 ::  single value
         if singleSelected == true {
         var loopAmount = 3
         if selectedRankValue == 5 || selectedRankValue == 6 {
@@ -50,7 +53,7 @@ class SecondViewController: UIViewController {
             currentBid.append(singleBidValue)
         }
         submittedBid = currentBid.joined()
-        print(submittedBid)
+        //print(submittedBid)
         }
         
         if selectedRankValue == 2 || selectedRankValue == 4 {
@@ -63,7 +66,7 @@ class SecondViewController: UIViewController {
             }
         }
         submittedBid = currentBid.joined()
-        print(submittedBid)
+        //print(submittedBid)
         
                 print("submit")
                 guard let delegate = self.delegate else {
@@ -181,6 +184,7 @@ class SecondViewController: UIViewController {
     
     
     @IBAction func buttonTouch(_ sender: Any) {
+        print(playerName)
         let selectedButton = rankButtons.index(of: sender as! UIButton)
         
         if selectedRank == false {
@@ -219,6 +223,7 @@ class SecondViewController: UIViewController {
                 
                 rowTwo[idx].isEnabled = true
                 rowTwo[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                
             }
         }
         
@@ -318,9 +323,18 @@ class SecondViewController: UIViewController {
     }
     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     //   if segue.identifier == "submitBid" {
-       //     game.setBid(<#T##newBid: String##String#>)
-        //}
+        if segue.identifier == "back" {
+            let mainScreen = segue.destination as! ViewController
+            mainScreen.game = LiarsDiceGame(pName: playerName)
+        }
+        
+        if segue.identifier == "submitBid" {
+        let mainScreen = segue.destination as! ViewController
+        mainScreen.game = LiarsDiceGame(pName: playerName)
+        //mainScreen.hasLoaded = true
+        //mainScreen.labelPlayer.text = playerName!
+        //game.setBid(submittedBid)
+        }
     }
 
 }
