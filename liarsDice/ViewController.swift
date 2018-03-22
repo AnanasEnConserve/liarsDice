@@ -249,6 +249,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             let biddingScreen = segue.destination as! SecondViewController
             biddingScreen.setCurrentRoll(currentRoll: self.currentRoll)
             biddingScreen.setCurrentRollAsString(currentRollAsString: currentRollAsString)
+            biddingScreen.setGame(game: game)
             biddingScreen.delegate = self
         }
 //        if let SecondViewController = segue.destination as? SecondViewController {
@@ -256,14 +257,19 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //        }
     }
     func didSetBid(controller: SecondViewController, bid: String) {
-        print(bid)
+        controller.navigationController?.popViewController(animated: true)
+    }
+    func comeBackFromBid(controller: SecondViewController) {
+        controller.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("VIEWDIDLOAD")
         //labelPlayer.text = playerName
         print(game)
+        print(game.getPlayer())
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
         // Do any additional setup after loading the view, typically from a nib.

@@ -51,7 +51,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         //let game = LiarsDiceGame(pName: playerName)
         //game.getPlayer()
         //game.getPlayer().getName()
-        performSegue(withIdentifier: "startGame", sender: self)
+        //performSegue(withIdentifier: "startGame", sender: self)
     }
     
     
