@@ -68,15 +68,15 @@ class SecondViewController: UIViewController {
         submittedBid = currentBid.joined()
         //print(submittedBid)
         
-                print("submit")
-                guard let delegate = self.delegate else {
-                    print("Delegate not set")
-                    return
-                }
-        print("before delegate")
-        print(game)
+//                print("submit")
+//                guard let delegate = self.delegate else {
+//                    print("Delegate not set")
+//                    return
+//                }
+//        print("before delegate")
+//        print(game)
                 delegate.didSetBid(controller: self,
-                                   bid: "I made a bid") 
+                                   bid: submittedBid)
     }
     //    @IBAction func submitBid(_ sender: Any) {
 //        print("submit")

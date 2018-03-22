@@ -65,7 +65,7 @@ class liarsDiceTests: XCTestCase {
         }
         // set a truthful bid, then call bluff -> should be false
         game.setBid(pattern[0])
-        XCTAssertFalse(game.callBluff())
+        XCTAssertFalse(game.isBidABluff())
 
         // do this again now set a bid but invert one value (7-value so 1 becomes 6, 2 becomes 5 etc) so it becomes false
         game.reset()
@@ -76,7 +76,7 @@ class liarsDiceTests: XCTestCase {
             pattern.append(String(game.getDiceNumber(i)))
         }
         game.setBid(pattern)
-        XCTAssertTrue(game.callBluff())
+        XCTAssertTrue(game.isBidABluff())
     }
     
     func testPerformanceExample() {

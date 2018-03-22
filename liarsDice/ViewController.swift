@@ -266,7 +266,32 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //            SecondViewController.currentroll = currentroll
 //        }
     }
+    
+    @IBOutlet weak var showBid: UILabel!
+    
+    @IBAction func callBluff(_ sender: Any) {
+        let didPlayerWin = game.callBluff()
+        if didPlayerWin{
+            print("Player won")
+        }
+        else{
+            print("Opponent won")
+        }
+        self.updateScores()
+        game.reset()
+        self.highlightTurn()
+    }
+    
     func didSetBid(controller: SecondViewController, bid: String) {
+        print("I am the MainViewController and I have received the bid: " + bid)
+        showBid.text = "Current Bid: " + bid
+        game.setBid(bid)
+        
+        // after the bid, its the oppponents turn
+        game.toggleTurn()
+        self.highlightTurn()
+        
+        
         controller.navigationController?.popViewController(animated: true)
     }
     func comeBackFromBid(controller: SecondViewController) {
@@ -280,7 +305,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         print("VIEWDIDLOAD")
         //labelPlayer.text = playerName
         print(game)
-        print(game.getPlayer())
+       // if hasLoaded == false {
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
             hasLoaded = true

@@ -223,6 +223,21 @@
                                     <segue destination="sgu-gD-pHR" kind="show" id="VIf-Ac-tsA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Bid: xxxxxx" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zf-aw-UQ8">
+                                <rect key="frame" x="36" y="68" width="204" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZmU-3q-0D4">
+                                <rect key="frame" x="297" y="347" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Call Bluff"/>
+                                <connections>
+                                    <action selector="callBluff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoj-4g-4jq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -234,6 +249,7 @@
                         <outlet property="labelPlayer" destination="7OO-hK-hSj" id="IEt-9M-f3x"/>
                         <outlet property="labelPlayerScore" destination="tYj-6y-yO2" id="Y1K-sr-n4o"/>
                         <outlet property="labelPlayerStreak" destination="g5V-A8-gsA" id="hnY-Ol-JXd"/>
+                        <outlet property="showBid" destination="7zf-aw-UQ8" id="IKk-Ni-uCI"/>
                         <outletCollection property="allDice" destination="QY9-wT-tBb" collectionClass="NSMutableArray" id="Xr6-nN-09G"/>
                         <outletCollection property="allDice" destination="lg9-SX-wpo" collectionClass="NSMutableArray" id="Z77-mN-iUL"/>
                         <outletCollection property="allDice" destination="ag2-BO-poP" collectionClass="NSMutableArray" id="LLR-WJ-92K"/>
@@ -469,7 +485,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submitBid:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="eIT-9l-Cxi"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="submitBid" id="V91-fc-DfF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXA-ME-INh">
