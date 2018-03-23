@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,12 +29,6 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="startGame" id="MvX-FZ-SAO"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter a username" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JNl-hh-K95">
-                                <rect key="frame" x="93" y="318" width="173" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" textContentType="name"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Liars Dice" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWG-Dz-JHD">
                                 <rect key="frame" x="72" y="52" width="231" height="154"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -45,19 +40,16 @@
                                 <rect key="frame" x="78" y="546" width="38" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Rules"/>
+                                <connections>
+                                    <segue destination="Xko-jv-0rw" kind="show" identifier="instructions" id="J18-Ay-58M"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please enter your name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN4-DB-lfr">
-                                <rect key="frame" x="78" y="214" width="203" height="108"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter a username" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JNl-hh-K95">
+                                <rect key="frame" x="82" y="281" width="210" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbq-Er-J71">
-                                <rect key="frame" x="156" y="405" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="apO-Vh-Azj"/>
@@ -70,6 +62,99 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGN-tu-ITf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-456.80000000000001" y="131.78410794602701"/>
+        </scene>
+        <!--Instructions View Controller-->
+        <scene sceneID="6DK-vA-vYy">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5QK-Vv-pu2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Xko-jv-0rw" customClass="InstructionsViewController" customModule="liarsDice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DOQ-Xt-xQY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="830"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3w-FP-7pn">
+                                <rect key="frame" x="170.5" y="780" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="Xko-jv-0rw" eventType="touchUpInside" id="RM8-Tn-JnE"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK1-FE-11f">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-Mi-T3x">
+                                        <rect key="frame" x="8" y="0.0" width="375" height="750"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="750" id="sKX-Y0-bG0"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Bent double, like old beggars under sacks, 
+Knock-kneed, coughing like hags, we cursed through sludge, 
+Till on the haunting flares we turned our backs, 
+And towards our distant rest began to trudge. 
+Men marched asleep. Many had lost their boots, 
+But limped on, blood-shod. All went lame; all blind; 
+Drunk with fatigue; deaf even to the hoots 
+Of gas-shells dropping softly behind. 
+
+Gas! GAS! Quick, boys!—An ecstasy of fumbling 
+Fitting the clumsy helmets just in time, 
+But someone still was yelling out and stumbling 
+And flound’ring like a man in fire or lime.—
+Dim through the misty panes and thick green light, 
+As under a green sea, I saw him drowning. 
+
+In all my dreams before my helpless sight, 
+He plunges at me, guttering, choking, drowning. 
+
+If in some smothering dreams, you too could pace 
+Behind the wagon that we flung him in, 
+And watch the white eyes writhing in his face, 
+His hanging face, like a devil’s sick of sin; 
+If you could hear, at every jolt, the blood 
+Come gargling from the froth-corrupted lungs, 
+Obscene as cancer, bitter as the cud 
+Of vile, incurable sores on innocent tongues,— 
+My friend, you would not tell with such high zest 
+To children ardent for some desperate glory, 
+The old Lie: Dulce et decorum est 
+Pro patria mori.</string>
+                                                <attributes>
+                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
+                                <constraints>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="top" id="1qb-JP-pVn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q9m-Mi-T3x" secondAttribute="trailing" id="8Hg-Up-jl8"/>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" id="8IP-48-xDc"/>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="leading" secondItem="rK1-FE-11f" secondAttribute="leadingMargin" id="W7p-CK-d0u"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q9m-Mi-T3x" secondAttribute="bottom" constant="8" id="Z9v-Zf-9Vk">
+                                        <mutableString key="userLabel">bottom = Bent double, like old beggars under sacks,  Knock-kneed, coughing like hags, we cursed through sludge,  Till on the haunting flares we turned our backs,  And towards our distant rest began to trudge.  Men marched asleep. Many had lost their boots,  But limped on, blood-shod. All went lame; all blind;  Drunk with fatigue; deaf even to the hoots  Of gas-shells dropping softly behind.   Gas! GAS! Quick, boys!—An ecstasy of fumbling  Fitting the clumsy helmets just in time,  But someone still was yelling out and stumbling  And flound’ring like a man in fire or lime.— Dim through the misty panes and thick green light,  As under a green sea, I saw him drowning.   In all my dreams before my helpless sight,  He plunges at me, guttering, choking, drowning.   If in some smothering dreams, you too could pace  Behind the wagon that we flung him in,  And watch the white eyes writhing in his face,  His hanging face, like a devil’s sick of sin;  If you could hear, at every jolt, the blood  Come gargling from the froth-corrupted lungs,  Obscene as cancer, bitter as the cud  Of vile, incurable sores on innocent tongues,—  My friend, you would not tell with such high zest  To children ardent for some desperate glory,  The old Lie: Dulce et decorum est  Pro patria mori..bottom + 8</mutableString>
+                                    </constraint>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rK1-FE-11f" firstAttribute="trailing" secondItem="YEE-29-Jja" secondAttribute="trailing" id="AMn-VY-U7E"/>
+                            <constraint firstItem="f3w-FP-7pn" firstAttribute="centerX" secondItem="rK1-FE-11f" secondAttribute="centerX" id="GTa-sj-VbJ"/>
+                            <constraint firstItem="rK1-FE-11f" firstAttribute="top" secondItem="DOQ-Xt-xQY" secondAttribute="top" id="ZOE-rg-3qO"/>
+                            <constraint firstItem="f3w-FP-7pn" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="bottom" constant="50" id="ltM-LX-PXb"/>
+                            <constraint firstAttribute="bottom" secondItem="f3w-FP-7pn" secondAttribute="bottom" constant="20" symbolic="YES" id="oB5-K0-yn6"/>
+                            <constraint firstItem="rK1-FE-11f" firstAttribute="leading" secondItem="YEE-29-Jja" secondAttribute="leading" id="sOC-jG-Dgz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YEE-29-Jja"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="830"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-623.20000000000005" y="1033.5832083958021"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">

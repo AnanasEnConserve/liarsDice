@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StartViewController: UIViewController, UITextFieldDelegate {
+class StartViewController: UIViewController, UITextFieldDelegate, InstructionsViewControllerDelegate {
 
     //var game = LiarsDiceGame()
     var playerName = String()
@@ -27,15 +27,23 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-//    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
-//        self.view.endEditing(true)
-//        playerName = textBox.text!
-//        print("Player Name:")
-//        print(playerName)
-//        return true
-//    }
+    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
+        self.view.endEditing(true)
+        playerName = textBox.text!
+        print("Player Name:")
+        print(playerName)
+        return true
+    }
+    
+    func comeBackToStart(controller: InstructionsViewController) {
+        controller.navigationController?.popViewController(animated: true)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "instructions" {
+            let screen = segue.destination as! InstructionsViewController
+            screen.delegate = self
+        }
        if segue.identifier == "startGame" {
        // let game = LiarsDiceGame(pName: playerName)
         

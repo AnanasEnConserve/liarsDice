@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		191A3A5D20528D48004B9ADE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191A3A5C20528D48004B9ADE /* SecondViewController.swift */; };
+		1949E8BB2064F110007B45EA /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1949E8BA2064F110007B45EA /* InstructionsViewController.swift */; };
 		19CCF656203F09FB0078F878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CCF655203F09FB0078F878 /* AppDelegate.swift */; };
 		19CCF658203F09FB0078F878 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CCF657203F09FB0078F878 /* ViewController.swift */; };
 		19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF659203F09FB0078F878 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		191A3A5C20528D48004B9ADE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = liarsDice/SecondViewController.swift; sourceTree = "<group>"; };
+		1949E8BA2064F110007B45EA /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InstructionsViewController.swift; path = liarsDice/InstructionsViewController.swift; sourceTree = "<group>"; };
 		19CCF652203F09FB0078F878 /* liarsDice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = liarsDice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19CCF655203F09FB0078F878 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19CCF657203F09FB0078F878 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		19CCF649203F09FB0078F878 = {
 			isa = PBXGroup;
 			children = (
+				1949E8BA2064F110007B45EA /* InstructionsViewController.swift */,
 				19F15467205C077F00B620D5 /* StartViewController.swift */,
 				191A3A5C20528D48004B9ADE /* SecondViewController.swift */,
 				19CCF654203F09FB0078F878 /* liarsDice */,
@@ -304,6 +307,7 @@
 				D9F7A09820614E53000EC7CC /* Support.swift in Sources */,
 				D9F7A09720614E53000EC7CC /* Tokenizer.swift in Sources */,
 				D9F7A09620614E53000EC7CC /* SlotCondition.swift in Sources */,
+				1949E8BB2064F110007B45EA /* InstructionsViewController.swift in Sources */,
 				191A3A5D20528D48004B9ADE /* SecondViewController.swift in Sources */,
 				D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */,
 				D9F7A09220614E53000EC7CC /* Procedural.swift in Sources */,
