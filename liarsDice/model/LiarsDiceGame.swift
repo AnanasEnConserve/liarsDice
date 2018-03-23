@@ -53,10 +53,12 @@ class LiarsDiceGame {
     }
     func fixDice(_ toFix: [Int]) {
         for i in toFix {
-            dice[i].fix()
-            fixed += toFix.count
-            if(fixed >= 5){
-                print("Dude what are you doing, you broke the game (took out all dice)")
+            if(dice[i]).isInPlay(){
+                dice[i].fix()
+                fixed += toFix.count
+                if(fixed >= 5){
+                    print("Dude what are you doing, you broke the game (took out all dice)")
+                }
             }
         }
     }
@@ -223,10 +225,30 @@ class LiarsDiceGame {
     }
     
     /**
+     * checks for bluff and increments score and streak of winner
+    */
+    func callBluff() -> Bool{
+        let wasBluff = isBidABluff()
+        // player called bluff and was right, OR opponent called bluff and was wrong
+        if ((wasBluff && isPlayerTurn()) || (!wasBluff && isOpponentTurn())) {
+                getPlayer().incrementScore()
+                getPlayer().incrementStreak()
+                getOpponent().resetStreak()
+        }
+        // else player loses
+        else {
+            getOpponent().incrementStreak()
+            getOpponent().incrementScore()
+            getPlayer().resetStreak()
+        }
+        return wasBluff
+    }
+    
+    /**
      * compares the last bid to the current state of dice
      * returns true if it was a bluff indeed
      */
-    func callBluff() -> Bool {
+    func isBidABluff() -> Bool {
         // instead of comparing the ranks etc compare dice directly by removing them one by one from the pattern
         var dice = getAllDiceValues()
         print("Dice values: ")

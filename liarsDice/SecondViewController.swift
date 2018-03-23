@@ -34,6 +34,9 @@ class SecondViewController: UIViewController {
     var doubleBidFirstValue = String()
     var doubleBidSecondValue = String()
     
+    @IBAction func back(_ sender: Any) {
+        delegate.comeBackFromBid(controller: self)
+    }
     
     @IBAction func submitBid(_ sender: Any) {
         currentBid.removeAll()
@@ -69,7 +72,9 @@ class SecondViewController: UIViewController {
 //                guard let delegate = self.delegate else {
 //                    print("Delegate not set")
 //                    return
-              //  }
+//                }
+//        print("before delegate")
+//        print(game)
                 delegate.didSetBid(controller: self,
                                    bid: submittedBid)
     }
@@ -305,7 +310,9 @@ class SecondViewController: UIViewController {
     func setCurrentRollAsString(currentRollAsString: String) {
          self.currentRollAsString = currentRollAsString
     }
-
+    func setGame(game: LiarsDiceGame){
+        self.game = game
+    }
     /*
     // MARK: - Navigation
 
@@ -334,4 +341,5 @@ class SecondViewController: UIViewController {
 
 protocol SecondViewControllerDelegate {
     func didSetBid(controller: SecondViewController,bid:String)
+    func comeBackFromBid(controller:SecondViewController)
 }

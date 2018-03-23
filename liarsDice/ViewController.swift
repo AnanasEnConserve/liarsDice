@@ -249,6 +249,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             let biddingScreen = segue.destination as! SecondViewController
             biddingScreen.setCurrentRoll(currentRoll: self.currentRoll)
             biddingScreen.setCurrentRollAsString(currentRollAsString: currentRollAsString)
+            biddingScreen.setGame(game: game)
             biddingScreen.delegate = self
             
             biddingScreen.playerName = labelPlayer.text
@@ -265,14 +266,43 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //            SecondViewController.currentroll = currentroll
 //        }
     }
+    
+    @IBOutlet weak var showBid: UILabel!
+    
+    @IBAction func callBluff(_ sender: Any) {
+        let didPlayerWin = game.callBluff()
+        if didPlayerWin{
+            print("Player won")
+        }
+        else{
+            print("Opponent won")
+        }
+        self.updateScores()
+        game.reset()
+        self.highlightTurn()
+    }
+    
     func didSetBid(controller: SecondViewController, bid: String) {
-        print(bid)
+        print("I am the MainViewController and I have received the bid: " + bid)
+        showBid.text = "Current Bid: " + bid
+        game.setBid(bid)
+        
+        // after the bid, its the oppponents turn
+        game.toggleTurn()
+        self.highlightTurn()
+        
+        
+        controller.navigationController?.popViewController(animated: true)
+    }
+    func comeBackFromBid(controller: SecondViewController) {
+        controller.navigationController?.popViewController(animated: true)
     }
     
     var hasLoaded = false
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("VIEWDIDLOAD")
         //labelPlayer.text = playerName
         print(game)
        // if hasLoaded == false {

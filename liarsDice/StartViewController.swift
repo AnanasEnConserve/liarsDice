@@ -27,20 +27,21 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
-        self.view.endEditing(true)
-        playerName = textBox.text!
-        print("Player Name:")
-        print(playerName)
-        return true
-    }
+//    func textFieldShouldReturn(_ textBox: UITextField) -> Bool {
+//        self.view.endEditing(true)
+//        playerName = textBox.text!
+//        print("Player Name:")
+//        print(playerName)
+//        return true
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "startGame" {
        // let game = LiarsDiceGame(pName: playerName)
         
         let mainScreen = segue.destination as! ViewController
-        mainScreen.game = LiarsDiceGame(pName: playerName)
+        //mainScreen.game = LiarsDiceGame(pName: playerName)
+        mainScreen.game = LiarsDiceGame(pName: textBox.text!)
         //mainScreen.labelPlayer.text = playerName
         }
     }
@@ -51,7 +52,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         //let game = LiarsDiceGame(pName: playerName)
         //game.getPlayer()
         //game.getPlayer().getName()
-        performSegue(withIdentifier: "startGame", sender: self)
+        //performSegue(withIdentifier: "startGame", sender: self)
     }
     
     

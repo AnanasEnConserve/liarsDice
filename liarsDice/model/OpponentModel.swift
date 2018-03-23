@@ -87,7 +87,7 @@ class OpponentModel: Model{
         // call bluff and end turn if the player is believed to bluff
         if(!believePlayer()){
             print("The AI calls bullshit on your bid!")
-            _ = game.callBluff()
+            _ = game.isBidABluff()
             return
         }
         fixDice()
