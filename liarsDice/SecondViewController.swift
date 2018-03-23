@@ -66,28 +66,9 @@ class SecondViewController: UIViewController {
             }
         }
         submittedBid = currentBid.joined()
-        //print(submittedBid)
-        
-//                print("submit")
-//                guard let delegate = self.delegate else {
-//                    print("Delegate not set")
-//                    return
-//                }
-//        print("before delegate")
-//        print(game)
                 delegate.didSetBid(controller: self,
                                    bid: submittedBid)
     }
-    //    @IBAction func submitBid(_ sender: Any) {
-//        print("submit")
-//        guard let delegate = self.delegate else {
-//            print("Delegate not set")
-//            return
-//        }
-//        delegate.didSetBid(controller: self,
-//                           bid: "I made a bid")
-//
-//    }
     @IBAction func singleTouch(_ sender: Any) {
         let selectedDie = rowTwo.index(of: sender as! UIButton)
         
@@ -114,9 +95,9 @@ class SecondViewController: UIViewController {
     }
     
     
+    // function only covers 2 pairs and full house
     @IBAction func touchFirst(_ sender: UIButton) {
         let selectedOne = rowOne.index(of: sender)
-        
         for index in 0...5{
             rowThree[index].isEnabled = true
         }
@@ -131,13 +112,17 @@ class SecondViewController: UIViewController {
             for index in 0...5 {
                 if selectedOne != index {
                     rowOne[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
-                }
+                    rowThree[index].isEnabled = true
+                    rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                        
+                    }
                 else {
                     rowOne[index].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
                     rowThree[index].isEnabled = false
                 }
             }
         }
+    
         doubleBidFirstValue = String(rowOne.index(of: sender)! + 1)
         
         if selectedFirst == true && selectedSecond == true && selectedRank == true {
@@ -182,32 +167,51 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var submitBid: UIButton!
     
-    
     @IBAction func buttonTouch(_ sender: Any) {
-        print(playerName)
+        print("Button touch")
+        let lastRank = game.getLastBidRank()
+        let lastBid = game.getLastBid()
+        print("last bid was " + String(lastBid) + " of rank " + String(lastRank))
         let selectedButton = rankButtons.index(of: sender as! UIButton)
         
         if selectedRank == false {
         rankButtons[selectedButton!].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
         selectedRank = true
         }
+    
         else {
             for idx in 0..<rankButtons.count {
                 if selectedButton != idx {
-                rankButtons[idx].setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: UIControlState.normal)
+                    rankButtons[idx].setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: UIControlState.normal)
                 }
                 else {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
                 }
             }
         }
-     
+    
+        let lastBidRank = game.getLastBidRank()
+        print("the pressed button is " + String(describing: selectedButton))
+        var higherPairNumber = Int(lastBid[0]) // for two pairs the first number in bid is always highest
+        if (higherPairNumber == 1){
+            higherPairNumber = 7
+        }
         //Adjust visibility of buttons below
-        if selectedButton == 2 || selectedButton == 4 {
+        if selectedButton == 2 {
             for idx in 0..<rowTwo.count {
                 rowTwo[idx].setTitleColor(#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 0), for: UIControlState.normal)
                 rowTwo[idx].isEnabled = false
                 
+                rowOne[idx].isEnabled = true
+                rowOne[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                
+                rowThree[idx].isEnabled = true
+                rowThree[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+            }
+        } else if selectedButton == 4 {
+            for idx in 0..<rowTwo.count {
+                rowTwo[idx].setTitleColor(#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 0), for: UIControlState.normal)
+                rowTwo[idx].isEnabled = false
                 rowOne[idx].isEnabled = true
                 rowThree[idx].isEnabled = true
                 rowOne[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
@@ -291,6 +295,22 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rollDisplay.text = currentRollAsString
+        print("opened bidding screen, disabling rank buttons")
+        var disableUpTo = game.getLastBidRank()
+        if(game.isHighestOfRank()){
+            disableUpTo += 1 // e.g. if previous bid was 11, disable one pair too because it cant be higher
+        }
+        print("disabling everything up to " + String(disableUpTo))
+
+        for i in 0..<disableUpTo{
+            rankButtons[i].setTitleColor(#colorLiteral(red: 0.8230279496, green: 0.8088910749, blue: 0.835492228, alpha: 1), for: UIControlState.normal)
+            rankButtons[i].isEnabled = false
+        }
+        // in case of reset, we need to re-enable previously disabled bids
+        for i in disableUpTo..<7{
+            rankButtons[i].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            rankButtons[i].isEnabled = true
+        }
         //String(describing: currentRoll)
         
         

@@ -24,7 +24,8 @@ class OpponentModelTest: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        var model = OpponentModel(game: LiarsDiceGame(pName: "test player"))
+        //var model = OpponentModel(game: LiarsDiceGame(pName: "test player"))
+        var model = OpponentModel(game: LiarsDiceGame(pName: "Erty"))
     }
     
     func testPerformanceExample() {
