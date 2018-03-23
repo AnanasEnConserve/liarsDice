@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InstructionsViewController: UIViewController {
+class InstructionsViewController: UIViewController, UIScrollViewDelegate {
 
     var delegate:InstructionsViewControllerDelegate! = nil
     var game:LiarsDiceGame!
@@ -17,8 +17,16 @@ class InstructionsViewController: UIViewController {
         delegate.comeBackToStart(controller: self)
     }
     
+    @IBOutlet weak var scrollView: UIScrollView!
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
+        scrollView.contentOffset.x = 0
+    }
     
-    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
