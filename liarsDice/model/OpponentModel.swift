@@ -30,8 +30,8 @@ class OpponentModel: Model{
         var profileData = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
         // create chunks of the profile for no reason...
         
-        var model = Model()
-        model.loadModel(fileName: "load-profile")
+        //let model = Model()
+        self.loadModel(fileName: "load-profile")
         for line in profileData.components(separatedBy: .newlines){
             if(line == "") {continue}
             var data = line.split{$0 == ";"}.map(String.init)
@@ -39,17 +39,18 @@ class OpponentModel: Model{
             print(line)
             print(data)
             
-            let chunk = model.generateNewChunk()
-            chunk.setSlot(slot: "playerName", value: data[0])
-            chunk.setSlot(slot: "earlyGameBeh", value: data[1])
-            chunk.setSlot(slot: "endGameBeh", value: data[2])
-            model.dm.addToDM(chunk)
-            print("created and added chunk")
-            //print(chunk)
+            if(data[0] == game.getPlayer().getName()){
+                let chunk = self.generateNewChunk()
+                chunk.setSlot(slot: "playerName", value: data[0])
+                chunk.setSlot(slot: "earlyGameBeh", value: data[1])
+                chunk.setSlot(slot: "endGameBeh", value: data[2])
+                self.dm.addToDM(chunk)
+                print("created and added chunk")
+            }
         }
-        model.run()
-        print(model.dm.chunks)
-        print(model.buffers)
+        self.run()
+        print(self.dm.chunks)
+        print(self.buffers)
     }
     
     

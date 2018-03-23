@@ -25,7 +25,7 @@ class LiarsDiceGame {
     // number of dice already taken out of play. Must never exceed 5
     private var fixed = 0
     // turn count
-    private var turnCount = 0
+    private var turnCount = 1
     // initialize the game: put the dices on the table, basically
     init(pName : String) {
         for _ in 0..<NUMBER_OF_DICE {
@@ -69,9 +69,16 @@ class LiarsDiceGame {
         normalizedLastBid = ""
         playerturn = true
         fixed = 0
+        turnCount = 1
         for i in dice{
             i.reset()
         }
+    }
+    
+    // value needs testing; for act-r purposes (model behaves differently early in the game since
+    // we expect the probability for bluffs higher there)
+    func isEarlyGame() -> Bool{
+        return fixed > 2
     }
     
     func incrementTurnCount(){
@@ -109,7 +116,7 @@ class LiarsDiceGame {
     
     // converts a string of dice values into the desired format
     // bids are stored as strings, and elements in string are sorted by (1) frequency and (2) number rank
-    private func normalizeBid(_ bid: String) -> String{
+    func normalizeBid(_ bid: String) -> String{
         // replace 1 with 7 for sorting purposes
         let newBid = bid.replacingOccurrences(of: "1", with: "7")
         var counts: [Character:Int] = [:]
