@@ -69,6 +69,7 @@ class SecondViewController: UIViewController {
                 delegate.didSetBid(controller: self,
                                    bid: submittedBid)
     }
+    
     @IBAction func singleTouch(_ sender: Any) {
         let selectedDie = rowTwo.index(of: sender as! UIButton)
         
@@ -89,7 +90,8 @@ class SecondViewController: UIViewController {
         let selectedDieValue = rowTwo.index(of: sender as! UIButton)! + 1
         singleBidValue = String(selectedDieValue)
         if singleSelected == true && selectedRank == true {
-            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitle("Submit", for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
     }
@@ -113,7 +115,7 @@ class SecondViewController: UIViewController {
                 if selectedOne != index {
                     rowOne[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
                     rowThree[index].isEnabled = true
-                    rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                    //rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
                         
                     }
                 else {
@@ -126,7 +128,8 @@ class SecondViewController: UIViewController {
         doubleBidFirstValue = String(rowOne.index(of: sender)! + 1)
         
         if selectedFirst == true && selectedSecond == true && selectedRank == true {
-            submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitle("Submit", for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
     }
@@ -160,7 +163,8 @@ class SecondViewController: UIViewController {
         doubleBidSecondValue = String(rowThree.index(of: sender)! + 1)
         
         if selectedFirst == true && selectedSecond == true && selectedRank == true {
-            submitBid.setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitle("Submit", for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
         }
     }
@@ -277,7 +281,7 @@ class SecondViewController: UIViewController {
         singleSelected = false
         selectedFirst = false
         selectedSecond = false
-        submitBid.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControlState.normal)
+        submitBid.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
         submitBid.isEnabled = false
     }
     

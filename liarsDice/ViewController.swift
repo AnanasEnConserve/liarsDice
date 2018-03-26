@@ -32,7 +32,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     @IBOutlet weak var labelPlayerScore: UILabel!
     @IBOutlet weak var labelPlayerStreak: UILabel!
     
-    let colorNormal = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+    let colorNormal = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     let colorHighlighted = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
     
     var removedDice = [String]()
