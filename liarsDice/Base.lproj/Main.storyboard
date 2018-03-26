@@ -92,7 +92,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK1-FE-11f">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="730"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-Mi-T3x">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
@@ -119,7 +119,7 @@ A pair of ones is therefore the highest possible pair and will beat a pair of si
 Each player can roll the dice once. After rolling, the player should make a bid which can either be truthful or a bluff.
 
 The opponent can then decide either to accept or challenge the bid.
-When accepting a truthful bid, you are given the opportunity to hold dice, taking them out of play. Dice can be selected by tapping on them. Selected dice will turn red. Note that these dice can not be brought back into play and will remain fixed until the end of the round. So think carefully which dice to take out of play, and use it to your advantage! 
+When accepting a truthful bid, you are given the opportunity to hold dice, taking them out of play. Dice can be selected by tapping on them. Selected dice will turn red. Removed dice will be displayed on the left of the screen.                                                                                                 Note that these dice can not be brought back into play and will remain fixed until the end of the round. So think carefully which dice to take out of play, and use it to your advantage! 
 You are not able to remove dice after accepting a bid that turns out to be a bluff. 
 
 Challenging a bid will always end the round. 
@@ -147,8 +147,8 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                         <constraints>
                             <constraint firstItem="rK1-FE-11f" firstAttribute="trailing" secondItem="YEE-29-Jja" secondAttribute="trailing" id="AMn-VY-U7E"/>
                             <constraint firstItem="f3w-FP-7pn" firstAttribute="centerX" secondItem="rK1-FE-11f" secondAttribute="centerX" id="GTa-sj-VbJ"/>
-                            <constraint firstItem="rK1-FE-11f" firstAttribute="top" secondItem="DOQ-Xt-xQY" secondAttribute="top" id="ZOE-rg-3qO"/>
-                            <constraint firstItem="f3w-FP-7pn" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="bottom" constant="50" id="ltM-LX-PXb"/>
+                            <constraint firstItem="rK1-FE-11f" firstAttribute="top" secondItem="DOQ-Xt-xQY" secondAttribute="top" constant="30" id="ZOE-rg-3qO"/>
+                            <constraint firstItem="f3w-FP-7pn" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="bottom" constant="20" id="ltM-LX-PXb"/>
                             <constraint firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" id="mHe-UD-XW1"/>
                             <constraint firstAttribute="bottom" secondItem="f3w-FP-7pn" secondAttribute="bottom" constant="20" symbolic="YES" id="oB5-K0-yn6"/>
                             <constraint firstItem="rK1-FE-11f" firstAttribute="width" secondItem="DOQ-Xt-xQY" secondAttribute="width" id="qQG-Et-dL5"/>
