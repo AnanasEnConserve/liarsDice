@@ -100,7 +100,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="750" id="sKX-Y0-bG0"/>
                                         </constraints>
-                                        <mutableString key="text">The game revolves around rolling dice and forming pairs. Players will bid on what they have rolled, and have the opportunity to bluff. The opponent can then either accept or challenge this bid. The player accepting a bid will get the opportunity to roll the dice once, and will then have to bid themselves. Each consecutive bid will have to be higher than the previous bid, until the highest possible bid has been made.
+                                        <string key="text">The game revolves around rolling dice and forming pairs. Players will bid on what they have rolled, and have the opportunity to bluff. The opponent can then either accept or challenge this bid. The player accepting a bid will get the opportunity to roll the dice once, and will then have to bid themselves. Each consecutive bid will have to be higher than the previous bid, until the highest possible bid has been made.
 
 The rankings of patterns one can bid is as follows (from high to low):
 Five of a kind
@@ -124,7 +124,7 @@ You are not able to remove dice after accepting a bid that turns out to be a blu
 
 Challenging a bid will always end the round. 
 If the bid was indeed a bluff, the person challenging will win the round. 
-Upon challenging a truthful bid, the opponent will win the round.</mutableString>
+Upon challenging a truthful bid, the opponent will win the round.</string>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                         <color key="textColor" red="0.13333" green="0.13333" blue="0.13333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -356,6 +356,11 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                                 <state key="normal" title="Call Bluff">
                                     <color key="titleColor" red="0.13333" green="0.13333" blue="0.13333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="callBluff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoj-4g-4jq"/>
                                 </connections>
@@ -374,14 +379,18 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-l8-qdM">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-l8-qdM">
                                 <rect key="frame" x="106" y="195" width="90" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.24882664305237598" green="0.74919041450777202" blue="0.21887824122560945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Accept">
                                     <color key="titleColor" red="0.12901870042783528" green="0.12379724113184375" blue="0.13333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYj-6y-yO2">
                                 <rect key="frame" x="293" y="597" width="64" height="21"/>
@@ -660,9 +669,6 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
                                 <connections>
                                     <action selector="touchSecond:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="Wxk-i3-hHn"/>
                                 </connections>
@@ -674,9 +680,6 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
                                 <connections>
                                     <action selector="touchSecond:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="Ksd-fN-OAt"/>
                                 </connections>
@@ -687,9 +690,6 @@ Upon challenging a truthful bid, the opponent will win the round.</mutableString
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="touchSecond:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="23s-Za-UvY"/>

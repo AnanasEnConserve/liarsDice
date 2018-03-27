@@ -108,7 +108,7 @@ class SecondViewController: UIViewController {
         if selectedFirst == false {
             rowOne[selectedOne!].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
             selectedFirst = true
-            rowThree[selectedOne!].isEnabled = false
+            //rowThree[selectedOne!].isEnabled = false
         }
         else {
             for index in 0...5 {
@@ -185,10 +185,11 @@ class SecondViewController: UIViewController {
     
         else {
             for idx in 0..<rankButtons.count {
+                if !rankButtons[idx].isEnabled {continue}
                 if selectedButton != idx {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: UIControlState.normal)
                 }
-                else {
+                else  {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
                 }
             }

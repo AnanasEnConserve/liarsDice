@@ -16,6 +16,8 @@
 		19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19CCF65E203F09FB0078F878 /* LaunchScreen.storyboard */; };
 		19F15468205C077F00B620D5 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F15467205C077F00B620D5 /* StartViewController.swift */; };
 		D90F58EB2064F6150073A74E /* load-profile.actr in Resources */ = {isa = PBXBuildFile; fileRef = D90F58EA2064F6140073A74E /* load-profile.actr */; };
+		D92A0021206A532900D46034 /* play-with-history.actr in Resources */ = {isa = PBXBuildFile; fileRef = D92A0020206A532900D46034 /* play-with-history.actr */; };
+		D92A0023206A532F00D46034 /* play-without-history.actr in Resources */ = {isa = PBXBuildFile; fileRef = D92A0022206A532F00D46034 /* play-without-history.actr */; };
 		D93D702A2052770600C95FA4 /* EBid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D70292052770600C95FA4 /* EBid.swift */; };
 		D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */; };
 		D988B69A2062664800AB91F0 /* OpponentModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988B6992062664800AB91F0 /* OpponentModelTest.swift */; };
@@ -63,6 +65,8 @@
 		19CCF661203F09FB0078F878 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19F15467205C077F00B620D5 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = liarsDice/StartViewController.swift; sourceTree = "<group>"; };
 		D90F58EA2064F6140073A74E /* load-profile.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "load-profile.actr"; sourceTree = "<group>"; };
+		D92A0020206A532900D46034 /* play-with-history.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "play-with-history.actr"; sourceTree = "<group>"; };
+		D92A0022206A532F00D46034 /* play-without-history.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "play-without-history.actr"; sourceTree = "<group>"; };
 		D93D70292052770600C95FA4 /* EBid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBid.swift; sourceTree = "<group>"; };
 		D93D703420528CBC00C95FA4 /* liarsDiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = liarsDiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = liarsDiceTests.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				D90F58EA2064F6140073A74E /* load-profile.actr */,
+				D92A0020206A532900D46034 /* play-with-history.actr */,
+				D92A0022206A532F00D46034 /* play-without-history.actr */,
 				D988B69E2062747200AB91F0 /* profiles.txt */,
 			);
 			name = Models;
@@ -281,10 +287,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92A0021206A532900D46034 /* play-with-history.actr in Resources */,
 				19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */,
 				D90F58EB2064F6150073A74E /* load-profile.actr in Resources */,
 				D988B69F2062747200AB91F0 /* profiles.txt in Resources */,
 				19CCF65D203F09FB0078F878 /* Assets.xcassets in Resources */,
+				D92A0023206A532F00D46034 /* play-without-history.actr in Resources */,
 				19CCF65B203F09FB0078F878 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

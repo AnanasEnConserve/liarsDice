@@ -288,7 +288,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         game.setBid(bid)
         
         // after the bid, its the oppponents turn
-        game.toggleTurn()
+        _ = game.toggleTurn()
         self.highlightTurn()
         
         
@@ -302,7 +302,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("VIEWDIDLOAD")
         //labelPlayer.text = playerName
         print(game)
        // if hasLoaded == false {

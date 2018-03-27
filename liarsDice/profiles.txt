@@ -1,2 +1,2 @@
-Asdf;1;0
-Erty;2;3
+HonestPlayer;-2;0;21
+Liar;2;0;21
