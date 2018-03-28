@@ -21,6 +21,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     func updateView() {
         if game.isPlayerTurn() == true {
+            bluffButton.isHidden = true
+            acceptButton.isHidden = true
+            
             activityIndicator.stopAnimating()
             activityIndicator.hidesWhenStopped = true
             //Set game up for players turn
@@ -29,7 +32,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //show AllDice
             for index in 0..<5 {
-                if(game.isInPlay(i: index)){
+               if(game.isInPlay(i: index)){
                     allDice[index].isEnabled = true
                     allDice[index].isHidden = false
                 }
@@ -176,6 +179,45 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             print(selected)
     }
     
+    //Function to reset things at the start of a new round
+    func startGame() {
+       // if game.isPlayerTurn() == true {
+            bluffButton.isHidden = true
+            acceptButton.isHidden = true
+            
+            activityIndicator.stopAnimating()
+            activityIndicator.hidesWhenStopped = true
+            //Set game up for players turn
+            rollButton.isEnabled = true
+            rollButton.isHidden = false
+            
+            //show AllDice
+            for index in 0..<5 {
+                //if(game.isInPlay(i: index)){
+                    allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+                    allDice[index].isEnabled = false
+                    allDice[index].isHidden = false
+               // }
+            }
+            resetButton.isEnabled = true
+            resetButton.isHidden = false
+            holdButton.isHidden = true
+            holdButton.isEnabled = false
+            opponentBid.isHidden = true
+        }
+        //        game.reset()
+//        removed.removeAll()
+//        selected.removeAll()
+//        highlightTurn()
+//        for value in 0..<diceTakenOut.count {
+//            let currentDice = diceTakenOut[value]
+//            currentDice.setTitle(" ", for: UIControlState.normal)
+//            currentDice.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+//        }
+   // }
+    
+    
+    
     //Array to keep track of which and how many buttons are already taken out
     var removed = [Int]()
     
@@ -245,29 +287,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         labelPlayerStreak.text = "Streak: " + String(game.getPlayer().getScore())
         labelOpponentScore.text = "Score: " + String(game.getOpponent().getScore())
         labelOpponentStreak.text = "Streak: " + String(game.getOpponent().getScore())
+        startGame()
     }
-    
-    //Function to reset things at the start of a new round
-    func startGame() {
-        game.reset()
-        removed.removeAll()
-        selected.removeAll()
-        highlightTurn()
-        for value in 0..<diceTakenOut.count {
-            let currentDice = diceTakenOut[value]
-            currentDice.setTitle(" ", for: UIControlState.normal)
-            currentDice.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
-        }
-        
-        
-        
-            // if playerStart == false {
-        // for value in 0..<diceInPLay.count {
-        //diceInPlay[value].setTitleColor(Opacity 0%, for: UIControlState.normal)
-            // }
-        //}
-    }
-    
     
     @IBAction func resetGame(_ sender: UIButton) {
         reset()
@@ -408,7 +429,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         labelOpponent.text = game.getOpponent().getName()
             hasLoaded = true
        // }
-        updateView()
+        //updateView()
         // Do any additional setup after loading the view, typically from a nib.
     }
 

@@ -280,6 +280,7 @@ class LiarsDiceGame {
             getOpponent().incrementScore()
             getPlayer().resetStreak()
         }
+        reset()
         return wasBluff
     }
     
