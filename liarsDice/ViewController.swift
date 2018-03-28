@@ -11,6 +11,59 @@ import UIKit
 class ViewController: UIViewController,SecondViewControllerDelegate {
 
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
+    func updateView() {
+        if game.isPlayerTurn() == true {
+            activityIndicator.stopAnimating()
+            activityIndicator.hidesWhenStopped = true
+            //Set game up for players turn
+            rollButton.isEnabled = true
+            rollButton.isHidden = false
+            
+        }
+        if game.isOpponentTurn() == true {
+            print("It is now the Opponent's turn")
+            opponentBid.text = "Dumb AI is considering his options..."
+            opponentBid.isHidden = false
+            
+            //hide AllDice
+            for index in 0..<5 {
+                allDice[index].isEnabled = false
+                allDice[index].isHidden = true
+            }
+            
+            //Disable all buttons /NOTE:(bidButton is being handled elsewhere)
+            resetButton.isEnabled = false
+            resetButton.isHidden = true
+            holdButton.isHidden = true
+            holdButton.isEnabled = false
+            
+            //Show the activity indicator
+            activityIndicator.startAnimating()
+            
+            //Stop this when the opponent has made a bid!
+            //if opponentdidsetbid = true, call seperate function
+            //There, display the bid on the appropriate label
+            
+        }
+    }
+    
+    func opponentHasBid() {
+        //Set the label to display the bid for the opponent
+        opponentBid.text = "Opponent has bid: \(game.getLastBid())"
+        opponentBid.isHidden =  false
+        
+        //Enable && display the accept/bluff buttons
+        acceptButton.isHidden = false
+        acceptButton.isEnabled = true
+        bluffButton.isHidden = false
+        bluffButton.isEnabled = true
+    }
+    
+    
+    
     // model that contains all data
     var game : LiarsDiceGame! // = LiarsDiceGame()
     var currentRollAsString = String()
@@ -18,8 +71,14 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     
+    
+    
+    @IBOutlet weak var holdButton: UIButton!
+    
+    @IBOutlet weak var bidButton: UIButton!
     @IBAction func Bid(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: "biddingSegue", sender: self)
+        bidButton.isHidden = true
+        bidButton.isEnabled = false
     }
   
     //Declare array of values the dice can take
@@ -31,6 +90,13 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     @IBOutlet weak var labelOpponentStreak: UILabel!
     @IBOutlet weak var labelPlayerScore: UILabel!
     @IBOutlet weak var labelPlayerStreak: UILabel!
+    
+    @IBOutlet weak var rollButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    
+    @IBOutlet weak var opponentBid: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var bluffButton: UIButton!
     
     let colorNormal = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     let colorHighlighted = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
@@ -46,6 +112,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func rollDice(_ sender: UIButton) {
         rollDice()
+        rollButton.isHidden = true
+        rollButton.isEnabled = false
+        bidButton.isHidden = false
+        bidButton.isEnabled = true
+        holdButton.isHidden = true
+        holdButton.isEnabled = false
     }
     
     //TODO:
@@ -290,9 +362,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         // after the bid, its the oppponents turn
         game.toggleTurn()
         self.highlightTurn()
-        
-        
-        controller.navigationController?.popViewController(animated: true)
+        self.updateView()
+    controller.navigationController?.popViewController(animated: true)
     }
     func comeBackFromBid(controller: SecondViewController) {
         controller.navigationController?.popViewController(animated: true)
@@ -310,7 +381,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         labelOpponent.text = game.getOpponent().getName()
             hasLoaded = true
        // }
-        
+        updateView()
         // Do any additional setup after loading the view, typically from a nib.
     }
 

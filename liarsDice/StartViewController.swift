@@ -16,6 +16,7 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
     
     @IBOutlet weak var textBox: UITextField!
     
+    @IBOutlet weak var warningLabel: UILabel!
     
     @IBAction func startGame(_ sender: UIButton) {
     }
@@ -38,7 +39,7 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
     func comeBackToStart(controller: InstructionsViewController) {
         controller.navigationController?.popViewController(animated: true)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "instructions" {
             let screen = segue.destination as! InstructionsViewController
@@ -46,16 +47,21 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
         }
        if segue.identifier == "startGame" {
        // let game = LiarsDiceGame(pName: playerName)
-        
         let mainScreen = segue.destination as! ViewController
-        //mainScreen.game = LiarsDiceGame(pName: playerName)
         mainScreen.game = LiarsDiceGame(pName: textBox.text!)
-        //mainScreen.labelPlayer.text = playerName
         }
+       
     }
+    
 
     
     @IBAction func init_Game(_ sender: UIButton) {
+        if textBox.text == "" {
+            warningLabel.text = "Please enter a username"
+            //Prevent the view from changing somehow..
+        }
+        
+        
         //Initialize the game and set up the start of a new game here
         //let game = LiarsDiceGame(pName: playerName)
         //game.getPlayer()
