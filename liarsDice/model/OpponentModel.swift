@@ -147,6 +147,7 @@ class OpponentModel: Model{
         return bid
     }
     
+    // default action for non-truthful
     private func createBidFromDecision(_ newBidRank: Int) -> String{
         
         return ""
