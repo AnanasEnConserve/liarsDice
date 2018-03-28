@@ -277,6 +277,7 @@ class OpponentModel: Model{
             return
         }
         fixDice()
+        game.rollDice()
         //makeBid()
         print("i am calculating")
         

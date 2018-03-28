@@ -29,8 +29,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //show AllDice
             for index in 0..<5 {
-                allDice[index].isEnabled = true
-                allDice[index].isHidden = false
+                if(game.isInPlay(i: index)){
+                    allDice[index].isEnabled = true
+                    allDice[index].isHidden = false
+                }
             }
             resetButton.isEnabled = true
             resetButton.isHidden = false

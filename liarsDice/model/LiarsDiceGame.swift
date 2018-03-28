@@ -141,6 +141,13 @@ class LiarsDiceGame {
         return bid
     }
     
+    func isFixed(i: Int) -> Bool{
+        return !dice[i].isInPlay()
+    }
+    func isInPlay(i: Int) -> Bool{
+        return dice[i].isInPlay()
+    }
+    
     func getRoll() -> String{
         var bid = ""
         for i in dice{
