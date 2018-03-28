@@ -144,7 +144,7 @@ class OpponentModel: Model{
         var fixed = game.normalizeBid(game.getFixedDice())
         
         
-        return
+        return bid
     }
     
     private func createBidFromDecision(_ newBidRank: Int) -> String{
