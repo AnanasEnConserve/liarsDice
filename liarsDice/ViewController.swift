@@ -11,8 +11,13 @@ import UIKit
 class ViewController: UIViewController,SecondViewControllerDelegate {
 
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    // model that contains all data
+    var game : LiarsDiceGame! // = LiarsDiceGame()
+    var currentRollAsString = String()
+    var playerName = String()
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var opponentModel : OpponentModel!
     
     func updateView() {
         if game.isPlayerTurn() == true {
@@ -21,6 +26,19 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             //Set game up for players turn
             rollButton.isEnabled = true
             rollButton.isHidden = false
+            
+            //show AllDice
+            for index in 0..<5 {
+                if(game.isInPlay(i: index)){
+                    allDice[index].isEnabled = true
+                    allDice[index].isHidden = false
+                }
+            }
+            resetButton.isEnabled = true
+            resetButton.isHidden = false
+            holdButton.isHidden = false
+            holdButton.isEnabled = true
+            opponentBid.isHidden = true
             
         }
         if game.isOpponentTurn() == true {
@@ -47,7 +65,22 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             //if opponentdidsetbid = true, call seperate function
             //There, display the bid on the appropriate label
             
+            print("before calculate turn")
+            print(game.getLastBid())
+            opponentModel.calculateTurn()
+            
+            print("after calculate turn")
+            print(game.getLastBid())
+            activityIndicator.stopAnimating()
+            self.opponentHasBid()
+            self.highlightTurn()
+            
         }
+    }
+    
+    @IBAction func acceptBid(_ sender: Any) {
+        print("I am accepting the bid")
+        self.updateView()
     }
     
     func opponentHasBid() {
@@ -63,11 +96,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     }
     
     
-    
-    // model that contains all data
-    var game : LiarsDiceGame! // = LiarsDiceGame()
-    var currentRollAsString = String()
-    var playerName = String()
     
     let elements = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
     

@@ -48,7 +48,9 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
        if segue.identifier == "startGame" {
        // let game = LiarsDiceGame(pName: playerName)
         let mainScreen = segue.destination as! ViewController
-        mainScreen.game = LiarsDiceGame(pName: textBox.text!)
+        let game = LiarsDiceGame(pName: textBox.text!)
+        mainScreen.game = game
+        mainScreen.opponentModel = OpponentModel(game: game)
         }
        
     }

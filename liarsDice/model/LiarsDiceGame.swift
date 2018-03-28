@@ -132,12 +132,32 @@ class LiarsDiceGame {
         return result.joined().replacingOccurrences(of: "7", with: "1")
     }
     
-    func calculateRankOfRoll() -> Int{
+    func getFixedDice() -> String{
+        var bid = ""
+        for i in 0..<5{
+            if (dice[i].isInPlay()) {continue}
+            bid += String(dice[i].getValue())
+        }
+        return bid
+    }
+    
+    func isFixed(i: Int) -> Bool{
+        return !dice[i].isInPlay()
+    }
+    func isInPlay(i: Int) -> Bool{
+        return dice[i].isInPlay()
+    }
+    
+    func getRoll() -> String{
         var bid = ""
         for i in dice{
             bid += String(i.getValue())
         }
-        return calculateRank(bid)
+        return bid
+    }
+    
+    func calculateRankOfRoll() -> Int{
+        return calculateRank(getRoll())
     }
     
     func calculateRank(_ bid: String) -> Int{
