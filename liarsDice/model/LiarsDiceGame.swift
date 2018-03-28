@@ -62,6 +62,9 @@ class LiarsDiceGame {
             }
         }
     }
+    func getNumberOfFixedDice() -> Int{
+        return fixed
+    }
     
     // OVERALL GAME MECHANICS ----------------------------------------------------------------
     func reset(){
@@ -91,6 +94,7 @@ class LiarsDiceGame {
     
     // Toggles the turn and returns true if it is now the player's turn, false if it is the opponent's turn
     func toggleTurn() -> Bool{
+        turnCount += 1
         playerturn = !playerturn
         return self.playerturn
     }
@@ -126,6 +130,14 @@ class LiarsDiceGame {
         // I know this is a mess but it works! Sorts by (1) number of occurrences and (2) value if they both appear equally often
         let result = counts.sorted { if($0.value != $1.value){ return $0.value > $1.value} else {return $0.key > $1.key}}.map {String.init(repeating: $0.key, count: $0.value)}
         return result.joined().replacingOccurrences(of: "7", with: "1")
+    }
+    
+    func calculateRankOfRoll() -> Int{
+        var bid = ""
+        for i in dice{
+            bid += String(i.getValue())
+        }
+        return calculateRank(bid)
     }
     
     func calculateRank(_ bid: String) -> Int{
