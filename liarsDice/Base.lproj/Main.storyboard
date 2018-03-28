@@ -395,6 +395,9 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="acceptBid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lev-0F-T2C"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYj-6y-yO2">
                                 <rect key="frame" x="293" y="597" width="64" height="21"/>

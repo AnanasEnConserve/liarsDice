@@ -84,9 +84,11 @@ class OpponentModel: Model{
         self.modifyLastAction(slot: "influence", value: String(influence()))
         self.run()
         print("BELIEVE PLAYER: ")
-        print(self.lastAction(slot: "response"))
+        let believe = self.lastAction(slot: "response")!
+        print(believe)
         self.run()
-        return self.lastAction(slot: "response") == "believe"
+        // when in doubt just believe the player
+        return believe == nil || believe == "believe"
         
     }
     
@@ -96,7 +98,8 @@ class OpponentModel: Model{
         game.fixDice([0])
     }
     
-    func makeBid(){
+    // testing
+    func makeBid2(){
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
         self.modifyLastAction(slot: "modelbid", value: String(game.calculateRankOfRoll()))
         self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
@@ -136,7 +139,23 @@ class OpponentModel: Model{
         game.setBid(createBidFromDecision(newBidRank))
         
     }
-    
+    func makeBid(){
+        // very smart bids
+        switch game.getLastBidRank() {
+        case 0:
+            game.setBid("22")
+        case 1:
+            game.setBid("2233")
+        case 2:
+            game.setBid("222")
+        case 3:
+            game.setBid("22233")
+        case 4:
+            game.setBid("2222")
+        default:
+            game.setBid("11111")
+        }
+    }
     // take
     private func createValidBid() -> String{
         var bid = ""
@@ -258,8 +277,12 @@ class OpponentModel: Model{
             return
         }
         fixDice()
-        makeBid()
+        //makeBid()
+        print("i am calculating")
         
+        makeBid()
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + game.getLastBid())
+        game.toggleTurn()
         //var chunk = Chunk(s: "name",m: self)
         //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
         
