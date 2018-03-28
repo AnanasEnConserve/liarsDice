@@ -31,15 +31,29 @@ class OpponentModelTest: XCTestCase {
 //        print(model.believePlayer())
         game = LiarsDiceGame(pName: "Liar")
         model = OpponentModel(game: game)
-        game.setBid("1")
+        game.setBid("1166")
         print("Do we believe the player?")
         //print(model.believePlayer())
         print("------------------------------------")
         _ = game.toggleTurn()
         game.rollDice()
-        model.believePlayer()
+        var s = ""
+        for i in 0..<5{
+            s += String(game.getDiceNumber(i))
+        }
+        print(s)
         
-        model.believePlayer()
+        _ = model.believePlayer()
+        model.makeBid()
+        _ = model.believePlayer()
+        model.makeBid()
+        var n = 0
+        for _ in 1..<1000{
+            n = model.rollHigherThan(n: 2)
+            assert(n == 1 ||  n > 2 && n <= 6)
+            n = model.rollHigherThan(n: 6)
+            assert(n == 1)
+        }
         
     }
     

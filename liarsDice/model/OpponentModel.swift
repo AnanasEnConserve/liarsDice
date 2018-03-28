@@ -85,7 +85,9 @@ class OpponentModel: Model{
         self.run()
         print("BELIEVE PLAYER: ")
         print(self.lastAction(slot: "response"))
+        self.run()
         return self.lastAction(slot: "response") == "believe"
+        
     }
     
     // TODO call machine learning part
@@ -95,40 +97,157 @@ class OpponentModel: Model{
     }
     
     func makeBid(){
-        self.modifyLastAction(slot: "fix", value: "0")
+        self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
+        self.modifyLastAction(slot: "modelbid", value: String(game.calculateRankOfRoll()))
+        self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
+        self.modifyLastAction(slot: "playerBluff", value: String(playerBluff))
+        self.modifyLastAction(slot: "playerGul", value: String(playerGul))
         self.modifyLastAction(slot: "turn", value: "model")
-        self.modifyLastAction(slot: "playerbid", value: "2.0")
-        self.modifyLastAction(slot: "modelbid", value: "5")
-        self.modifyLastAction(slot: "playerBluff", value: "2")
-        self.modifyLastAction(slot: "playerGul", value: "1.0")
-
-//        self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
-//        self.modifyLastAction(slot: "modelbid", value: String(game.calculateRankOfRoll()))
-//        self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
-//        self.modifyLastAction(slot: "playerBluff", value: String(playerBluff))
-//        self.modifyLastAction(slot: "playerGul", value: String(playerGul))
-//        self.modifyLastAction(slot: "turn", value: "model")
- //       self.modifyLastAction(slot: "influence", value: String(influence()))
+        self.modifyLastAction(slot: "influence", value: String(influence()))
         self.waitingForAction = false
         self.run()
         print("WHAT TO BID: ")
-        print(self.lastAction(slot: "response"))
+        let response = self.lastAction(slot: "response")
+        print(response)
+        var newBidRank = game.calculateRankOfRoll()
+        // model only works if it runs again after response...
+        self.run()
+        switch response! {
+        case "oneh":
+            newBidRank += 1
+            break
+        case "twoh":
+            newBidRank += 2
+            break
+        case "threeh":
+            newBidRank += 3
+            break
+        case "fourh":
+            newBidRank += 4
+            break
+        case "t-bid":
+            newBidRank = -1
+            break
+        default: // lastresort OR model fails and returns nil
+            if(game.isHighestOfRank()){
+                newBidRank += 1
+            }
+        }
+        game.setBid(createBidFromDecision(newBidRank))
         
-//        switch game.getLastBidRank() {
-//        case 0:
-//            game.setBid("22")
-//        case 1:
-//            game.setBid("2233")
-//        case 2:
-//            game.setBid("222")
-//        case 3:
-//            game.setBid("22233")
-//        case 4:
-//            game.setBid("2222")
-//        default:
-//            game.setBid("11111")
-//        }
     }
+    
+    // take
+    private func createValidBid() -> String{
+        var bid = ""
+        // the basis of new bid
+        var fixed = game.normalizeBid(game.getFixedDice())
+        
+        
+        return
+    }
+    
+    private func createBidFromDecision(_ newBidRank: Int) -> String{
+        
+        return ""
+    }
+//    // THE BIG BLUFF
+//    private func createBidFromDecision(_ newBidRank: Int) -> String{
+//        var bid = ""
+//        // truthful: remove all unique values from roll and call it a bid
+//        // eg if roll is 24344 it becomes 444, 12323 becomes 2323
+//        if newBidRank == -1 {
+//            var counts: [Character:Int] = [:]
+//            for i in bid {
+//                counts[i] = (counts[i] ?? 0) + 1
+//            }
+//            var toFilterOut = ""
+//            for idx in counts.keys{
+//                if counts[idx] == 1{
+//                    toFilterOut.append(idx)
+//                }
+//            }
+//            bid = bid.filter {!toFilterOut.contains($0)}
+//            return bid
+//        }
+//
+//        // all other cases (including last resort but it's not a special case anymore here,
+//        // since its taken care of before function call (see makeBid))
+//
+//        var newBid = ""
+//        bid = game.normalizeBid(game.getFixedDice())
+//        var currentRank = game.calculateRank(bid)
+//
+//        switch newBidRank{
+//            // make a bid of rank 0. It means last bid is also rank 0,
+//            // so we bid a random number above last bid
+//            // TODO there might be cases where the bid is 0 and the model still fixed some dice, needs to be added later (make it above or equal to highest fixed die)
+//        case 0:
+//            if(game.getLastBid().length > 1 || game.isHighestOfRank()){
+//                    print("PANIC - tried to make bid of rank 0 but old bid is already higher rank")
+//                    newBid = "11111"
+//                    break
+//            }
+//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid())!))
+//            break;
+//        case 1: // 1 pair
+//                // make a bid of rank 1
+//                // if we have a single bid and no fixed dice or just fixed the previous bid, just duplicate
+//            if(game.getLastBid().length == 1 && game.getNumberOfFixedDice() == 0 || game.getFixedDice() == game.getLastBid()){
+//                    newBid = game.getLastBid() + game.getLastBid()
+//                    break
+//            }
+//            // if we have a pair as a bid already just go higher (TODO: see what fixed dice do)
+//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid()[0])!))
+//            newBid += newBid
+//        case 2: // 2 pair
+//            // if previous bid was a pair, just another pair that isnt the same, if was a single then just duplicate
+//            // todo: if
+//            if(game.getLastBidRank() == 0){
+//                newBid = game.getLastBid() + game.getLastBid()
+//            }
+//            let newNum = rollExcept(n: Int(game.getLastBid()[0])!)
+//            newBid += String(newNum) + String(newNum)
+//            break
+//        case 3: // 3 of a kind
+//            // if previous bid was single or pair, just duplicate
+//            if(game.getLastBidRank() == 0){
+//                newBid = game.getLastBid() + game.getLastBid() + game.getLastBid()
+//            }
+//            if(game.getLastBidRank() == 1){
+//                newBid = game.getLastBid() + game.getLastBid()[0]
+//            }
+//            // if previous bid was 3 of a kind
+//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid()[0])!))
+//            newBid += newBid + newBid             // TODO THIS IS GARBAGE
+//        case 4: // Full house
+//
+//        default:
+//            print("PANIC - default case reached")
+//            newBid = "11111" // PANIC
+//
+//        }
+//
+//        return ""
+//    }
+    
+    // cant roll higher than 1
+    func rollHigherThan(n: Int) -> Int{
+        let bounds = UInt32(7 - n - 1)
+        let randomN = Int(arc4random_uniform(bounds))
+        let result = n + randomN + 1
+        return result == 7 ? 1 : result
+    }
+    
+    func rollExcept(n: Int) -> Int{
+        let randomN = Int(arc4random_uniform(5)) + 1
+        if randomN >= n{
+            return randomN+1
+        } else{
+            return randomN
+        }
+    }
+    
     
     func calculateTurn(){
         // call bluff and end turn if the player is believed to bluff
