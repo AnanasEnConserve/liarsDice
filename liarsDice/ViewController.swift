@@ -216,6 +216,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //        }
    // }
     
+    @IBOutlet weak var roundResult: UILabel!
     
     
     //Array to keep track of which and how many buttons are already taken out
