@@ -97,7 +97,7 @@ class SecondViewController: UIViewController {
     }
     
     
-    // function only covers 2 pairs and full house
+    //   function only covers 2 pairs and full house
     @IBAction func touchFirst(_ sender: UIButton) {
         let selectedOne = rowOne.index(of: sender)
         for index in 0...5{
