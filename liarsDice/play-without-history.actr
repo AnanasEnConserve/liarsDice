@@ -6,7 +6,7 @@
  =goal>
     isa initiate-game
     state start
-==>
+==> 
  =goal>
     isa initiate-game
     state store

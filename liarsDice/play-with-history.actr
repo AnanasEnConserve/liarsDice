@@ -21,7 +21,7 @@
     playerGul val4
     influence val5
 	outcome state
-)
+) 
 
 (p store-info
  =goal>
