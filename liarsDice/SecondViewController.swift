@@ -356,6 +356,13 @@ class SecondViewController: UIViewController {
         if segue.identifier == "submitBid" {
         let mainScreen = segue.destination as! ViewController
         mainScreen.game = LiarsDiceGame(pName: playerName)
+            mainScreen.holdButton.isHidden = true
+            mainScreen.holdButton.isEnabled = false
+            
+            for index in 0...5 {
+            mainScreen.allDice[index].isHidden = true
+            mainScreen.allDice[index].isEnabled = false
+            }
         //mainScreen.hasLoaded = true
         //mainScreen.labelPlayer.text = playerName!
         //game.setBid(submittedBid)

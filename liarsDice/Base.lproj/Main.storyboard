@@ -61,6 +61,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYn-yC-EO0">
+                                <rect key="frame" x="45" y="370" width="284" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="apO-Vh-Azj"/>
@@ -68,6 +75,7 @@
                     <navigationItem key="navigationItem" id="lbD-Er-NfC"/>
                     <connections>
                         <outlet property="textBox" destination="JNl-hh-K95" id="XZC-ZP-VAR"/>
+                        <outlet property="warningLabel" destination="rYn-yC-EO0" id="iA7-o7-mrt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGN-tu-ITf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +306,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                     <action selector="resetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O6V-d4-mpk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijs-Af-wGu">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijs-Af-wGu">
                                 <rect key="frame" x="292" y="303" width="75" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Hold">
@@ -315,7 +323,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-46-t4V">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cV-46-t4V">
                                 <rect key="frame" x="292" y="386" width="75" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Bid">
@@ -326,10 +334,6 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                     <segue destination="GJN-Ms-1cc" kind="show" identifier="goToBidding" id="vYc-gz-fgz"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="inm-Qh-TlO">
-                                <rect key="frame" x="193" y="303" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEe-ox-DpP">
                                 <rect key="frame" x="36" y="28" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -348,7 +352,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZmU-3q-0D4">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZmU-3q-0D4">
                                 <rect key="frame" x="215" y="196" width="90" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -365,7 +369,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                     <action selector="callBluff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoj-4g-4jq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ei-jt-a6v">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ei-jt-a6v">
                                 <rect key="frame" x="117" y="105" width="179" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
@@ -379,7 +383,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-l8-qdM">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE8-l8-qdM">
                                 <rect key="frame" x="106" y="195" width="90" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.24882664305237598" green="0.74919041450777202" blue="0.21887824122560945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -399,17 +403,30 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="inm-Qh-TlO">
+                                <rect key="frame" x="185" y="275" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="SE8-l8-qdM" id="4Z0-5A-uo5"/>
+                        <outlet property="activityIndicator" destination="inm-Qh-TlO" id="Pn0-PO-u9o"/>
+                        <outlet property="bidButton" destination="8cV-46-t4V" id="Bla-pL-7di"/>
+                        <outlet property="bluffButton" destination="ZmU-3q-0D4" id="1vU-X4-dpU"/>
+                        <outlet property="holdButton" destination="Ijs-Af-wGu" id="6Rl-Bx-iZu"/>
                         <outlet property="labelOpponent" destination="jm7-My-WFv" id="XQy-FH-YWe"/>
                         <outlet property="labelOpponentScore" destination="Qb8-fa-9gl" id="c7a-Gp-Yps"/>
                         <outlet property="labelOpponentStreak" destination="Ysn-ii-qOq" id="pju-Ca-UoM"/>
                         <outlet property="labelPlayer" destination="7OO-hK-hSj" id="IEt-9M-f3x"/>
                         <outlet property="labelPlayerScore" destination="tYj-6y-yO2" id="Y1K-sr-n4o"/>
                         <outlet property="labelPlayerStreak" destination="g5V-A8-gsA" id="hnY-Ol-JXd"/>
+                        <outlet property="opponentBid" destination="1Ei-jt-a6v" id="WCy-ls-1Yd"/>
+                        <outlet property="resetButton" destination="mqo-6R-bCw" id="AUG-qk-ou1"/>
+                        <outlet property="rollButton" destination="Zmh-lS-35z" id="cQI-bH-46Z"/>
                         <outlet property="showBid" destination="7zf-aw-UQ8" id="IKk-Ni-uCI"/>
                         <outletCollection property="allDice" destination="QY9-wT-tBb" collectionClass="NSMutableArray" id="Xr6-nN-09G"/>
                         <outletCollection property="allDice" destination="lg9-SX-wpo" collectionClass="NSMutableArray" id="Z77-mN-iUL"/>
