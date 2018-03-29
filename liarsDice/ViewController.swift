@@ -158,10 +158,26 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     }
     
     func opponentHasBid() {
+        var displayOpponentBid = [String]()
+        var tempOpponentBid = game.getLastBid()
+        
+        while tempOpponentBid.length != 0 {
+            displayOpponentBid.append(tempOpponentBid[0])
+            tempOpponentBid.remove(at: tempOpponentBid.startIndex)
+        }
+        
+        for idx in 0..<displayOpponentBid.count {
+            let integer = Int(displayOpponentBid[idx])
+            displayOpponentBid[idx] = diceValues[integer! - 1]
+        }
+        let joinedOpponentBid = displayOpponentBid.joined(separator: " ")
+        
         //Set the label to display the bid for the opponent
-        opponentBid.text = "Opponent has bid: \(game.getLastBid())"
-        showBid.text = "Current Bid: \(game.getLastBid())"
+        opponentBid.text = "Opponent has bid: " + joinedOpponentBid
+        showBid.text = "Current Bid: " + joinedOpponentBid
         opponentBid.isHidden =  false
+        
+        displayOpponentBid.removeAll()
         
         //Enable && display the accept/bluff buttons
         acceptButton.isHidden = false
@@ -256,8 +272,15 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
        // if game.isPlayerTurn() == true {
         
         for idx in 0..<5 {
+            if idx < 4 {
+            diceTakenOut[idx].setTitle(" ", for: UIControlState.normal)
             allDice[idx].isEnabled = false
             allDice[idx].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            }
+            else {
+                allDice[idx].isEnabled = false
+                allDice[idx].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            }
         }
         showBid.text = " "
         
