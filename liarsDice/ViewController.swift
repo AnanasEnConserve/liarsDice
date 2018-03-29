@@ -72,8 +72,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
         }
         if game.isOpponentTurn() == true {
-            print("Current roll for cheaters (OPPONENT TURN): ")
-            print(game.getRoll())
+            bidButton.isHidden = true
+            bidButton.isEnabled = false
+            
             print("It is now the Opponent's turn")
             opponentBid.text = "Dumb AI is considering his options..."
             opponentBid.isHidden = false
@@ -92,11 +93,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //Show the activity indicator
             activityIndicator.startAnimating()
-            
             //Stop this when the opponent has made a bid!
             //if opponentdidsetbid = true, call seperate function
             //There, display the bid on the appropriate label
-            
+    
             print("before calculate turn")
             print(game.getLastBid())
             if (opponentModel.calculateTurn()){
@@ -157,8 +157,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBOutlet weak var bidButton: UIButton!
     @IBAction func Bid(_ sender: UIButton) {
-        bidButton.isHidden = true
-        bidButton.isEnabled = false
+//        bidButton.isHidden = true
+//        bidButton.isEnabled = false
     }
   
     //Declare array of values the dice can take
@@ -242,17 +242,30 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //show AllDice
             for index in 0..<5 {
-                //if(game.isInPlay(i: index)){
-                    allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+                if  index < 4 {
+                    diceTakenOut[index].setTitle("", for: UIControlState.normal)
+                    allDice[index].setTitle("", for: UIControlState.normal)
+                    //allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
                     allDice[index].isEnabled = false
                     allDice[index].isHidden = false
-               // }
+                }
+                else {
+                   // allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+                    allDice[index].setTitle("", for: UIControlState.normal)
+                    allDice[index].isEnabled = false
+                    allDice[index].isHidden = false
+                }
             }
             resetButton.isEnabled = true
             resetButton.isHidden = false
             holdButton.isHidden = true
             holdButton.isEnabled = false
             opponentBid.isHidden = true
+            rollButton.isEnabled = true
+           rollButton.isHidden = false
+        
+        
+        
         }
         //        game.reset()
 //        removed.removeAll()
@@ -271,7 +284,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     //Array to keep track of which and how many buttons are already taken out
     var removed = [Int]()
     
-    var checker = 0
+    
     //Function to transfer dice from InPlay to TakenOut
     @IBAction func removeDice(_ sender: UIButton) {
         
@@ -438,15 +451,32 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //        }
     }
     
+    
+    @IBAction func setupNextRound(_ sender: UIButton) {
+        startGame()
+        roundResult.isHidden = true
+        continueButton.isHidden = true
+        continueButton.isEnabled = false
+    }
+    
+    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var showBid: UILabel!
     
     @IBAction func callBluff(_ sender: Any) {
         let didPlayerWin = game.callBluff()
         if didPlayerWin{
             print("Player won")
+            roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
+            roundResult.isHidden = false
+            continueButton.isEnabled = true
+            continueButton.isHidden = false
         }
         else{
             print("Opponent won")
+            roundResult.text = "You lost. Too bad"
+            roundResult.isHidden = false
+            continueButton.isEnabled = true
+            continueButton.isHidden = false
         }
         self.updateScores()
         game.reset()
