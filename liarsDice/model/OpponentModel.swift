@@ -424,7 +424,7 @@ class OpponentModel: Model{
                 if(uniqueHigherThan.length > 0){
                     pairValue = Int(uniqueHigherThan[0])!
                 }
-                bid = String(repeating: String(pairValue), count: 4)
+                bid = String(repeating: String(pairValue), count: 5)
                 break
             }
             if(uniqueFixed.length == 0){
@@ -573,6 +573,11 @@ class OpponentModel: Model{
             _ = game.isBidABluff()
             return true
         }
+        // check if player was bluffing
+        if(game.isBidABluff()){
+            incrementPlayerBluff()
+        }
+        
         fixDice()
         game.rollDice()
         //makeBid()

@@ -151,6 +151,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func acceptBid(_ sender: Any) {
         print("I am accepting the bid")
+        if(game.isBidABluff()){
+            opponentModel.incrementPlayerGul()
+        } 
         self.updateView()
     }
     
@@ -490,6 +493,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func callBluff(_ sender: Any) {
         let didPlayerWin = game.callBluff()
+        
+        if(game.isBidABluff()){
+            opponentModel.decrementPlayerGul()
+        }
+        
         if didPlayerWin{
             print("Player won")
             roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
