@@ -22,6 +22,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var opponentModel : OpponentModel!
     
+    var debugIndex = [Int]()
     var debugArray = [String]()
     func updateView() {
         print("Current roll for cheaters (UPDATEVIEW): ")
@@ -34,15 +35,16 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             for i in 0..<5 {
                 if game.isFixed(i: i) {
                     debugArray.append(allDice[i].title(for: UIControlState.normal)!)
+                    debugIndex.append(i)
                 }
             }
             print("Debug Array:: " , debugArray)
-            //print(debugArray)
+            //debugArray.sort()
             for index in 0..<debugArray.count {
                 diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
             }
             //Reset debugArray as it will be set again on the next turn
-            debugArray.removeAll()
+            //debugArray.removeAll()
             
             
             bluffButton.isHidden = true
@@ -273,11 +275,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         
         // make them appear in the fixed row
         for index in 0..<5 {
-            if game.isFixed(i: index) == true {
+            if game.isFixed(i: index) == true && debugIndex.contains(index) == false {
             debugArray.append(allDice[index].title(for: UIControlState.normal)!)
+                debugIndex.append(index)
             }
         }
-        debugArray.sort()
+        //debugArray.sort()
         for index in 0..<debugArray.count {
             diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
         }
@@ -287,7 +290,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //                //debugArray.append(currentRoll[selected[i]])
 //        }
         
-        debugArray.removeAll()
+        //debugArray.removeAll()
         // clear selection
         selected.removeAll()
         
@@ -365,9 +368,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         }
         for i in 0..<5 {
             let value = game.getDiceNumber(i)
+            print("value:: " , value)
             allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
             currentRoll[i] = diceValues[value-1]
         }
+        print("currentroll:: " , currentRoll)
         currentRollAsString = currentRoll.joined(separator: " ")
         print(currentRollAsString)
        // print("Array of Current Roll: ", currentRoll)

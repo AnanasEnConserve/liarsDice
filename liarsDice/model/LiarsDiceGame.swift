@@ -41,7 +41,7 @@ class LiarsDiceGame {
         for d in dice{
             // this check is actually useless because the Dice class already takes care of it
             // but never trust anything, not even your own code
-            if d.isInPlay() {
+            if d.isInPlay() == true {
                 d.roll()
             }
         }
