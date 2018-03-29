@@ -27,7 +27,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     func updateView() {
         if game.isPlayerTurn() == true {
 //            //Update the dice taken out in the view
-//            for i in 0..<5 {
+//              for i in 0..<5 {
 //                if game.isFixed(i: i) {
 //                debugIndex.append(i)
 //                }
