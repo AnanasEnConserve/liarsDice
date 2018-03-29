@@ -300,6 +300,7 @@ class LiarsDiceGame {
             if(dice.contains(i)){
                 if let index = dice.index(of: i) {
                     dice.remove(at: index)
+                    print("remove " + String(i))
                 }
             } else {
                 // this case means that one dice value in the bid wasn't found in the actual bid so it was a bluff

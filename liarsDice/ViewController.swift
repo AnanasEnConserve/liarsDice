@@ -25,15 +25,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     var debugIndex = [Int]()
     var debugArray = [String]()
     func updateView() {
-        print("Current roll for cheaters (UPDATEVIEW): ")
-        print(game.getRoll())
-        print(game.getFixedDice())
-        
         if game.isPlayerTurn() == true {
             //Update the dice taken out in the view
             
             for i in 0..<5 {
-                if game.isFixed(i: i) {
+                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
                     debugArray.append(allDice[i].title(for: UIControlState.normal)!)
                     debugIndex.append(i)
                 }
