@@ -9,6 +9,7 @@
 import Foundation
 class OpponentModel: Model{
     var game: LiarsDiceGame
+    var playerProfiles : Dictionary<String,Dictionary<String,String>>!
     private var playerBluff = 0
     private var playerGul = 0
     private var playerTotalTurnCount = 0
@@ -17,52 +18,85 @@ class OpponentModel: Model{
     init(game: LiarsDiceGame) {
         self.game = game
         super.init()
-        //self.loadModel(fileName: "load-profile")
         self.loadProfile(name: game.getPlayer().getName())
     }
     
     // loads player data from file if there is any, and initializes the model with it
     private func loadProfile(name: String) {
-        let bundle = Bundle.main
-        let path = bundle.path(forResource: "profiles", ofType: "txt")!
-        var profileData = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
-        // create chunks of the profile for no reason...
-        var foundProfile = false
-        //let model = Model()
-        for line in profileData.components(separatedBy: .newlines){
-            if(line == "") {continue}
-            var data = line.split{$0 == ";"}.map(String.init)
-            print("line")
-            print(line)
-            print(data)
-            
-            self.loadModel(fileName: "play-with-history")
-            if(data[0] == game.getPlayer().getName()){
-                foundProfile = true
-//                let chunk = self.generateNewChunk()
-//                chunk.setSlot(slot: "playerName", value: data[0])
-//                chunk.setSlot(slot: "earlyGameBeh", value: data[1])
-//                chunk.setSlot(slot: "endGameBeh", value: data[2])
-//                self.dm.addToDM(chunk)
-//                print("created and added chunk")
-                playerBluff = Int(data[1])!
-                playerGul = Int(data[2])!
-                playerTotalTurnCount = Int(data[3])!
-                let testStr = "player data: " + String(playerBluff) + " " + String(playerGul) + " " + String(playerTotalTurnCount)
-                print(testStr)
-                break
+        // default stuff - overwrite if json contains data with same playername
+        self.loadModel(fileName: "play-with-history")
+        playerBluff = 0
+        playerGul = 0
+        playerTotalTurnCount = 0
+        
+        if let path = Bundle.main.path(forResource: "profiles", ofType: "txt") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                do{
+                    
+                    let json =  try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    // JSONObjectWithData returns AnyObject so the first thing to do is to downcast to dictionary type
+                    print(json)
+                    playerProfiles =  json as! Dictionary<String,Dictionary<String,String>>
+                    let pName = game.getPlayer().getName()
+                    // print(playerProfiles[pName])
+                    if playerProfiles[pName] != nil {
+                        print("Yes I have data for this player")
+                        playerBluff = Int(playerProfiles[pName]!["playerBluff"]!)!
+                        playerGul = Int(playerProfiles[pName]!["playerGul"]!)!
+                        playerTotalTurnCount = Int(playerProfiles[pName]!["turns"]!)!
+                    }else {
+                        playerProfiles[pName] = Dictionary<String,String>()
+                        playerProfiles[pName]!["playerBluff"] = "0"
+                        playerProfiles[pName]!["playerGul"] = "0"
+                        playerProfiles[pName]!["turns"] = "0"
+                    }
+                    
+                }catch let error{
+                    
+                    print(error.localizedDescription)
+                }
+                
+            } catch let error {
+                print(error.localizedDescription)
             }
+        } else {
+            print("Invalid filename/path.")
         }
-        if !foundProfile {
-            playerBluff = 0
-            playerGul = 0
-            playerTotalTurnCount = 0
-            let testStr = "player data: " + String(playerBluff) + " " + String(playerGul) + " " + String(playerTotalTurnCount)
-            print(testStr)
-        }
+        
+        let testStr = "player data: " + String(playerBluff) + " " + String(playerGul) + " " + String(playerTotalTurnCount)
+        print(testStr)
+        
         self.modifyLastAction(slot: "playerBluff", value: String(playerBluff))
         self.modifyLastAction(slot: "playerGul", value: String(playerGul))
         self.run()
+    }
+    
+    // update data and write back to file
+    // do this after each round
+    func updatePlayerProfile(){
+        print("updatePlayerProfile")
+        let pName = game.getPlayer().getName()
+        playerProfiles[pName]!["playerBluff"] = String(playerBluff)
+        playerProfiles[pName]!["playerGul"] = String(playerGul)
+        playerProfiles[pName]!["turns"]! = String(playerTotalTurnCount + game.getTurnCount())
+        if let path = Bundle.main.path(forResource: "profiles", ofType: "txt") {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: playerProfiles, options: .prettyPrinted)
+                let str = jsonData.description
+                let data = str.data(using: String.Encoding.utf8)!
+                if let file = FileHandle(forWritingAtPath:path) {
+                    print(str)
+                    print("path: \(path)")
+                    file.write(data)
+                }
+            }
+            catch{
+                print(error)
+            }
+            
+        }
+        
     }
     
     
@@ -91,7 +125,7 @@ class OpponentModel: Model{
         self.run()
         print("BELIEVE PLAYER: ")
         let believe = self.lastAction(slot: "response")
-        print(believe)
+        print(String(describing: believe))
         self.run()
         return believe != nil && believe! == "believe"
         
@@ -118,7 +152,7 @@ class OpponentModel: Model{
         self.run()
         print("WHAT TO BID: ")
         let response = self.lastAction(slot: "response")
-        print(response)
+        print(String(describing: response))
         var newBidRank = game.getLastBidRank()
         // model only works if it runs again after response...
         self.run()
@@ -167,16 +201,6 @@ class OpponentModel: Model{
             game.setBid("11111")
         }
     }
-    // take
-    private func createValidBid() -> String{
-        var bid = ""
-        // the basis of new bid
-        var fixed = game.normalizeBid(game.getFixedDice())
-        
-        
-        return bid
-    }
-    
     
     // makes a bid that is guaranteed to be valid if the input rank is higher (or equal) than the last bid
     // this method does NOT cover all cases (absurd ones such as 4 dice fixed but bid rank 0)
@@ -369,7 +393,6 @@ class OpponentModel: Model{
                 break
             }
             
-            let random0or1 = Int(arc4random_uniform(2)) //todo maybe make it not 50/50
             if uniqueFixed.length > 0{
                 print("trying to make full house: there are so many different fixed dice: " + uniqueFixed)
                 print("uniqueFixed: \(uniqueFixed)")

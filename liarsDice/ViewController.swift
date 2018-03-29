@@ -508,6 +508,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             // our modeller decided that being wrong counts towards being gullible
             opponentModel.incrementPlayerGul()
         }
+        print("updating")
+        opponentModel.updatePlayerProfile()
         
         if didPlayerWin{
             print("Player won")
