@@ -583,8 +583,32 @@ class OpponentModel: Model{
         //var chunk = Chunk(s: "name",m: self)
         //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
         return false
-        
-        
+    }
+    
+    func incrementPlayerBluff(){
+        playerBluff += 1
+        if(playerBluff > 2){
+            playerBluff = 2
+        }
+    }
+    func decrementPlayerBluff(){
+        playerBluff -= 1
+        if(playerBluff < -2){
+            playerBluff = -2
+        }
+    }
+    
+    func incrementPlayerGul(){
+        playerGul += 1
+        if(playerGul > 2){
+            playerGul = 2
+        }
+    }
+    func decrementPlayerGul(){
+        playerGul -= 1
+        if(playerGul < -2){
+            playerGul = -2
+        }
     }
     
 }

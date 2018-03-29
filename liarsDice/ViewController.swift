@@ -116,6 +116,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     debugIndex.append(i)
                 }
             }
+            for i in 0..<5 {
+                if !game.isFixed(i: i) {
+                    let j = game.getDiceNumber(i)
+                    allDice[i].setTitle(diceValues[j-1], for: UIControlState.normal)
+                }
+            }
             print("Debug Array:: " , debugArray)
             //debugArray.sort()
             for index in 0..<debugArray.count {
@@ -339,6 +345,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         removed.removeAll()
         selected.removeAll()
         highlightTurn()
+        showBid.text = "Current Bid: xxxxxx" 
+        
         //Revert colors && enable buttons for dice
         for index in 0..<allDice.count {
             allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
