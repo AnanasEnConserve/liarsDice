@@ -52,11 +52,13 @@ class LiarsDiceGame {
         return dice[i].getValue()
     }
     func fixDice(_ toFix: [Int]) {
+        print("currently fixed (indices): \(fixed)")
+        print("tofix: \(toFix)")
         for i in toFix {
             if(dice[i]).isInPlay(){
                 dice[i].fix()
                 
-                fixed += toFix.count
+                fixed += 1
                 if(fixed >= 5){
                     print("Dude what are you doing, you broke the game (took out all dice)")
                 }
@@ -304,7 +306,7 @@ class LiarsDiceGame {
                 }
             } else {
                 // this case means that one dice value in the bid wasn't found in the actual bid so it was a bluff
-                print("Caught bluffing!")
+                print("Yes it is a bluff")
                 return true
             }
         }
