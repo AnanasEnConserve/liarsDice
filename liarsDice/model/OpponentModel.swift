@@ -565,23 +565,24 @@ class OpponentModel: Model{
     }
     
     
-    func calculateTurn(){
+    func calculateTurn() -> Bool{
         // call bluff and end turn if the player is believed to bluff
         if(!believePlayer()){
             print("The AI calls bullshit on your bid!")
             _ = game.isBidABluff()
-            return
+            return true
         }
         fixDice()
         game.rollDice()
         //makeBid()
-        print("i am calculating")
+        print("i am calculating, here is my roll")
+        print(game.getRoll())
         
         makeBid()
         _ = game.toggleTurn()
         //var chunk = Chunk(s: "name",m: self)
         //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
-        
+        return false
         
         
     }

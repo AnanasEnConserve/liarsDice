@@ -26,7 +26,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     var debugArray = [String]()
     func updateView() {
         if game.isPlayerTurn() == true {
-            //Update the dice taken out in the view
+//            //Update the dice taken out in the view
+//            for i in 0..<5 {
+//                if game.isFixed(i: i) {
+//                debugIndex.append(i)
+//                }
+//            }
             
             for i in 0..<5 {
                 if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
@@ -94,7 +99,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             print("before calculate turn")
             print(game.getLastBid())
-            opponentModel.calculateTurn()
+            if (opponentModel.calculateTurn()){
+                // check bluff and end game
+                
+            }
             
             print("after calculate turn")
             print(game.getLastBid())
@@ -102,8 +110,17 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             self.opponentHasBid()
             self.highlightTurn()
             
-            print("Current roll for cheaters (OPPONENT TURN 2): ")
-            print(game.getRoll())
+            for i in 0..<5 {
+                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
+                    debugArray.append(allDice[i].title(for: UIControlState.normal)!)
+                    debugIndex.append(i)
+                }
+            }
+            print("Debug Array:: " , debugArray)
+            //debugArray.sort()
+            for index in 0..<debugArray.count {
+                diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
+            }
         }
     }
     
