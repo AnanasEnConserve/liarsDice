@@ -100,8 +100,27 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             print("before calculate turn")
             print(game.getLastBid())
             if (opponentModel.calculateTurn()){
-                // check bluff and end game
-                
+            let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
+                if didPlayerWin{
+                    print("Player won")
+                    roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
+                    roundResult.isHidden = false
+                    continueButton.isEnabled = true
+                    continueButton.isHidden = false
+                }
+                else{
+                    print("Opponent won")
+                    roundResult.text = "You lost. Too bad"
+                    roundResult.isHidden = false
+                    continueButton.isEnabled = true
+                    continueButton.isHidden = false
+                }
+                self.updateScores()
+                game.reset()
+                self.highlightTurn()
+                rollButton.isEnabled = false
+                rollButton.isHidden = true
+                return
             }
             
             print("after calculate turn")
@@ -116,6 +135,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     debugIndex.append(i)
                 }
             }
+            for i in 0..<5 {
+                if !game.isFixed(i: i) {
+                    let j = game.getDiceNumber(i)
+                    allDice[i].setTitle(diceValues[j-1], for: UIControlState.normal)
+                }
+            }
             print("Debug Array:: " , debugArray)
             //debugArray.sort()
             for index in 0..<debugArray.count {
@@ -126,12 +151,16 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func acceptBid(_ sender: Any) {
         print("I am accepting the bid")
+        if(game.isBidABluff()){
+            opponentModel.incrementPlayerGul()
+        } 
         self.updateView()
     }
     
     func opponentHasBid() {
         //Set the label to display the bid for the opponent
         opponentBid.text = "Opponent has bid: \(game.getLastBid())"
+        showBid.text = "Current Bid: \(game.getLastBid())"
         opponentBid.isHidden =  false
         
         //Enable && display the accept/bluff buttons
@@ -343,9 +372,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     func updateScores(){
         labelPlayerScore.text = "Score: " + String(game.getPlayer().getScore())
-        labelPlayerStreak.text = "Streak: " + String(game.getPlayer().getScore())
+        labelPlayerStreak.text = "Streak: " + String(game.getPlayer().getStreak())
         labelOpponentScore.text = "Score: " + String(game.getOpponent().getScore())
-        labelOpponentStreak.text = "Streak: " + String(game.getOpponent().getScore())
+        labelOpponentStreak.text = "Streak: " + String(game.getOpponent().getStreak())
         startGame()
     }
     
@@ -358,7 +387,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         game.reset()
         removed.removeAll()
         selected.removeAll()
+        for i in 1..<5{
+            allDice[i].setTitleColor(colorNormal, for: UIControlState.normal)
+        }
         highlightTurn()
+        showBid.text = "Current Bid: xxxxxx" 
+        
         //Revert colors && enable buttons for dice
         for index in 0..<allDice.count {
             allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
@@ -453,6 +487,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func setupNextRound(_ sender: UIButton) {
         startGame()
+        for i in 1..<5{
+            allDice[i].setTitleColor(colorNormal, for: UIControlState.normal)
+        }
         roundResult.isHidden = true
         continueButton.isHidden = true
         continueButton.isEnabled = false
@@ -463,6 +500,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func callBluff(_ sender: Any) {
         let didPlayerWin = game.callBluff()
+        
+        if(game.isBidABluff()){
+            opponentModel.decrementPlayerGul()
+        }
+        
         if didPlayerWin{
             print("Player won")
             roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"

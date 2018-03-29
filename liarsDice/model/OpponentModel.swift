@@ -187,7 +187,7 @@ class OpponentModel: Model{
     // todo make private after testing
     // truthful bids are not checked btw
     public func createValidBid(rank: Int) -> String{
-        print("creating bid of higher rank: " + String(rank))
+        print("creating bid of higher/eq rank: " + String(rank))
                 if rank == -1 {
                     var bid = game.getRoll()
                     var counts: [Character:Int] = [:]
@@ -371,20 +371,21 @@ class OpponentModel: Model{
             
             let random0or1 = Int(arc4random_uniform(2)) //todo maybe make it not 50/50
             if uniqueFixed.length > 0{
-            pairValue = Int(uniqueFixed[0])!
-            bid = String(repeating: String(pairValue), count: 3 - random0or1)
-            if uniqueFixed.length == 1{
-                excluding = pairValue
-                pairValue = rollExcept(n: excluding)
-                bid += String(repeating: String(pairValue), count: 2 + random0or1)
-            }
-            else if uniqueFixed.length == 2{
-                pairValue = Int(uniqueFixed[1])!
-                bid += String(repeating: String(pairValue), count: 3 - random0or1)
+                print("trying to make full house: there are so many different fixed dice: " + uniqueFixed)
+                pairValue = Int(uniqueFixed[0])!
+                bid = String(repeating: String(pairValue), count: 3 - random0or1)
+                if uniqueFixed.length == 1{
+                    excluding = pairValue
+                    pairValue = rollExcept(n: excluding)
+                    bid += String(repeating: String(pairValue), count: 2 + random0or1)
                 }
+                else if uniqueFixed.length == 2{
+                    pairValue = Int(uniqueFixed[1])!
+                    bid += String(repeating: String(pairValue), count: 3 - random0or1)
+                    }
                 
             }
-                // 0 fixed, any full house will do
+            // 0 fixed, any full house will do
             else {
                 pairValue = rollDie()
                 bid = String(repeating: String(pairValue), count: 3)
@@ -423,7 +424,7 @@ class OpponentModel: Model{
                 if(uniqueHigherThan.length > 0){
                     pairValue = Int(uniqueHigherThan[0])!
                 }
-                bid = String(repeating: String(pairValue), count: 4)
+                bid = String(repeating: String(pairValue), count: 5)
                 break
             }
             if(uniqueFixed.length == 0){
@@ -572,6 +573,11 @@ class OpponentModel: Model{
             _ = game.isBidABluff()
             return true
         }
+        // check if player was bluffing
+        if(game.isBidABluff()){
+            incrementPlayerBluff()
+        }
+        
         fixDice()
         game.rollDice()
         //makeBid()
@@ -583,8 +589,32 @@ class OpponentModel: Model{
         //var chunk = Chunk(s: "name",m: self)
         //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
         return false
-        
-        
+    }
+    
+    func incrementPlayerBluff(){
+        playerBluff += 1
+        if(playerBluff > 2){
+            playerBluff = 2
+        }
+    }
+    func decrementPlayerBluff(){
+        playerBluff -= 1
+        if(playerBluff < -2){
+            playerBluff = -2
+        }
+    }
+    
+    func incrementPlayerGul(){
+        playerGul += 1
+        if(playerGul > 2){
+            playerGul = 2
+        }
+    }
+    func decrementPlayerGul(){
+        playerGul -= 1
+        if(playerGul < -2){
+            playerGul = -2
+        }
     }
     
 }
