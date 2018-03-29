@@ -153,7 +153,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         print("I am accepting the bid")
         if(game.isBidABluff()){
             opponentModel.incrementPlayerGul()
-        } 
+        }
         self.updateView()
     }
     
@@ -526,6 +526,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         
         if(game.isBidABluff()){
             opponentModel.decrementPlayerGul()
+        } else{
+            // this is a bit of a tricky case: the model didn't bluff but the player thought so
+            // our modeller decided that being wrong counts towards being gullible
+            opponentModel.incrementPlayerGul()
         }
         
         if didPlayerWin{
@@ -534,6 +538,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             roundResult.isHidden = false
             continueButton.isEnabled = true
             continueButton.isHidden = false
+            rollButton.isHidden = true
         }
         else{
             print("Opponent won")
@@ -541,9 +546,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             roundResult.isHidden = false
             continueButton.isEnabled = true
             continueButton.isHidden = false
+            rollButton.isHidden = true
         }
         self.updateScores()
-        game.reset()
+        //game.reset()
         self.highlightTurn()
     }
     

@@ -349,7 +349,7 @@ class OpponentModel: Model{
             // check if there are more than 3 different dice fixed because it means impossible
             if uniqueFixed.length > 2{
                 print("PANIC! TRIED TO FULL HOUSE when there are more than 2 fixed dice of different values")
-                return "xxxxx"
+                return "11111"
             }
             if(lastBidRank == 4){
                 uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: fixed, n: Int(lastBid[0])!)
@@ -372,16 +372,17 @@ class OpponentModel: Model{
             let random0or1 = Int(arc4random_uniform(2)) //todo maybe make it not 50/50
             if uniqueFixed.length > 0{
                 print("trying to make full house: there are so many different fixed dice: " + uniqueFixed)
+                print("uniqueFixed: \(uniqueFixed)")
                 pairValue = Int(uniqueFixed[0])!
-                bid = String(repeating: String(pairValue), count: 3 - random0or1)
+                bid = String(repeating: String(pairValue), count: 3 )
                 if uniqueFixed.length == 1{
                     excluding = pairValue
                     pairValue = rollExcept(n: excluding)
-                    bid += String(repeating: String(pairValue), count: 2 + random0or1)
+                    bid += String(repeating: String(pairValue), count: 2 )
                 }
                 else if uniqueFixed.length == 2{
                     pairValue = Int(uniqueFixed[1])!
-                    bid += String(repeating: String(pairValue), count: 3 - random0or1)
+                    bid += String(repeating: String(pairValue), count: 2 )
                     }
                 
             }
@@ -396,7 +397,7 @@ class OpponentModel: Model{
         case 5: // four of a kind
             if uniqueFixed.length > 2{
                 print("HELP HOW CAN I MAKE 4 OF A KIND IF MORE THAN 2 VALUES ARE FIXED")
-                return "xxxxx"
+                return "11111"
             }
             if(lastBidRank == 5){
                 uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
@@ -416,7 +417,7 @@ class OpponentModel: Model{
         case 6: // five of a kind
             if uniqueFixed.length > 1{
                 print("HELP I AM HAVING A HEART ATTACK (five of a kind not possible)")
-                return "xxxxx"
+                return "11111"
             }
             
             if(lastBidRank == 5){
@@ -436,7 +437,11 @@ class OpponentModel: Model{
             break
         default:
             print("how the fuck did I end up in the default case (createbidofhigherrank)")
-            return "xxxxx"
+            return "11111"
+        }
+        // if something went wrong with the creation of the bid, go full panic and surrender by making absurd bid
+        if(game.calculateRank(bid) < rank){
+            bid = "11111"
         }
         return bid
     }
@@ -468,85 +473,6 @@ class OpponentModel: Model{
         
         return ""
     }
-//    // THE BIG BLUFF
-//    private func createBidFromDecision(_ newBidRank: Int) -> String{
-//        var bid = ""
-//        // truthful: remove all unique values from roll and call it a bid
-//        // eg if roll is 24344 it becomes 444, 12323 becomes 2323
-//        if newBidRank == -1 {
-//            var counts: [Character:Int] = [:]
-//            for i in bid {
-//                counts[i] = (counts[i] ?? 0) + 1
-//            }
-//            var toFilterOut = ""
-//            for idx in counts.keys{
-//                if counts[idx] == 1{
-//                    toFilterOut.append(idx)
-//                }
-//            }
-//            bid = bid.filter {!toFilterOut.contains($0)}
-//            return bid
-//        }
-//
-//        // all other cases (including last resort but it's not a special case anymore here,
-//        // since its taken care of before function call (see makeBid))
-//
-//        var newBid = ""
-//        bid = game.normalizeBid(game.getFixedDice())
-//        var currentRank = game.calculateRank(bid)
-//
-//        switch newBidRank{
-//            // make a bid of rank 0. It means last bid is also rank 0,
-//            // so we bid a random number above last bid
-//            // TODO there might be cases where the bid is 0 and the model still fixed some dice, needs to be added later (make it above or equal to highest fixed die)
-//        case 0:
-//            if(game.getLastBid().length > 1 || game.isHighestOfRank()){
-//                    print("PANIC - tried to make bid of rank 0 but old bid is already higher rank")
-//                    newBid = "11111"
-//                    break
-//            }
-//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid())!))
-//            break;
-//        case 1: // 1 pair
-//                // make a bid of rank 1
-//                // if we have a single bid and no fixed dice or just fixed the previous bid, just duplicate
-//            if(game.getLastBid().length == 1 && game.getNumberOfFixedDice() == 0 || game.getFixedDice() == game.getLastBid()){
-//                    newBid = game.getLastBid() + game.getLastBid()
-//                    break
-//            }
-//            // if we have a pair as a bid already just go higher (TODO: see what fixed dice do)
-//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid()[0])!))
-//            newBid += newBid
-//        case 2: // 2 pair
-//            // if previous bid was a pair, just another pair that isnt the same, if was a single then just duplicate
-//            // todo: if
-//            if(game.getLastBidRank() == 0){
-//                newBid = game.getLastBid() + game.getLastBid()
-//            }
-//            let newNum = rollExcept(n: Int(game.getLastBid()[0])!)
-//            newBid += String(newNum) + String(newNum)
-//            break
-//        case 3: // 3 of a kind
-//            // if previous bid was single or pair, just duplicate
-//            if(game.getLastBidRank() == 0){
-//                newBid = game.getLastBid() + game.getLastBid() + game.getLastBid()
-//            }
-//            if(game.getLastBidRank() == 1){
-//                newBid = game.getLastBid() + game.getLastBid()[0]
-//            }
-//            // if previous bid was 3 of a kind
-//            newBid = String(self.rollHigherThan(n: Int(game.getLastBid()[0])!))
-//            newBid += newBid + newBid             // TODO THIS IS GARBAGE
-//        case 4: // Full house
-//
-//        default:
-//            print("PANIC - default case reached")
-//            newBid = "11111" // PANIC
-//
-//        }
-//
-//        return ""
-//    }
     
     // cant roll higher than 1
     func rollHigherThan(n: Int) -> Int{
