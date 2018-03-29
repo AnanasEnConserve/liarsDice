@@ -776,6 +776,13 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                     <action selector="back:" destination="GJN-Ms-1cc" eventType="touchUpInside" id="Oay-MK-tH4"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your bid is too low" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CaZ-fk-JWD">
+                                <rect key="frame" x="108" y="615" width="140" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.046545039428554702" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Hnr-cA-AWg"/>
@@ -783,6 +790,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                     <connections>
                         <outlet property="rollDisplay" destination="Zfg-Dn-o7f" id="LYw-NC-r3S"/>
                         <outlet property="submitBid" destination="CuW-6g-70X" id="lXj-bw-a3e"/>
+                        <outlet property="tooLowAlert" destination="CaZ-fk-JWD" id="gxd-JP-vqG"/>
                         <outletCollection property="rankButtons" destination="6ea-n6-EoN" collectionClass="NSMutableArray" id="Ez5-Do-GNi"/>
                         <outletCollection property="rankButtons" destination="6fI-rT-8AS" collectionClass="NSMutableArray" id="v15-5i-Atx"/>
                         <outletCollection property="rankButtons" destination="t3k-3L-dUQ" collectionClass="NSMutableArray" id="UbY-1D-ei2"/>

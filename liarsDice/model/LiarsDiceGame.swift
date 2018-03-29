@@ -222,26 +222,26 @@ class LiarsDiceGame {
     
     // returns true if the bid is higher, meaning that it is a valid bid
     // also returns the rank
-    func bidIsHigher(_ newBid : String) -> (Bool,Int) {
+    func bidIsHigher(_ newBid : String) -> Bool {
         let normalizedBid = normalizeBid(newBid)
         let newBidRank = calculateRank(newBid)
         if newBidRank > lastBidRank{
-            return (true,newBidRank)
+            return true
         }
         else if newBidRank < lastBidRank{
-            return (false,newBidRank)
+            return false
         }
         else {
-            return (compareSameRank(normalizedBid),newBidRank)
+            return compareSameRank(normalizedBid)
         }
     }
     
     func setBid(_ newBid : String) {
         let normalizedBid = normalizeBid(newBid)
-        let (isHigher,newRank) = bidIsHigher(newBid)
+        let isHigher = bidIsHigher(newBid)
         if isHigher {
             normalizedLastBid = normalizedBid
-            lastBidRank = newRank
+            lastBidRank = calculateRank(normalizedBid)
         }
         else {
             // todo replace with proper exception?

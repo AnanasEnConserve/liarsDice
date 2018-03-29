@@ -38,24 +38,23 @@ class SecondViewController: UIViewController {
         delegate.comeBackFromBid(controller: self)
     }
     
-    @IBAction func submitBid(_ sender: Any) {
+    func calculateCurrentlySelectedBid(){
         currentBid.removeAll()
         //0, 1, 3, 5, 6 :: single value
         if singleSelected == true {
-        var loopAmount = 3
-        if selectedRankValue == 5 || selectedRankValue == 6 {
-            loopAmount = selectedRankValue - 1
+            var loopAmount = 3
+            if selectedRankValue == 5 || selectedRankValue == 6 {
+                loopAmount = selectedRankValue - 1
+            }
+            if selectedRankValue == 0 || selectedRankValue == 1 {
+                loopAmount = selectedRankValue + 1
+            }
+            for _ in 0..<loopAmount {
+                currentBid.append(singleBidValue)
+            }
+            submittedBid = currentBid.joined()
+            //print(submittedBid)
         }
-        if selectedRankValue == 0 || selectedRankValue == 1 {
-            loopAmount = selectedRankValue + 1
-        }
-        for _ in 0..<loopAmount {
-            currentBid.append(singleBidValue)
-        }
-        submittedBid = currentBid.joined()
-        //print(submittedBid)
-        }
-        
         if selectedRankValue == 2 || selectedRankValue == 4 {
             if selectedRankValue == 4 {
                 currentBid.append(doubleBidFirstValue)
@@ -65,6 +64,11 @@ class SecondViewController: UIViewController {
                 currentBid.append(doubleBidSecondValue)
             }
         }
+    }
+    
+    @IBAction func submitBid(_ sender: Any) {
+        calculateCurrentlySelectedBid()
+        
         submittedBid = currentBid.joined()
                 delegate.didSetBid(controller: self,
                                    bid: submittedBid)
@@ -89,10 +93,24 @@ class SecondViewController: UIViewController {
         }
         let selectedDieValue = rowTwo.index(of: sender as! UIButton)! + 1
         singleBidValue = String(selectedDieValue)
-        if singleSelected == true && selectedRank == true {
+        calculateCurrentlySelectedBid()
+        print(currentBid.joined())
+        let isValidBid = game.bidIsHigher(currentBid.joined())
+        print(isValidBid)
+        if singleSelected == true && selectedRank == true && isValidBid {
             submitBid.setTitle("Submit", for: UIControlState.normal)
             submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
+            submitBid.isHidden = false
+            tooLowAlert.isHidden = true
+        } else if singleSelected && selectedRank {
+            tooLowAlert.isHidden = false
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
+        } else {
+            tooLowAlert.isHidden = true
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
         }
     }
     
@@ -126,11 +144,24 @@ class SecondViewController: UIViewController {
         }
     
         doubleBidFirstValue = String(rowOne.index(of: sender)! + 1)
-        
-        if selectedFirst == true && selectedSecond == true && selectedRank == true {
+        calculateCurrentlySelectedBid()
+        print(currentBid.joined())
+        let isValidBid = game.bidIsHigher(currentBid.joined())
+        print(isValidBid)
+        if selectedFirst == true && selectedSecond == true && selectedRank == true && isValidBid{
             submitBid.setTitle("Submit", for: UIControlState.normal)
             submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
+            submitBid.isHidden = false
+            tooLowAlert.isHidden = true
+        } else if selectedFirst && selectedSecond {
+            tooLowAlert.isHidden = false
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
+        } else {
+            tooLowAlert.isHidden = true
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
         }
     }
     
@@ -161,14 +192,29 @@ class SecondViewController: UIViewController {
             }
         }
         doubleBidSecondValue = String(rowThree.index(of: sender)! + 1)
-        
-        if selectedFirst == true && selectedSecond == true && selectedRank == true {
+        calculateCurrentlySelectedBid()
+        print(currentBid.joined())
+        let isValidBid = game.bidIsHigher(currentBid.joined())
+        print(isValidBid)
+        if selectedFirst == true && selectedSecond == true && selectedRank == true && isValidBid
+            {
             submitBid.setTitle("Submit", for: UIControlState.normal)
             submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
+            submitBid.isHidden = false
+            tooLowAlert.isHidden = true
+        } else if selectedFirst == true && selectedSecond == true {
+            tooLowAlert.isHidden = false
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
+        } else {
+            tooLowAlert.isHidden = true
+            submitBid.isEnabled = false
+            submitBid.isHidden = true
         }
     }
     
+    @IBOutlet weak var tooLowAlert: UILabel!
     @IBOutlet weak var submitBid: UIButton!
     
     @IBAction func buttonTouch(_ sender: Any) {
