@@ -36,9 +36,9 @@ class OpponentModel: Model{
             print(line)
             print(data)
             
+            self.loadModel(fileName: "play-with-history")
             if(data[0] == game.getPlayer().getName()){
                 foundProfile = true
-                self.loadModel(fileName: "play-with-history")
 //                let chunk = self.generateNewChunk()
 //                chunk.setSlot(slot: "playerName", value: data[0])
 //                chunk.setSlot(slot: "earlyGameBeh", value: data[1])
@@ -54,7 +54,11 @@ class OpponentModel: Model{
             }
         }
         if !foundProfile {
-            self.loadModel(fileName: "play-without-history")
+            playerBluff = 0
+            playerGul = 0
+            playerTotalTurnCount = 0
+            let testStr = "player data: " + String(playerBluff) + " " + String(playerGul) + " " + String(playerTotalTurnCount)
+            print(testStr)
         }
         self.modifyLastAction(slot: "playerBluff", value: String(playerBluff))
         self.modifyLastAction(slot: "playerGul", value: String(playerGul))
@@ -115,7 +119,7 @@ class OpponentModel: Model{
         print("WHAT TO BID: ")
         let response = self.lastAction(slot: "response")
         print(response)
-        var newBidRank = game.calculateRankOfRoll()
+        var newBidRank = game.getLastBidRank()
         // model only works if it runs again after response...
         self.run()
         if(response == nil){
@@ -138,7 +142,6 @@ class OpponentModel: Model{
                 newBidRank = -1
                 break
             default: // lastresort OR model fails and returns nil
-                
                 newBidRank += 1
             
             }
@@ -182,8 +185,25 @@ class OpponentModel: Model{
     // most of these have a randomness factor for believability, but they do not correspond to the
     // actual probabilities
     // todo make private after testing
+    // truthful bids are not checked btw
     public func createValidBid(rank: Int) -> String{
         print("creating bid of higher rank: " + String(rank))
+                if rank == -1 {
+                    var bid = game.getRoll()
+                    var counts: [Character:Int] = [:]
+                    for i in bid {
+                        counts[i] = (counts[i] ?? 0) + 1
+                    }
+                    var toFilterOut = ""
+                    for idx in counts.keys{
+                        if counts[idx] == 1{
+                            toFilterOut.append(idx)
+                        }
+                    }
+                    bid = bid.filter {!toFilterOut.contains($0)}
+                    return bid
+                }
+        
         if(rank < game.getLastBidRank()){
             print("create bid of higher rank: invalid rank (lower than last bid)")
         }
@@ -191,7 +211,6 @@ class OpponentModel: Model{
         var bid = ""
         // variables for rolling randoms
         var pairValue = 0
-        var mustBeHigherThan = 0
         // variable for keeping track of excluded rolls
         // (eg we want to make 2 pair, first pair is already 22,
         // so when randomly rolling another pair, exclude 2)
@@ -252,6 +271,7 @@ class OpponentModel: Model{
         case 2: // two pair
             
             if lastBidRank == 2{
+                print("LAST BID WAS RANK 2 --------------------")
                 // make sure the bid is valid by rolling one higher value
                 pairValue = rollHigherThan(n: Int(lastBid[0])!)
                 bid = String(repeating: String(pairValue), count: 2)

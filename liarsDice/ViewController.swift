@@ -24,10 +24,15 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     var debugArray = [String]()
     func updateView() {
+        print("Current roll for cheaters (UPDATEVIEW): ")
+        print(game.getRoll())
+        print(game.getFixedDice())
+        
         if game.isPlayerTurn() == true {
             //Update the dice taken out in the view
+            
             for i in 0..<5 {
-                if game.isFixed(i: i) == true {
+                if game.isFixed(i: i) {
                     debugArray.append(allDice[i].title(for: UIControlState.normal)!)
                 }
             }
@@ -64,6 +69,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
         }
         if game.isOpponentTurn() == true {
+            print("Current roll for cheaters (OPPONENT TURN): ")
+            print(game.getRoll())
             print("It is now the Opponent's turn")
             opponentBid.text = "Dumb AI is considering his options..."
             opponentBid.isHidden = false
@@ -97,6 +104,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             self.opponentHasBid()
             self.highlightTurn()
             
+            print("Current roll for cheaters (OPPONENT TURN 2): ")
+            print(game.getRoll())
         }
     }
     
@@ -244,6 +253,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     var checker = 0
     //Function to transfer dice from InPlay to TakenOut
     @IBAction func removeDice(_ sender: UIButton) {
+        
+        print("Current roll for cheaters (REMOVEDICE): ")
+        print(game.getRoll())
         if removed.count + selected.count == 5 {
             print("I'm afraid I can't let you do that Dave")
             return
@@ -329,6 +341,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
    
     func rollDice() {
+        
+        game.rollDice()
         for j in 0..<5{
             self.allDice[j].setTitle(" ", for: UIControlState.normal)
         }
@@ -349,7 +363,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                 }
              }
         }
-        game.rollDice()
         for i in 0..<5 {
             let value = game.getDiceNumber(i)
             allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
