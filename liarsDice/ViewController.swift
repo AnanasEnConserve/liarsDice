@@ -25,6 +25,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     var debugIndex = [Int]()
     var debugArray = [String]()
     func updateView() {
+          print("Hoi ik ben de updateView functie!!")
         if game.isPlayerTurn() == true {
 //            //Update the dice taken out in the view
 //              for i in 0..<5 {
@@ -32,6 +33,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //                debugIndex.append(i)
 //                }
 //            }
+          
             
             for i in 0..<5 {
                 if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
@@ -120,6 +122,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                 self.highlightTurn()
                 rollButton.isEnabled = false
                 rollButton.isHidden = true
+                
+                for idx in 0..<4 {
+                    diceTakenOut[idx].setTitle("", for: UIControlState.normal)
+                }
+                
                 return
             }
             
@@ -398,13 +405,13 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         labelPlayerStreak.text = "Streak: " + String(game.getPlayer().getStreak())
         labelOpponentScore.text = "Score: " + String(game.getOpponent().getScore())
         labelOpponentStreak.text = "Streak: " + String(game.getOpponent().getStreak())
-        startGame()
+        //startGame()
     }
     
     @IBAction func resetGame(_ sender: UIButton) {
         reset()
     }
-    
+    var playerHasWon = false
     //Function to reset the game (start new round && reset scores)
     func reset() {
         game.reset()
@@ -538,6 +545,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             // our modeller decided that being wrong counts towards being gullible
             opponentModel.incrementPlayerGul()
         }
+        rollButton.isHidden = true
+        rollButton.isEnabled = false
+        bidButton.isHidden = true
+        holdButton.isHidden = true
+        
         
         if didPlayerWin{
             print("Player won")
@@ -558,6 +570,21 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         self.updateScores()
         //game.reset()
         self.highlightTurn()
+        endRound()
+    }
+    
+    func endRound() {
+        acceptButton.isHidden = true
+        bluffButton.isHidden = true
+        activityIndicator.isHidden = true
+        opponentBid.isHidden = true
+        
+        for idx in 0..<4 {
+            diceTakenOut[idx].setTitle("", for: UIControlState.normal)
+        }
+        
+        showBid.text = ""
+        
     }
     
     var tempBid = String()
