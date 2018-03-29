@@ -57,6 +57,23 @@ class OpponentModelTest: XCTestCase {
         
     }
     
+    func testBidding(){
+        let game = LiarsDiceGame(pName: "HonestPlayer")
+        let model = OpponentModel(game: game)
+        game.rollDice()
+        game.setBid("2")
+        for i in 0..<4{
+            print(model.createValidBid(rank: 1))
+            print(model.createValidBid(rank: 2))
+            print(model.createValidBid(rank: 3))
+            print(model.createValidBid(rank: 4))
+            print(model.createValidBid(rank: 5))
+            print(model.createValidBid(rank: 6))
+            game.fixDice([i])
+        }
+        
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
