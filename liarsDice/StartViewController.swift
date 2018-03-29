@@ -48,7 +48,8 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
        if segue.identifier == "startGame" {
        // let game = LiarsDiceGame(pName: playerName)
         let mainScreen = segue.destination as! ViewController
-        let game = LiarsDiceGame(pName: textBox.text!)
+        //let game = LiarsDiceGame(pName: textBox.text!)
+        let game = LiarsDiceGame(pName: playerName)
         mainScreen.game = game
         mainScreen.opponentModel = OpponentModel(game: game)
         }
@@ -59,7 +60,7 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
     
     @IBAction func init_Game(_ sender: UIButton) {
         if textBox.text == "" {
-            warningLabel.text = "Please enter a username"
+            playerName = "Anonymous"
             //Prevent the view from changing somehow..
         }
         
