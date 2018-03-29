@@ -162,7 +162,7 @@ class LiarsDiceGame {
     
     func calculateRank(_ bid: String) -> Int{
         let normalizedBid = normalizeBid(bid)
-        print("normalized bid: " + normalizedBid)
+        // print("normalized bid: " + normalizedBid)
         var pattern = [Int]()
         var currentCount = 0
         for i in 0..<normalizedBid.count{
@@ -180,7 +180,7 @@ class LiarsDiceGame {
         if convertedPattern == "" {
             convertedPattern = "1"
         }
-        print("Pattern type: " + convertedPattern)
+        // print("Pattern type: " + convertedPattern)
         switch convertedPattern {
         case EBid.highCard.rawValue:
             return 0

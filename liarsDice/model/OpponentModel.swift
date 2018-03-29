@@ -166,6 +166,274 @@ class OpponentModel: Model{
         return bid
     }
     
+    
+    // makes a bid that is guaranteed to be valid if the input rank is higher (or equal) than the last bid
+    // this method does NOT cover all cases (absurd ones such as 4 dice fixed but bid rank 0)
+    // in those cases there will still be a bid but there is a chance for them to be impossible due to
+    // contradicting the visible dice
+    // most of these have a randomness factor for believability, but they do not correspond to the
+    // actual probabilities
+    // todo make private after testing
+    public func createValidBid(rank: Int) -> String{
+        print("creating bid of higher rank: " + String(rank))
+        if(rank < game.getLastBidRank()){
+            print("create bid of higher rank: invalid rank (lower than last bid)")
+        }
+        // the bid to be returned
+        var bid = ""
+        // variables for rolling randoms
+        var pairValue = 0
+        var mustBeHigherThan = 0
+        // variable for keeping track of excluded rolls
+        // (eg we want to make 2 pair, first pair is already 22,
+        // so when randomly rolling another pair, exclude 2)
+        var excluding = 0
+        // the basis of new bid is the dice that are already visible (fixed) to the player for plausibility
+        // fixed is normalized so that the most frequent value is always at index 0
+        let fixed = game.normalizeBid(game.getFixedDice())
+        let fixedRank = game.calculateRank(fixed)
+        let fixedNumber = game.getNumberOfFixedDice()
+        let uniqueFixed = uniqueValuesInBid(bid: fixed) // used to check if full house and above are possible
+        var uniqueHigherThan = ""
+        let lastBid = game.getLastBid()
+        let lastBidRank = game.getLastBidRank()
+        let msg = "fixed: " + String(fixed) + " (rank of fixed dice only: " + String(fixedRank) + "; last bid was " + lastBid + " (rank " + String(lastBidRank) + ")"
+        print(msg)
+        // ugly part begins here, consider all possible cases.
+        // some cases are not possible, e.g. 3 dice are fixed and aren't equal, then four/five of a kind
+        // are ruled out.
+        // also case 0 is never needed in this function since it can't be higher than anything (equal rank bids are somewhere else)
+        switch rank {
+        // rank 0: ignore fixed dice (why should there be any), just roll higher than last bid
+        case 0:
+            if(lastBid.length >= 0){
+                bid = String(rollHigherThan(n: Int(lastBid[0])!))
+            } else {
+                bid = String(rollDie())
+            }
+        case 1: // one pair
+            if(lastBidRank == 1){
+                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: fixed, n: Int(lastBid[0])!)
+                // if there are fixed dice that are higher in value than the pair, 50% chance of using them
+                if(uniqueHigherThan.length > 0 && arc4random_uniform(2) == 0){
+                    // beautiful
+                    pairValue = chooseRandom(from: uniqueHigherThan)
+                } else{
+                    pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
+                }
+            } else {
+                if fixedNumber > 0 {
+                
+                    pairValue = chooseRandom(from: fixed)
+                    // if we have 3 or less dice fixed we can just reroll for any
+                    if fixedNumber < 4{
+                        // todo: proper math?
+                        if arc4random_uniform(100) < 100 - fixedNumber*20{
+                            pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
+                        }
+                    }
+                } else {
+                    pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
+                }
+                
+            }
+            bid = String(repeating: String(pairValue), count:2)
+            break
+            // for rank 2, we check if there is already a pair. If so, add another pair.
+            // if there are more than 2 fixed (eg 112) give a higher probability for 1122 than 1133 etc
+        case 2: // two pair
+            
+            if lastBidRank == 2{
+                // make sure the bid is valid by rolling one higher value
+                pairValue = rollHigherThan(n: Int(lastBid[0])!)
+                bid = String(repeating: String(pairValue), count: 2)
+                // todo have a look at fixed dice?
+                bid += String(repeating: String(rollExcept(n: pairValue)), count: 2)
+                break
+            }
+            
+            // already a fixed pair
+            if fixedRank == 1{
+                excluding = Int(fixed[0])!
+                if fixedNumber > 2{
+                    // guaranteed the first non-pair unless bid was lower than the fixed dice which is bull
+                    // and should never happen. Add the case when there is time otherwise leave it
+                    pairValue = Int(fixed[2])!
+                    if(arc4random_uniform(2) == 0){
+                        // note that this can still be the the pair value, so overall odds is above 50%
+                        pairValue = rollExcept(n: excluding)
+                    }
+                }
+                else{
+                    pairValue = rollExcept(n: excluding)
+                }
+                bid = fixed.substring(from: 0, to: 2) + String(repeating: String(pairValue), count: 2)
+            }
+                // guaranteed rank 0 then
+            else {
+                if(fixedNumber > 0){
+                    pairValue = chooseRandom(from: fixed)
+                    if fixedNumber < 5{
+                        // todo: proper math?
+                        if arc4random_uniform(100) < 100 - fixedNumber*10{
+                            pairValue = rollDie()
+                        }
+                    }
+                } else{
+                    pairValue = rollDie()
+                }
+                bid = String(pairValue) + String(pairValue)
+                // just roll another
+                excluding = pairValue
+                pairValue = rollExcept(n: excluding)
+                bid += String(pairValue) + String(pairValue)
+            }
+            break
+        case 3: // three of a kind
+            if (lastBidRank == 3){
+                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
+                if(uniqueHigherThan.length > 0){
+                    pairValue = chooseRandom(from: uniqueHigherThan)
+                } else {
+                    pairValue = rollHigherThan(n: Int(lastBid[0])!)
+                }
+                bid = String(repeating: String(pairValue), count:3)
+                break
+            }
+            
+            // if we still have at least one fixed and 2 non-fixed, we can take any
+            // of the fixed ones and make 3 of them. Note that if 3 are fixed and one is a pair,
+            // that one automatically gets better odds
+            if fixedNumber > 0 && fixedNumber < 4{
+                pairValue = Int(fixed[Int(arc4random_uniform(UInt32(fixedNumber)))])!
+                if fixedNumber < 3{
+                    // todo: proper math?
+                    if arc4random_uniform(100) < 100 - fixedNumber*20{
+                        pairValue = rollDie()
+                    }
+                }
+            } else {
+                pairValue = rollDie()
+            }
+            bid = String(repeating: String(pairValue),count: 3)
+            break
+        case 4: // full house
+            // check if there are more than 3 different dice fixed because it means impossible
+            if uniqueFixed.length > 2{
+                print("PANIC! TRIED TO FULL HOUSE when there are more than 2 fixed dice of different values")
+                return "xxxxx"
+            }
+            if(lastBidRank == 4){
+                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: fixed, n: Int(lastBid[0])!)
+                if uniqueHigherThan.length >= 0{
+                    pairValue = Int(uniqueHigherThan[0])!
+                    
+                }
+                else{
+                    pairValue = rollHigherThan(n: Int(lastBid[0])!)
+                }
+                bid = String(repeating: String(pairValue), count: 3)
+                if uniqueHigherThan.length == 1{
+                    bid += String(repeating: uniqueHigherThan[1], count: 2)
+                }else {
+                    bid += String(repeating: String(rollExcept(n: pairValue)), count: 2)
+                }
+                break
+            }
+            
+            let random0or1 = Int(arc4random_uniform(2)) //todo maybe make it not 50/50
+            if uniqueFixed.length > 0{
+            pairValue = Int(uniqueFixed[0])!
+            bid = String(repeating: String(pairValue), count: 3 - random0or1)
+            if uniqueFixed.length == 1{
+                excluding = pairValue
+                pairValue = rollExcept(n: excluding)
+                bid += String(repeating: String(pairValue), count: 2 + random0or1)
+            }
+            else if uniqueFixed.length == 2{
+                pairValue = Int(uniqueFixed[1])!
+                bid += String(repeating: String(pairValue), count: 3 - random0or1)
+                }
+                
+            }
+                // 0 fixed, any full house will do
+            else {
+                pairValue = rollDie()
+                bid = String(repeating: String(pairValue), count: 3)
+                excluding = pairValue
+                bid += String(repeating: String(rollExcept(n: excluding)), count:2)
+            }
+            break
+        case 5: // four of a kind
+            if uniqueFixed.length > 2{
+                print("HELP HOW CAN I MAKE 4 OF A KIND IF MORE THAN 2 VALUES ARE FIXED")
+                return "xxxxx"
+            }
+            if(lastBidRank == 5){
+                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
+                if(uniqueHigherThan.length > 0){
+                    pairValue = Int(uniqueHigherThan[0])!
+                }
+                bid = String(repeating: String(pairValue), count: 4)
+                break
+            }
+            if(uniqueFixed.length == 0){
+                pairValue = rollDie()
+            } else{
+                pairValue = Int(uniqueFixed[0])!
+            }
+            bid = String(repeating: String(pairValue),count: 4)
+            break
+        case 6: // five of a kind
+            if uniqueFixed.length > 1{
+                print("HELP I AM HAVING A HEART ATTACK (five of a kind not possible)")
+                return "xxxxx"
+            }
+            
+            if(lastBidRank == 5){
+                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
+                if(uniqueHigherThan.length > 0){
+                    pairValue = Int(uniqueHigherThan[0])!
+                }
+                bid = String(repeating: String(pairValue), count: 4)
+                break
+            }
+            if(uniqueFixed.length == 0){
+                pairValue = rollDie()
+            } else{
+                pairValue = Int(uniqueFixed[0])!
+            }
+            bid = String(repeating: String(pairValue),count: 5)
+            break
+        default:
+            print("how the fuck did I end up in the default case (createbidofhigherrank)")
+            return "xxxxx"
+        }
+        return bid
+    }
+    
+    private func rollDie() -> Int{
+        return Int(arc4random_uniform(UInt32(6))) + 1
+    }
+    // returns number of unique values in bid
+    private func uniqueValuesInBid(bid : String) -> String{
+        var set = Set<Character>()
+        let uniqueVals = String(bid.filter{ set.insert($0).inserted } )
+        return uniqueVals
+    }
+    private func uniqueFixedValuesHigherThan(uniqueBid: String, n: Int) -> String{
+        var result = ""
+        for i in 0..<uniqueBid.length{
+            if Int(uniqueBid[i])! > n {
+                result.append(uniqueBid[i])
+            }
+        }
+        return result
+    }
+    private func chooseRandom(from list: String) -> Int{
+        return Int(list[Int(arc4random_uniform(UInt32(list.length)))])!
+    }
+    
     // default action for non-truthful
     private func createBidFromDecision(_ newBidRank: Int) -> String{
         
