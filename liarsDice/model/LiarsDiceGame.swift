@@ -55,6 +55,7 @@ class LiarsDiceGame {
         for i in toFix {
             if(dice[i]).isInPlay(){
                 dice[i].fix()
+                
                 fixed += toFix.count
                 if(fixed >= 5){
                     print("Dude what are you doing, you broke the game (took out all dice)")
