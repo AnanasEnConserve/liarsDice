@@ -236,17 +236,30 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //show AllDice
             for index in 0..<5 {
-                //if(game.isInPlay(i: index)){
-                    allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+                if  index < 4 {
+                    diceTakenOut[index].setTitle("", for: UIControlState.normal)
+                    allDice[index].setTitle("", for: UIControlState.normal)
+                    //allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
                     allDice[index].isEnabled = false
                     allDice[index].isHidden = false
-               // }
+                }
+                else {
+                   // allDice[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
+                    allDice[index].setTitle("", for: UIControlState.normal)
+                    allDice[index].isEnabled = false
+                    allDice[index].isHidden = false
+                }
             }
             resetButton.isEnabled = true
             resetButton.isHidden = false
             holdButton.isHidden = true
             holdButton.isEnabled = false
             opponentBid.isHidden = true
+            rollButton.isEnabled = true
+           rollButton.isHidden = false
+        
+        
+        
         }
         //        game.reset()
 //        removed.removeAll()
@@ -430,15 +443,32 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //        }
     }
     
+    
+    @IBAction func setupNextRound(_ sender: UIButton) {
+        startGame()
+        roundResult.isHidden = true
+        continueButton.isHidden = true
+        continueButton.isEnabled = false
+    }
+    
+    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var showBid: UILabel!
     
     @IBAction func callBluff(_ sender: Any) {
         let didPlayerWin = game.callBluff()
         if didPlayerWin{
             print("Player won")
+            roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
+            roundResult.isHidden = false
+            continueButton.isEnabled = true
+            continueButton.isHidden = false
         }
         else{
             print("Opponent won")
+            roundResult.text = "You lost. Too bad"
+            roundResult.isHidden = false
+            continueButton.isEnabled = true
+            continueButton.isHidden = false
         }
         self.updateScores()
         game.reset()

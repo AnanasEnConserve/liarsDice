@@ -418,6 +418,16 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fr-NJ-ZGb">
+                                <rect key="frame" x="155" y="361" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="setupNextRound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jP2-zv-4ll"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -427,6 +437,7 @@ Upon challenging a truthful bid, the opponent will win the round.</string>
                         <outlet property="activityIndicator" destination="inm-Qh-TlO" id="Pn0-PO-u9o"/>
                         <outlet property="bidButton" destination="8cV-46-t4V" id="Bla-pL-7di"/>
                         <outlet property="bluffButton" destination="ZmU-3q-0D4" id="1vU-X4-dpU"/>
+                        <outlet property="continueButton" destination="2Fr-NJ-ZGb" id="wcT-Gg-S3Q"/>
                         <outlet property="holdButton" destination="Ijs-Af-wGu" id="6Rl-Bx-iZu"/>
                         <outlet property="labelOpponent" destination="jm7-My-WFv" id="XQy-FH-YWe"/>
                         <outlet property="labelOpponentScore" destination="Qb8-fa-9gl" id="c7a-Gp-Yps"/>
