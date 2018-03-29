@@ -32,17 +32,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //                debugIndex.append(i)
 //                }
 //            }
-            for i in 0..<5 {
-                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
-                    debugArray.append(allDice[i].title(for: UIControlState.normal)!)
-                    debugIndex.append(i)
-                }
-            }
-            print("Debug Array:: " , debugArray)
-            //debugArray.sort()
-            for index in 0..<debugArray.count {
-                diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
-            }
+            
             //Reset debugArray as it will be set again on the next turn
             //debugArray.removeAll()
             
@@ -104,6 +94,17 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             self.opponentHasBid()
             self.highlightTurn()
             
+            for i in 0..<5 {
+                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
+                    debugArray.append(allDice[i].title(for: UIControlState.normal)!)
+                    debugIndex.append(i)
+                }
+            }
+            print("Debug Array:: " , debugArray)
+            //debugArray.sort()
+            for index in 0..<debugArray.count {
+                diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
+            }
         }
     }
     
