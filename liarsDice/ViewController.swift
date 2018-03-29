@@ -410,18 +410,25 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         game.reset()
         removed.removeAll()
         selected.removeAll()
-        for i in 1..<5{
+        labelPlayerScore.text = "Score: 0"
+        labelOpponentScore.text = "Score: 0"
+        for i in 0..<5{
+            allDice[i].isEnabled = false
+            allDice[i].setTitle(" ", for: UIControlState.normal)
             allDice[i].setTitleColor(colorNormal, for: UIControlState.normal)
         }
         highlightTurn()
-        showBid.text = "Current Bid: xxxxxx" 
-        
+        showBid.text = " "
+        holdButton.isHidden = true
+        holdButton.isEnabled = false
+        bidButton.isHidden = true
+        bidButton.isEnabled = false
         //Revert colors && enable buttons for dice
-        for index in 0..<allDice.count {
-            allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
-            allDice[index].isEnabled = true
-            allDice[index].isHidden = false
-        }
+//        for index in 0..<allDice.count {
+//            allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
+//            allDice[index].isEnabled = true
+//            allDice[index].isHidden = false
+//        }
         
         for value in 0..<diceTakenOut.count {
             diceTakenOut[value].setTitle(" ", for: UIControlState.normal)
