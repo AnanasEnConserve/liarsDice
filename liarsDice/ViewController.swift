@@ -225,6 +225,13 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     //Function to reset things at the start of a new round
     func startGame() {
        // if game.isPlayerTurn() == true {
+        
+        for idx in 0..<5 {
+            allDice[idx].isEnabled = false
+            allDice[idx].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+        }
+        showBid.text = " "
+        
             bluffButton.isHidden = true
             acceptButton.isHidden = true
             
@@ -475,10 +482,31 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         self.highlightTurn()
     }
     
+    var tempBid = String()
+    var displayBid = [String]()
     func didSetBid(controller: SecondViewController, bid: String) {
         print("I am the MainViewController and I have received the bid: " + bid)
-        showBid.text = "Current Bid: " + bid
+        
+        
+        tempBid = bid
+        while tempBid.length != 0 {
+            displayBid.append(tempBid[0])
+            tempBid.remove(at: tempBid.startIndex)
+        }
+        print("DisplayBid::  ",displayBid)
+        
+        for idx in 0..<displayBid.count {
+            let somethingAwesome = Int(displayBid[idx])
+            displayBid[idx] = diceValues[somethingAwesome! - 1]
+        }
+        displayBid.sort()
+        print("ConvertedBid:: ",displayBid)
+        let convertedBid = displayBid.joined(separator: " ")
+
+        showBid.text = "Current Bid: " + convertedBid
         game.setBid(bid)
+        
+        displayBid.removeAll()
         
         // after the bid, its the oppponents turn
         _ = game.toggleTurn()
