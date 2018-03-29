@@ -61,6 +61,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
         }
         if game.isOpponentTurn() == true {
+            bidButton.isHidden = true
+            bidButton.isEnabled = false
+            
             print("It is now the Opponent's turn")
             opponentBid.text = "Dumb AI is considering his options..."
             opponentBid.isHidden = false
@@ -79,11 +82,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             
             //Show the activity indicator
             activityIndicator.startAnimating()
-            
             //Stop this when the opponent has made a bid!
             //if opponentdidsetbid = true, call seperate function
             //There, display the bid on the appropriate label
-            
+    
             print("before calculate turn")
             print(game.getLastBid())
             opponentModel.calculateTurn()
@@ -135,8 +137,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBOutlet weak var bidButton: UIButton!
     @IBAction func Bid(_ sender: UIButton) {
-        bidButton.isHidden = true
-        bidButton.isEnabled = false
+//        bidButton.isHidden = true
+//        bidButton.isEnabled = false
     }
   
     //Declare array of values the dice can take
@@ -249,7 +251,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     //Array to keep track of which and how many buttons are already taken out
     var removed = [Int]()
     
-    var checker = 0
+    
     //Function to transfer dice from InPlay to TakenOut
     @IBAction func removeDice(_ sender: UIButton) {
         if removed.count + selected.count == 5 {
