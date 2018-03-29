@@ -21,7 +21,7 @@
     playerGul val4
     influence val5
 	outcome state
-) 
+)
 
 (p store-info
  =goal>
@@ -449,8 +449,8 @@
  	isa initiate-game
  	state decide
  	playerbid =val
- >= modelbid =val
-  < playerGul 2
+  > modelbid =val
+ <= playerGul 2
     - turn player
 ==>
  +action>
@@ -460,13 +460,14 @@
     state start
 )
 
-;;left case for 5,6
+;left cases for 6
 (p make-t-bid-2
  =goal>
  	isa initiate-game
  	state decide
- >=	modelbid 5
- >=	playerbid 5
+  <	playerbid 6
+	modelbid 6
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -476,14 +477,14 @@
     state start
 )
 
-;;left case for 5
+;left cases for 5
 (p make-t-bid-3
  =goal>
  	isa initiate-game
  	state decide
+  <	playerbid 5
 	modelbid 5
- >=	influence 1
- >= playerGul 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -493,13 +494,15 @@
     state start
 )
 
-;;case for 0
+;left cases for 4
 (p make-t-bid-4
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 0
-	playerbid 0
+  <	playerbid 4
+	modelbid 4
+	influence 1
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -509,14 +512,15 @@
     state start
 )
 
-;;left case for 6
+;left cases for 3
 (p make-t-bid-5
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 6
- <	playerbid 6
- >=	playerGul 2
+  <	playerbid 3
+	modelbid 3
+	influence 1
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -526,15 +530,15 @@
     state start
 )
 
-;;case for 4
+;left cases for 2
 (p make-t-bid-6
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 4
- <	playerbid 4
+  <	playerbid 2
+	modelbid 2 
 	influence 1
- >=	playerGul 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -544,15 +548,14 @@
     state start
 )
 
-;;case for 2
+;left cases for 1
 (p make-t-bid-7
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 2
- <	playerbid 2
-	influence 1
- >=	playerGul 2
+	playerbid 0
+	modelbid 1
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -562,14 +565,15 @@
     state start
 )
 
-;;case for 4
+;left cases for 4
 (p make-t-bid-8
  =goal>
  	isa initiate-game
  	state decide
+  < playerbid 1
 	modelbid 4
-	playerbid 4
- <= fix 2
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -579,49 +583,17 @@
     state start
 )
 
-;;case for 4
-(p make-t-bid-9
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 4
-	fix 4
-    - turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 3
-(p make-t-bid-10
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 3
-	playerbid 3
- <= fix 2
-    - turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-
-;;case for 2
+;left cases for 4
 (p make-t-bid-11
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 2
-	playerbid 2
- <= fix 2
+ <= playerbid 3
+ >= playerbid 2
+	modelbid 4
+ <=	fix 1
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -631,14 +603,16 @@
     state start
 )
 
-;;case for 2
+;left cases for 4
 (p make-t-bid-12
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 2
-	playerbid 2
-	fix 4
+	playerbid 3
+	modelbid 4
+	fix 2
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -648,14 +622,16 @@
     state start
 )
 
-;;case for 1
+;left cases for 4
 (p make-t-bid-13
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 1
-	playerbid 1
- <= fix 1
+	playerbid 2
+	modelbid 4
+	fix 4
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -665,86 +641,93 @@
     state start
 )
 
-;;case for 1
+;left cases for 4
 (p make-t-bid-14
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 1
-	playerbid 0
- <= fix 1
- >= playerGul 2
+	playerbid 2
+	modelbid 4
+ >= fix 2	
+ <=	fix 3
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
     isa decision
-    response t-bid
+    response oneh
  =goal>
     state start
 )
 
-;;case for 3
+;left cases for 4
 (p make-t-bid-15
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 3
-	playerbid 2
- >= playerGul 2
+	playerbid 3
+	modelbid 4
+	fix 3
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
     isa decision
-    response t-bid
+    response twoh
  =goal>
     state start
 )
 
-;;case for 3
+;left cases for 3
 (p make-t-bid-16
  =goal>
  	isa initiate-game
  	state decide
+	playerbid 1
 	modelbid 3
-	playerbid 0
- >= playerGul 2
+	fix 2
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
     isa decision
-    response t-bid
+    response twoh
  =goal>
     state start
 )
 
-;;case for 2
+;left cases for 2
 (p make-t-bid-17
  =goal>
  	isa initiate-game
  	state decide
+	playerbid 1
 	modelbid 2
-	playerbid 0
- >= playerGul 2
+	fix 2
 	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
     isa decision
-    response t-bid
+    response twoh
  =goal>
     state start
 )
 
-;;case for 3
-(p make-t-bid-18
+;left cases for 3
+(p make-t-bid-9
  =goal>
  	isa initiate-game
  	state decide
+ <= playerbid 2
 	modelbid 3
-	playerbid 1
- >= playerGul 2
- <= influence 2
-  < fix 2
+	influence 2
+	playerGul 3
+ <= fix 1
     - turn player
 ==>
  +action>
@@ -754,15 +737,15 @@
     state start
 )
 
-;;case for 3
-(p make-t-bid-19
+;left cases for 3
+(p make-t-bid-10
  =goal>
  	isa initiate-game
  	state decide
+	playerbid 2
 	modelbid 3
-	playerbid 1
- >= playerGul 2
-  < fix 2
+	influence 2
+	playerGul 3
     - turn player
 ==>
  +action>
@@ -772,340 +755,21 @@
     state start
 )
 
-;;case for 4
-(p make-t-bid-20
+;left cases for 2
+(p make-t-bid-11
  =goal>
  	isa initiate-game
  	state decide
-	modelbid 4
  <=	playerbid 1
- <= fix 2
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 4
-(p make-t-bid-21
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 2
- <= fix 1
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 4
-(p make-t-bid-22
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 2
-	fix 4
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 4
-(p make-t-bid-23
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 3
- <= fix 2
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 4
-(p make-t-bid-24
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 3
- <= fix 2
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-;;case for 4
-(p make-t-bid-25
- =goal>
- 	isa initiate-game
- 	state decide
 	modelbid 2
-	playerbid 1
- <= fix 1
-	influence 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response t-bid
- =goal>
-    state start
-)
-
-
-
-;;ut-bid for 4
-(p make-ut-bid-1
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 4
-	fix 3
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-
-)
-
-;;ut-bid for 3
-(p make-ut-bid-2
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 3
-	playerbid 3
-	fix 3
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 2
-(p make-ut-bid-3
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 2
-	playerbid 2
-	fix 3
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 1
-(p make-ut-bid-4
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 1
-	playerbid 1
-	fix 2
- <= playerGul 0
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 1
-(p make-ut-bid-5
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 1
-	playerbid 1
-	fix 2
- >= playerGul 1	
- <= playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response twoh
- =goal>
-    state start
-)
-
-;;ut-bid for 1
-(p make-ut-bid-6
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 1
-	playerbid 1
-	fix 2
-	influence 1
-	playerGul 3
-	- turn player
-==>
- +action>
-    isa decision
-    response threeh
- =goal>
-    state start
-)
-
-;;ut-bid for 1
-(p make-ut-bid-7
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 1
-	playerbid 1
-	fix 2
+ <=	fix 1
 	influence 2
 	playerGul 3
-	- turn player
+    - turn player
 ==>
  +action>
     isa decision
-    response fourh
- =goal>
-    state start
-)
-
-;;ut-bid for 3
-(p make-ut-bid-8
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 3
-	playerbid 1
-	fix 2
- >=	playerGul 2
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 4
-(p make-ut-bid-9
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 2
- >=	fix 2
- <=	fix 3
- >=	playerGul 2
-	influence 2
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 4
-(p make-ut-bid-10
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 4
-	playerbid 3
-	fix 3
- >=	playerGul 2
-	influence 2
-	- turn player
-==>
- +action>
-    isa decision
-    response twoh
- =goal>
-    state start
-)
-
-;;ut-bid for 2
-(p make-ut-bid-11
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 2
-	playerbid 1
-	fix 2
-	playerGul 2
-	influence 2
-	- turn player
-==>
- +action>
-    isa decision
-    response oneh
- =goal>
-    state start
-)
-
-;;ut-bid for 2
-(p make-ut-bid-12
- =goal>
- 	isa initiate-game
- 	state decide
-	modelbid 2
-	playerbid 1
-	fix 2
-	playerGul 3
-	influence 2
-	- turn player
-==>
- +action>
-    isa decision
-    response twoh
+    response t-bid
  =goal>
     state start
 )
@@ -1116,7 +780,7 @@
     isa initiate-game
     state decide
     playerbid =val
-  < modelbid =val
+ <= modelbid =val
     - turn player
 ==>
  +action>

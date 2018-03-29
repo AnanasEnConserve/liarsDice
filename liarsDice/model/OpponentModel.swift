@@ -75,6 +75,8 @@ class OpponentModel: Model{
     }
     func believePlayer() -> Bool{
         
+        let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: player, influence: " + String(influence())
+        print(msg)
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
         self.modifyLastAction(slot: "modelbid", value: "0")
         self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
@@ -84,11 +86,10 @@ class OpponentModel: Model{
         self.modifyLastAction(slot: "influence", value: String(influence()))
         self.run()
         print("BELIEVE PLAYER: ")
-        let believe = self.lastAction(slot: "response")!
+        let believe = self.lastAction(slot: "response")
         print(believe)
         self.run()
-        // when in doubt just believe the player
-        return believe == nil || believe == "believe"
+        return believe != nil && believe! == "believe"
         
     }
     
@@ -99,7 +100,9 @@ class OpponentModel: Model{
     }
     
     // testing
-    func makeBid2(){
+    func makeBid(){
+        let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: model, influence: " + String(influence())
+        print(msg)
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
         self.modifyLastAction(slot: "modelbid", value: String(game.calculateRankOfRoll()))
         self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
@@ -115,31 +118,36 @@ class OpponentModel: Model{
         var newBidRank = game.calculateRankOfRoll()
         // model only works if it runs again after response...
         self.run()
-        switch response! {
-        case "oneh":
+        if(response == nil){
             newBidRank += 1
-            break
-        case "twoh":
-            newBidRank += 2
-            break
-        case "threeh":
-            newBidRank += 3
-            break
-        case "fourh":
-            newBidRank += 4
-            break
-        case "t-bid":
-            newBidRank = -1
-            break
-        default: // lastresort OR model fails and returns nil
-            if(game.isHighestOfRank()){
+        } else{
+            switch response! {
+            case "oneh":
                 newBidRank += 1
+                break
+            case "twoh":
+                newBidRank += 2
+                break
+            case "threeh":
+                newBidRank += 3
+                break
+            case "fourh":
+                newBidRank += 4
+                break
+            case "t-bid":
+                newBidRank = -1
+                break
+            default: // lastresort OR model fails and returns nil
+                
+                newBidRank += 1
+            
             }
         }
-        game.setBid(createBidFromDecision(newBidRank))
+        print("new bid rank: " + String(newBidRank))
+        game.setBid(createValidBid(rank: newBidRank))
         
     }
-    func makeBid(){
+    func makeBid2(){
         // very smart bids
         switch game.getLastBidRank() {
         case 0:
@@ -550,8 +558,7 @@ class OpponentModel: Model{
         print("i am calculating")
         
         makeBid()
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + game.getLastBid())
-        game.toggleTurn()
+        _ = game.toggleTurn()
         //var chunk = Chunk(s: "name",m: self)
         //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
         
