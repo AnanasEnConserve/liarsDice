@@ -517,7 +517,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             let currentroll = currentRoll
             let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
             destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
-           // present(destinationViewController, animated: false, completion: nil)
+           
         }
     
     func setPlayerName(playerName: String) {
@@ -526,7 +526,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     
     //Segue to transfer player name to main view controller (AND model)
-    //This does NOT work as of yet, needs attention
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // let currentroll = currentRoll
         if segue.identifier == "goToBidding"{

@@ -159,7 +159,7 @@ class OpponentModel: Model{
         
     }
     
-    // testing
+    // teing
     func makeBid(){
         let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: model, influence: " + String(influence())
         print(msg)
