@@ -456,6 +456,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         holdButton.isEnabled = false
         bidButton.isHidden = true
         bidButton.isEnabled = false
+        startGame()
         //Revert colors && enable buttons for dice
 //        for index in 0..<allDice.count {
 //            allDice[index].setTitleColor(colorNormal, for: UIControlState.normal)
@@ -467,7 +468,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             diceTakenOut[value].setTitle(" ", for: UIControlState.normal)
             //diceTakenOut[value].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), for: UIControlState.normal)
         }
-        
         //TODO: Reset scores
         //Call function startGame() to set up a new round?
     }
@@ -533,6 +533,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             biddingScreen.setCurrentRoll(currentRoll: self.currentRoll)
             biddingScreen.setCurrentRollAsString(currentRollAsString: currentRollAsString)
             biddingScreen.setGame(game: game)
+            //biddingScreen.lastBid = displayOpponentBid.joined(separator: " ")
             biddingScreen.delegate = self
             
             biddingScreen.playerName = labelPlayer.text

@@ -12,7 +12,7 @@ import Foundation
 class LiarsDiceGame {
     // The players
     private var human = Player("Player")
-    private var opponent = Player("Dumb AI")
+    private var opponent = Player("Opponent")
     // The bid made by the previous player; it should always be saved in the "normalized" form,
     // meaning that the dice values are sorted by frequency and value
     private var normalizedLastBid = ""
