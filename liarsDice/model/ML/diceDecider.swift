@@ -67,7 +67,7 @@ class diceDecider {
     }
     func playGame(diceNumber: Int,currentRoll: Array<String>) -> [Int] {
         var ActionTable = [String:String]();
-
+        
         ActionTable = loadActionTable(diceNumber: diceNumber,ActionTable: ActionTable);
         var finalKeeper: Array<Int> = [];
 
@@ -83,10 +83,11 @@ class diceDecider {
                 keepers.append(i + 1)
                 }
         }
-        print(keepers)
+        // print(keepers)
         //var newDice = evalAction(actions);
         //print(newDice);
         finalKeeper = unsorter(diceNumber: diceNumber,keepers: keepers,currentRoll: currentRoll,sortedRoll: sortedRoll);
+        print("finalkepper: \(finalKeeper)")
         return finalKeeper
     }
     
@@ -121,7 +122,7 @@ class diceDecider {
             var key = String(describing: temp)+akey;
             var tempValue = ActionTable[key]?.split(separator:",")
             
-            //print("tempValue: \(tempValue), ActionTable[key] \(ActionTable[key]), key = \(key) ...")
+            print("tempValue: \(tempValue), ActionTable[key] \(ActionTable[key]), key = \(key) ...")
             //print(Array(ActionTable.keys))
             var value = tempValue![2].split(separator: "]")[0]
             //var value = self.ActionTable[temp2]?.split(separator:",")

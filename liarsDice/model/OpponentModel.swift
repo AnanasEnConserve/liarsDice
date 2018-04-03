@@ -124,7 +124,7 @@ class OpponentModel: Model{
         let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: player, influence: " + String(influence())
         print(msg)
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
-        self.modifyLastAction(slot: "modelbid", value: "0")
+        // self.modifyLastAction(slot: "modelbid", value: "0")
         self.modifyLastAction(slot: "fix", value: String(game.getNumberOfFixedDice()))
         self.modifyLastAction(slot: "playerBluff", value: String(playerBluff))
         self.modifyLastAction(slot: "playerGul", value: String(playerGul))
@@ -145,7 +145,7 @@ class OpponentModel: Model{
         let Decider = diceDecider();
         print("-------- DICE DECIDER ------------")
         let diceNumber = 5 - game.getNumberOfFixedDice()
-        let currentRoll = game.getRoll().map{String($0)}
+        let currentRoll = game.getDiceInPlay().map{String($0)}
         print(diceNumber)
         print(currentRoll)
         let toBeFixed = Decider.playGame(diceNumber: diceNumber,currentRoll: currentRoll).map{$0-1}
