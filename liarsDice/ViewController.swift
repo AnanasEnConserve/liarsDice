@@ -519,7 +519,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     
     //Segue to transfer player name to main view controller (AND model)
-    //This does NOT work as of yet, needs attention
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // let currentroll = currentRoll
         if segue.identifier == "goToBidding"{
