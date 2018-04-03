@@ -12,6 +12,7 @@ class SecondViewController: UIViewController {
     
     var diceTakenOut: [String]!
     var playerName : String!
+    var lastBid : String!
     var game : LiarsDiceGame!
     var delegate:SecondViewControllerDelegate! = nil
    
@@ -218,6 +219,7 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var submitBid: UIButton!
     
     @IBAction func buttonTouch(_ sender: Any) {
+        
         print("Button touch")
         let lastRank = game.getLastBidRank()
         let lastBid = game.getLastBid()
@@ -346,6 +348,16 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rollDisplay.text = currentRollAsString
+        var lastBid = game.getLastBid()
+        var displayOpponentBid = String()
+        for idx in 0..<lastBid.count {
+            let integer = Int(lastBid[idx])
+            print("disp opponent bid \(lastBid[idx])")
+            displayOpponentBid.append(eyes[integer! - 1])
+        }
+        tooLowAlert.numberOfLines = 0
+        tooLowAlert.text = "Last bid: \n" + displayOpponentBid
+        print(tooLowAlert.text)
         print("opened bidding screen, disabling rank buttons")
         var disableUpTo = game.getLastBidRank()
         if(game.isHighestOfRank()){

@@ -27,6 +27,7 @@
 		D99634FF20736CD20009D17E /* 2Dice.dat in Resources */ = {isa = PBXBuildFile; fileRef = D99634FA20736CD20009D17E /* 2Dice.dat */; };
 		D9963503207390E80009D17E /* play-with-history.actr in Resources */ = {isa = PBXBuildFile; fileRef = D9963502207390E80009D17E /* play-with-history.actr */; };
 		D9963505207394FC0009D17E /* UILabel+Fancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9963504207394FC0009D17E /* UILabel+Fancy.swift */; };
+		D99635072073A8DF0009D17E /* diceDeciderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99635062073A8DF0009D17E /* diceDeciderTest.swift */; };
 		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
@@ -83,6 +84,7 @@
 		D99634FA20736CD20009D17E /* 2Dice.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2Dice.dat; sourceTree = "<group>"; };
 		D9963502207390E80009D17E /* play-with-history.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "play-with-history.actr"; sourceTree = "<group>"; };
 		D9963504207394FC0009D17E /* UILabel+Fancy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Fancy.swift"; sourceTree = "<group>"; };
+		D99635062073A8DF0009D17E /* diceDeciderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diceDeciderTest.swift; sourceTree = "<group>"; };
 		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				D93D703620528CBC00C95FA4 /* liarsDiceTests.swift */,
 				D988B6992062664800AB91F0 /* OpponentModelTest.swift */,
 				D93D703820528CBC00C95FA4 /* Info.plist */,
+				D99635062073A8DF0009D17E /* diceDeciderTest.swift */,
 			);
 			path = liarsDiceTests;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D99635072073A8DF0009D17E /* diceDeciderTest.swift in Sources */,
 				D988B69A2062664800AB91F0 /* OpponentModelTest.swift in Sources */,
 				D93D703720528CBC00C95FA4 /* liarsDiceTests.swift in Sources */,
 			);
@@ -518,10 +522,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5E5F4SQPRE;
+				DEVELOPMENT_TEAM = 8VPYVQ3H3Q;
 				INFOPLIST_FILE = liarsDice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = team3.liarsDice;
+				PRODUCT_BUNDLE_IDENTIFIER = team3.LD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -533,10 +537,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5E5F4SQPRE;
+				DEVELOPMENT_TEAM = 8VPYVQ3H3Q;
 				INFOPLIST_FILE = liarsDice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = team3.liarsDice;
+				PRODUCT_BUNDLE_IDENTIFIER = team3.LD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

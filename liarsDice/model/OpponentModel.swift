@@ -145,11 +145,12 @@ class OpponentModel: Model{
         if(game.getNumberOfFixedDice() >= 4) {return}
         let Decider = diceDecider();
         print("-------- DICE DECIDER ------------")
-        let diceNumber = 5 - game.getNumberOfFixedDice()
         let currentRoll = game.getDiceInPlay().map{String($0)}
+        let diceNumber = currentRoll.count
+        let history = game.getFixedDice().map{String($0)}
         print(diceNumber)
         print(currentRoll)
-        let toBeFixed = Decider.playGame(diceNumber: diceNumber,currentRoll: currentRoll).map{$0-1}
+        let toBeFixed = Decider.playGame(diceNumber: diceNumber,currentRoll: currentRoll, history: history).map{$0-1}
         if(toBeFixed.count + game.getNumberOfFixedDice() > 4){
             print("Warning: tried to fix all dice, ABORT ABORT")
             return

@@ -87,13 +87,18 @@ class diceDecider {
         //var newDice = evalAction(actions);
         //print(newDice);
         finalKeeper = unsorter(diceNumber: diceNumber,keepers: keepers,currentRoll: currentRoll,sortedRoll: sortedRoll);
+        //var finalKeeper2 = finalKeeper
         if (finalKeeper.count == diceNumber) {
             if (history.count != 0) {
-                for i in (0..<finalKeeper.count) {
-                    if (!currentRoll.contains(history[i])) {
-                        finalKeeper.remove(at: (currentRoll.index(of: history[i]))! + 1)
-                    }
-                }
+//                for i in (0..<finalKeeper.count) {
+//                    if (!currentRoll.contains(history[i])) {
+//
+//                        finalKeeper2 = finalKeeper2.filter{currentRoll[$0-1] == history[i]}
+//                        //finalKeeper.remove(at: (currentRoll.index(of: history[i]))! + 1)
+//                    }
+//                }
+                finalKeeper = finalKeeper.filter{history.contains(currentRoll[$0-1])}
+                
             } else {
                 //return the mode of the roll and keep the rest
                 var counts = [Int: Int]()
@@ -101,11 +106,16 @@ class diceDecider {
                 if let (value, count) = counts.max(by: {$0.1 < $1.1}) {
                     print("\(value) occurs \(count) times")
                     if (count != diceNumber) {
-                        for i in (0..<finalKeeper.count) {
-                            if (finalKeeper[i] != value) {
-                                finalKeeper.remove(at: i)
-                            }
-                        }
+//                        for i in (0..<finalKeeper.count) {
+//                            print("final keeper count: \(finalKeeper.count)")
+//                            print(i)
+//                            if (finalKeeper[i] != value) {
+//                                finalKeeper.remove(at: i)
+//                            }
+//                        }
+                        print("finalKeeper before filter: \(finalKeeper)")
+                        finalKeeper = finalKeeper.filter{Int(currentRoll[$0-1]) == value}
+                        print("finalKeeper after filter: \(finalKeeper)")
                     }
                 }
             }
