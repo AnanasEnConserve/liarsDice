@@ -57,7 +57,7 @@
  =goal>
     isa initiate-game
     state decide
- <= playerbid 1
+ <= playerbid 2
  >= playerBluff -2
  >= fix 0
  >= influence 1 
@@ -115,7 +115,7 @@
  >= playerbid 2
  <=	playerbid 3
  <= playerBluff -1
- >= fix 3
+ >= fix 2
  >= influence 1 
     turn player
 ==>
@@ -151,7 +151,6 @@
     isa initiate-game
     state decide
 	playerbid 5
- >= playerBluff 1
  >= fix 3
  >= influence 1 
     turn player
@@ -280,7 +279,7 @@
  =goal>
     isa initiate-game
     state decide
- >= playerbid 2
+ >= playerbid 3
  <= playerbid 5
  <= playerBluff 0
  <= fix 1
@@ -301,8 +300,7 @@
     state decide
     playerbid 5
  <= playerBluff 0
- <= fix 4
- >= fix 2
+ <= fix 2
  >= influence 1 
     turn player
 ==>
@@ -370,24 +368,6 @@
     state start
 )
 
-;;some bluff cases for 2,3
-(p call-bluff-7
- =goal>
-    isa initiate-game
-    state decide
- >= playerbid 2 
- <=	playerbid 3
- <= playerBluff -1
-	fix 2
- >= influence 2 
-    turn player
-==>
- +action>
-    isa decision
-    response callBluff
- =goal>
-    state start
-)
 
 ;;some bluff cases for 4
 (p call-bluff-8

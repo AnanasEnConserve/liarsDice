@@ -25,7 +25,8 @@
 		D99634FD20736CD20009D17E /* diceDecider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99634F820736CD20009D17E /* diceDecider.swift */; };
 		D99634FE20736CD20009D17E /* 5Dice.dat in Resources */ = {isa = PBXBuildFile; fileRef = D99634F920736CD20009D17E /* 5Dice.dat */; };
 		D99634FF20736CD20009D17E /* 2Dice.dat in Resources */ = {isa = PBXBuildFile; fileRef = D99634FA20736CD20009D17E /* 2Dice.dat */; };
-		D9963501207386E90009D17E /* play-with-history.actr in Resources */ = {isa = PBXBuildFile; fileRef = D9963500207386E90009D17E /* play-with-history.actr */; };
+		D9963503207390E80009D17E /* play-with-history.actr in Resources */ = {isa = PBXBuildFile; fileRef = D9963502207390E80009D17E /* play-with-history.actr */; };
+		D9963505207394FC0009D17E /* UILabel+Fancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9963504207394FC0009D17E /* UILabel+Fancy.swift */; };
 		D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C0204FEE5D007CB047 /* Dice.swift */; };
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
@@ -80,7 +81,8 @@
 		D99634F820736CD20009D17E /* diceDecider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = diceDecider.swift; sourceTree = "<group>"; };
 		D99634F920736CD20009D17E /* 5Dice.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5Dice.dat; sourceTree = "<group>"; };
 		D99634FA20736CD20009D17E /* 2Dice.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2Dice.dat; sourceTree = "<group>"; };
-		D9963500207386E90009D17E /* play-with-history.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "play-with-history.actr"; sourceTree = "<group>"; };
+		D9963502207390E80009D17E /* play-with-history.actr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "play-with-history.actr"; sourceTree = "<group>"; };
+		D9963504207394FC0009D17E /* UILabel+Fancy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Fancy.swift"; sourceTree = "<group>"; };
 		D9ADB6C0204FEE5D007CB047 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				19CCF661203F09FB0078F878 /* Info.plist */,
 				D9ADB6C2204FEE60007CB047 /* model */,
 				D9BB055C2051893300F07073 /* String+Index.swift */,
+				D9963504207394FC0009D17E /* UILabel+Fancy.swift */,
 			);
 			path = liarsDice;
 			sourceTree = "<group>";
@@ -170,7 +173,7 @@
 		D988B69B20626AB300AB91F0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D9963500207386E90009D17E /* play-with-history.actr */,
+				D9963502207390E80009D17E /* play-with-history.actr */,
 				D90F58EA2064F6140073A74E /* load-profile.actr */,
 				D988B69E2062747200AB91F0 /* profiles.txt */,
 			);
@@ -308,7 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D99634FB20736CD20009D17E /* 3Dice.dat in Resources */,
-				D9963501207386E90009D17E /* play-with-history.actr in Resources */,
+				D9963503207390E80009D17E /* play-with-history.actr in Resources */,
 				D99634FF20736CD20009D17E /* 2Dice.dat in Resources */,
 				D99634FC20736CD20009D17E /* 4Dice.dat in Resources */,
 				19CCF660203F09FB0078F878 /* LaunchScreen.storyboard in Resources */,
@@ -350,6 +353,7 @@
 				D99634FD20736CD20009D17E /* diceDecider.swift in Sources */,
 				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
 				19F15468205C077F00B620D5 /* StartViewController.swift in Sources */,
+				D9963505207394FC0009D17E /* UILabel+Fancy.swift in Sources */,
 				D9ADB6C8204FF073007CB047 /* Player.swift in Sources */,
 				D9F7A08220614E4A000EC7CC /* Chunk.swift in Sources */,
 				D93D702A2052770600C95FA4 /* EBid.swift in Sources */,

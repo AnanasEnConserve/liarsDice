@@ -65,7 +65,7 @@ class diceDecider {
         //print(ActionTable)
         return (ActionTable);
     }
-    func playGame(diceNumber: Int,currentRoll: Array<String>) -> [Int] {
+    func playGame(diceNumber: Int,currentRoll: Array<String>,history: Array<String>) -> [Int] {
         var ActionTable = [String:String]();
         
         ActionTable = loadActionTable(diceNumber: diceNumber,ActionTable: ActionTable);
@@ -87,6 +87,29 @@ class diceDecider {
         //var newDice = evalAction(actions);
         //print(newDice);
         finalKeeper = unsorter(diceNumber: diceNumber,keepers: keepers,currentRoll: currentRoll,sortedRoll: sortedRoll);
+        if (finalKeeper.count == diceNumber) {
+            if (history.count != 0) {
+                for i in (0..<finalKeeper.count) {
+                    if (!currentRoll.contains(history[i])) {
+                        finalKeeper.remove(at: (currentRoll.index(of: history[i]))! + 1)
+                    }
+                }
+            } else {
+                //return the mode of the roll and keep the rest
+                var counts = [Int: Int]()
+                currentRoll.forEach { counts[Int($0)!] = (counts[Int($0)!] ?? 0) + 1 }
+                if let (value, count) = counts.max(by: {$0.1 < $1.1}) {
+                    print("\(value) occurs \(count) times")
+                    if (count != diceNumber) {
+                        for i in (0..<finalKeeper.count) {
+                            if (finalKeeper[i] != value) {
+                                finalKeeper.remove(at: i)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         print("finalkepper: \(finalKeeper)")
         return finalKeeper
     }
@@ -103,6 +126,7 @@ class diceDecider {
         }
         print (finalKeeper)
         return (finalKeeper);
+        
     }
     
     func getAllActions(diceNumber: Int,sortedRoll: Array<String>,ActionTable: Dictionary<String,String>) -> Int{
