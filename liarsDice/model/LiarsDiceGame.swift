@@ -143,6 +143,14 @@ class LiarsDiceGame {
         }
         return bid
     }
+    func getDiceInPlay() -> String{
+        var bid = ""
+        for i in 0..<5{
+            if (!dice[i].isInPlay()) {continue}
+            bid += String(dice[i].getValue())
+        }
+        return bid
+    }
     
     func isFixed(i: Int) -> Bool{
         return !dice[i].isInPlay()
