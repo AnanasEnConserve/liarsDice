@@ -208,8 +208,8 @@
     isa initiate-game
     state decide
 	playerbid 4
-	playerBluff 2
-	fix 2
+ <=	playerBluff -1
+	fix 4
  >= influence 1 
     turn player
 ==>
@@ -245,7 +245,7 @@
     state decide
 	playerbid 4
 	playerBluff 2
- <=	fix 2
+ >=	fix 2
  >=	influence 1 
     turn player
 ==>
@@ -255,6 +255,7 @@
  =goal>
     state start
 )
+
 
 ;;bluff cases for 6
 (p call-bluff-1
@@ -426,7 +427,7 @@
 )
 
 ;;some bluff cases for 5
-(p call-bluff-9
+(p call-bluff-10
  =goal>
     isa initiate-game
     state decide

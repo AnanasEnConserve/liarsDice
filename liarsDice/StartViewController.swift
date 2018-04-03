@@ -76,7 +76,13 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        textBox.backgroundColor = UIColor.clear
+        textBox.textColor = UIColor.white
+        textBox.layer.borderWidth = 2
+        textBox.layer.borderColor = UIColor.white.cgColor
+        textBox.layer.cornerRadius = 10
+        textBox.attributedPlaceholder = NSAttributedString(string: "Enter a username",
+                                                           attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)])
         // Do any additional setup after loading the view.
         textBox.delegate = self
         textBox.becomeFirstResponder()
