@@ -33,14 +33,14 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
 //                debugIndex.append(i)
 //                }
 //            }
-          
-            
+            debugArray.removeAll()
             for i in 0..<5 {
-                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
+                if game.isFixed(i: i) == true { //&& debugIndex.contains(i) == false {
                     debugArray.append(allDice[i].title(for: UIControlState.normal)!)
                     debugIndex.append(i)
                 }
             }
+            
             print("Debug Array:: " , debugArray)
             //debugArray.sort()
             for index in 0..<debugArray.count {
@@ -48,8 +48,6 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             }
             //Reset debugArray as it will be set again on the next turn
             //debugArray.removeAll()
-            
-            
             bluffButton.isHidden = true
             acceptButton.isHidden = true
             
@@ -142,29 +140,31 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                 
                 return
             }
-            
-            print("after calculate turn")
-            print(game.getLastBid())
-            activityIndicator.stopAnimating()
-            self.opponentHasBid()
-            self.highlightTurn()
-            
-            for i in 0..<5 {
-                if game.isFixed(i: i) == true && debugIndex.contains(i) == false {
-                    debugArray.append(allDice[i].title(for: UIControlState.normal)!)
-                    debugIndex.append(i)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // change 2 to desired number of seconds
+                
+                print("after calculate turn")
+                print("Last bid: \(self.game.getLastBid())")
+                self.activityIndicator.stopAnimating()
+                self.opponentHasBid()
+                self.highlightTurn()
+                
+                for i in 0..<5 {
+                    if self.game.isFixed(i: i) == true && self.debugIndex.contains(i) == false {
+                        self.debugArray.append(self.allDice[i].title(for: UIControlState.normal)!)
+                        self.debugIndex.append(i)
+                    }
                 }
-            }
-            for i in 0..<5 {
-                if !game.isFixed(i: i) {
-                    let j = game.getDiceNumber(i)
-                    allDice[i].setTitle(diceValues[j-1], for: UIControlState.normal)
+                for i in 0..<5 {
+                    if !self.game.isFixed(i: i) {
+                        let j = self.game.getDiceNumber(i)
+                        self.allDice[i].setTitle(self.diceValues[j-1], for: UIControlState.normal)
+                    }
                 }
-            }
-            print("Debug Array:: " , debugArray)
-            //debugArray.sort()
-            for index in 0..<debugArray.count {
-                diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
+                print("Debug Array:: " , self.debugArray)
+                //debugArray.sort()
+                for index in 0..<self.debugArray.count {
+                    self.diceTakenOut[index].setTitle(self.debugArray[index], for: UIControlState.normal)
+                }
             }
         }
     }
@@ -293,7 +293,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     //Function to reset things at the start of a new round
     func startGame() {
        // if game.isPlayerTurn() == true {
-        
+        debugIndex.removeAll()
+        debugArray.removeAll()
+
         for idx in 0..<5 {
             if idx < 4 {
             diceTakenOut[idx].setTitle(" ", for: UIControlState.normal)
@@ -383,10 +385,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         // todo: is this needed? Also add sanity check?
         removed.append(contentsOf: selected)
     
-        
+        debugArray.removeAll()
         // make them appear in the fixed row
         for index in 0..<5 {
-            if game.isFixed(i: index) == true && debugIndex.contains(index) == false {
+            if game.isFixed(i: index) == true { // && debugIndex.contains(index) == false {
             debugArray.append(allDice[index].title(for: UIControlState.normal)!)
                 debugIndex.append(index)
             }
@@ -411,11 +413,15 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     func highlightTurn() {
         if game.isPlayerTurn(){
-            labelPlayer.textColor = colorHighlighted
-            labelOpponent.textColor = colorNormal
+            labelPlayer.glow()
+            labelOpponent.removeGlow()
+//            labelPlayer.textColor = colorHighlighted
+//            labelOpponent.textColor = colorNormal
         } else {
-            labelPlayer.textColor = colorNormal
-            labelOpponent.textColor = colorHighlighted
+//            labelPlayer.textColor = colorNormal
+//            labelOpponent.textColor = colorHighlighted
+            labelPlayer.removeGlow()
+            labelOpponent.glow()
         }
     }
     
@@ -436,6 +442,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         game.reset()
         removed.removeAll()
         selected.removeAll()
+        debugArray.removeAll()
         labelPlayerScore.text = "Score: 0"
         labelOpponentScore.text = "Score: 0"
         for i in 0..<5{
@@ -665,6 +672,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         labelPlayer.text = game.getPlayer().getName()
         labelOpponent.text = game.getOpponent().getName()
             hasLoaded = true
+        self.highlightTurn()
        // }
         //updateView()
         // Do any additional setup after loading the view, typically from a nib.

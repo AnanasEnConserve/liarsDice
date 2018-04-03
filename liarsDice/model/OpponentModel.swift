@@ -142,6 +142,7 @@ class OpponentModel: Model{
     // TODO call machine learning part
     // just be a dumb AI and fix the first one (if it isnt yet)
     func fixDice(){
+        if(game.getNumberOfFixedDice() >= 4) {return}
         let Decider = diceDecider();
         print("-------- DICE DECIDER ------------")
         let diceNumber = 5 - game.getNumberOfFixedDice()
@@ -476,7 +477,12 @@ class OpponentModel: Model{
             } else{
                 pairValue = Int(uniqueFixed[0])!
             }
+            // not sure why it happens
+            if(pairValue == 0){
+                pairValue = 1
+            }
             bid = String(repeating: String(pairValue),count: 5)
+            
             break
         default:
             print("how the fuck did I end up in the default case (createbidofhigherrank)")
@@ -553,11 +559,8 @@ class OpponentModel: Model{
         game.rollDice()
         //makeBid()
         
-        
-        makeBid()
-        _ = game.toggleTurn()
-        //var chunk = Chunk(s: "name",m: self)
-        //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
+        self.makeBid()
+        _ = self.game.toggleTurn()
         return false
     }
     
