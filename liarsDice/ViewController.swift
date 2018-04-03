@@ -517,7 +517,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             let currentroll = currentRoll
             let destinationViewController = SecondViewController(nibName: "SecondViewController", bundle: nil)
             destinationViewController.rollDisplay.text = currentroll.joined(separator: " ")
-           // present(destinationViewController, animated: false, completion: nil)
+           
         }
     
     func setPlayerName(playerName: String) {
