@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 class OpponentModel: Model{
     var game: LiarsDiceGame
     var playerProfiles : Dictionary<String,Dictionary<String,String>>!
@@ -141,7 +142,19 @@ class OpponentModel: Model{
     // TODO call machine learning part
     // just be a dumb AI and fix the first one (if it isnt yet)
     func fixDice(){
-        game.fixDice([0])
+        let Decider = diceDecider();
+        print("-------- DICE DECIDER ------------")
+        let diceNumber = 5 - game.getNumberOfFixedDice()
+        let currentRoll = game.getRoll().map{String($0)}
+        print(diceNumber)
+        print(currentRoll)
+        let toBeFixed = Decider.playGame(diceNumber: diceNumber,currentRoll: currentRoll).map{$0-1}
+        if(toBeFixed.count + game.getNumberOfFixedDice() > 4){
+            print("Warning: tried to fix all dice, ABORT ABORT")
+            return
+        }
+        game.fixDice(toBeFixed)
+        
     }
     
     // testing
@@ -539,8 +552,7 @@ class OpponentModel: Model{
         fixDice()
         game.rollDice()
         //makeBid()
-        print("i am calculating, here is my roll")
-        print(game.getRoll())
+        
         
         makeBid()
         _ = game.toggleTurn()
