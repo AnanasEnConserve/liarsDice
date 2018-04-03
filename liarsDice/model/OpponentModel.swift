@@ -553,11 +553,8 @@ class OpponentModel: Model{
         game.rollDice()
         //makeBid()
         
-        
-        makeBid()
-        _ = game.toggleTurn()
-        //var chunk = Chunk(s: "name",m: self)
-        //chunk.setSlot(slot: <#T##String#>, value: <#T##Value#>)
+        self.makeBid()
+        _ = self.game.toggleTurn()
         return false
     }
     
