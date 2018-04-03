@@ -18,8 +18,8 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
     
     @IBOutlet weak var warningLabel: UILabel!
     
-    @IBAction func startGame(_ sender: UIButton) {
-    }
+//    @IBAction func startGame(_ sender: UIButton) {
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         playerName = textBox.text!
@@ -49,19 +49,19 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
        // let game = LiarsDiceGame(pName: playerName)
         let mainScreen = segue.destination as! ViewController
         //let game = LiarsDiceGame(pName: textBox.text!)
-        let game = LiarsDiceGame(pName: textBox.text!)
+        let game = LiarsDiceGame(pName: playerName)
         mainScreen.game = game
         mainScreen.opponentModel = OpponentModel(game: game)
         }
-       
     }
-    
-
     
     @IBAction func init_Game(_ sender: UIButton) {
         if textBox.text == "" {
             playerName = "Anonymous"
             //Prevent the view from changing somehow..
+        }
+        else {
+            playerName = textBox.text!
         }
         
         

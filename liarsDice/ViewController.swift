@@ -195,7 +195,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         //Set the label to display the bid for the opponent
         opponentBid.text = """
  Opponent has bid:
- """ + joinedOpponentBid
+ 
+""" + joinedOpponentBid
         showBid.text = "Current Bid: " + joinedOpponentBid
         opponentBid.isHidden =  false
         
