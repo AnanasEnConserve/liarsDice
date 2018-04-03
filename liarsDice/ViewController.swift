@@ -438,6 +438,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         game.reset()
         removed.removeAll()
         selected.removeAll()
+        debugArray.removeAll()
         labelPlayerScore.text = "Score: 0"
         labelOpponentScore.text = "Score: 0"
         for i in 0..<5{
