@@ -594,9 +594,14 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     }
     
     func endRound() {
-        if game.toggleTurn() == false {
-            game.toggleTurn()
+//        if game.toggleTurn() == false {
+//            game.toggleTurn()
+//        }
+        for index in 0..<diceTakenOut.count {
+            diceTakenOut[index].setTitle("", for: UIControlState.normal)
         }
+        game.reset()
+        
         acceptButton.isHidden = true
         bluffButton.isHidden = true
         activityIndicator.stopAnimating()
@@ -605,9 +610,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         opponentBid.isHidden = true
         
         
-        for idx in 0..<4 {
-            diceTakenOut[idx].setTitle("", for: UIControlState.normal)
-        }
+//        for idx in 0..<4 {
+//            diceTakenOut[idx].setTitle("", for: UIControlState.normal)
+//        }
         
         showBid.text = ""
         
