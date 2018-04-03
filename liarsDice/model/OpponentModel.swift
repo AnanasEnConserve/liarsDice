@@ -75,37 +75,37 @@ class OpponentModel: Model{
     
     // update data and write back to file
     // do this after each round
-    func updatePlayerProfile(){
-        // if profiles file is empty, create object
-        if(playerProfiles == nil){
-            playerProfiles = Dictionary<String,Dictionary<String,String>>()
-        }
-        print("updatePlayerProfile")
-        print(game)
-        let pName = game.getPlayer().getName()
-        print(game.getPlayer())
-        print(pName)
-        if(playerProfiles[pName] == nil){
-            playerProfiles[pName] = [String:String]()
-        }
-        playerProfiles[pName]!["playerBluff"] = String(playerBluff)
-        playerProfiles[pName]!["playerGul"] = String(playerGul)
-        playerProfiles[pName]!["turns"] = String(playerTotalTurnCount + game.getTurnCount())
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        let fileURL = dir.appendingPathComponent(filename)
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: playerProfiles, options: .prettyPrinted)
-                //let str = jsonData.description
-                try jsonData.write(to: fileURL)
-                print(fileURL)
-            }
-            catch{
-                print(error)
-            }
-            
-        }
-        
-    }
+//    func updatePlayerProfile(){
+//        // if profiles file is empty, create object
+//        if(playerProfiles == nil){
+//            playerProfiles = Dictionary<String,Dictionary<String,String>>()
+//        }
+//        print("updatePlayerProfile")
+//        print(game)
+//        let pName = game.getPlayer().getName()
+//        print(game.getPlayer())
+//        print(pName)
+//        if(playerProfiles[pName] == nil){
+//            playerProfiles[pName] = [String:String]()
+//        }
+//        playerProfiles[pName]!["playerBluff"] = String(playerBluff)
+//        playerProfiles[pName]!["playerGul"] = String(playerGul)
+//        playerProfiles[pName]!["turns"] = String(playerTotalTurnCount + game.getTurnCount())
+//        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+//        let fileURL = dir.appendingPathComponent(filename)
+//            do {
+//                let jsonData = try JSONSerialization.data(withJSONObject: playerProfiles, options: .prettyPrinted)
+//                //let str = jsonData.description
+//                try jsonData.write(to: fileURL)
+//                print(fileURL)
+//            }
+//            catch{
+//                print(error)
+//            }
+//            
+//        }
+//
+//    }
     
     
     private func influence() -> Int{

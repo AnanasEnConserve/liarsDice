@@ -111,7 +111,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             print(game.getLastBid())
             if (opponentModel.calculateTurn()){
                 let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
-                opponentModel.updatePlayerProfile()
+                //opponentModel.updatePlayerProfile()
                 if didPlayerWin{
                     print("Player won")
                     roundResult.text = "You win the round! The opponent falsely accused you of bluffing! 🤣"
@@ -577,7 +577,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             opponentModel.incrementPlayerGul()
         }
         print("updating")
-        opponentModel.updatePlayerProfile()
+        //opponentModel.updatePlayerProfile()
         
         
         if didPlayerWin{
