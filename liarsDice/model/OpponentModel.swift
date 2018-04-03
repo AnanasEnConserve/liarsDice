@@ -135,7 +135,7 @@ class OpponentModel: Model{
         let believe = self.lastAction(slot: "response")
         print(String(describing: believe))
         self.run()
-        return believe != nil && believe! == "believe"
+        return believe == nil || believe! == "believe"
         
     }
     
@@ -546,10 +546,10 @@ class OpponentModel: Model{
         if(game.isBidABluff()){
             incrementPlayerBluff()
         } else{
+            fixDice()
             decrementPlayerBluff()
         }
         
-        fixDice()
         game.rollDice()
         //makeBid()
         
