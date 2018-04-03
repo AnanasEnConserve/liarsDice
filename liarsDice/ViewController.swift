@@ -112,7 +112,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             print("before calculate turn")
             print(game.getLastBid())
             if (opponentModel.calculateTurn()){
-            let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
+                let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
+                opponentModel.updatePlayerProfile()
                 if didPlayerWin{
                     print("Player won")
                     roundResult.text = "You win the round! The opponent falsely accused you of bluffing! 🤣"

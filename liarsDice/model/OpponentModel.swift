@@ -7,13 +7,14 @@
 //
 
 import Foundation
+
 class OpponentModel: Model{
     var game: LiarsDiceGame
     var playerProfiles : Dictionary<String,Dictionary<String,String>>!
     private var playerBluff = 0
     private var playerGul = 0
     private var playerTotalTurnCount = 0
-    
+    private var filename = "profiles.txt"
     // initialize, set the game and load player profile, push chunks into model
     init(game: LiarsDiceGame) {
         self.game = game
@@ -29,13 +30,13 @@ class OpponentModel: Model{
         playerGul = 0
         playerTotalTurnCount = 0
         
-        if let path = Bundle.main.path(forResource: "profiles", ofType: "txt") {
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(filename)
             do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+                let data = try Data(contentsOf: fileURL, options: .alwaysMapped)
                 do{
                     
                     let json =  try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                    // JSONObjectWithData returns AnyObject so the first thing to do is to downcast to dictionary type
                     print(json)
                     playerProfiles =  json as! Dictionary<String,Dictionary<String,String>>
                     let pName = game.getPlayer().getName()
@@ -75,21 +76,28 @@ class OpponentModel: Model{
     // update data and write back to file
     // do this after each round
     func updatePlayerProfile(){
+        // if profiles file is empty, create object
+        if(playerProfiles == nil){
+            playerProfiles = Dictionary<String,Dictionary<String,String>>()
+        }
         print("updatePlayerProfile")
+        print(game)
         let pName = game.getPlayer().getName()
+        print(game.getPlayer())
+        print(pName)
+        if(playerProfiles[pName] == nil){
+            playerProfiles[pName] = [String:String]()
+        }
         playerProfiles[pName]!["playerBluff"] = String(playerBluff)
         playerProfiles[pName]!["playerGul"] = String(playerGul)
-        playerProfiles[pName]!["turns"]! = String(playerTotalTurnCount + game.getTurnCount())
-        if let path = Bundle.main.path(forResource: "profiles", ofType: "txt") {
+        playerProfiles[pName]!["turns"] = String(playerTotalTurnCount + game.getTurnCount())
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let fileURL = dir.appendingPathComponent(filename)
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: playerProfiles, options: .prettyPrinted)
-                let str = jsonData.description
-                let data = str.data(using: String.Encoding.utf8)!
-                if let file = FileHandle(forWritingAtPath:path) {
-                    print(str)
-                    print("path: \(path)")
-                    file.write(data)
-                }
+                //let str = jsonData.description
+                try jsonData.write(to: fileURL)
+                print(fileURL)
             }
             catch{
                 print(error)
@@ -134,7 +142,19 @@ class OpponentModel: Model{
     // TODO call machine learning part
     // just be a dumb AI and fix the first one (if it isnt yet)
     func fixDice(){
-        game.fixDice([0])
+        let Decider = diceDecider();
+        print("-------- DICE DECIDER ------------")
+        let diceNumber = 5 - game.getNumberOfFixedDice()
+        let currentRoll = game.getRoll().map{String($0)}
+        print(diceNumber)
+        print(currentRoll)
+        let toBeFixed = Decider.playGame(diceNumber: diceNumber,currentRoll: currentRoll).map{$0-1}
+        if(toBeFixed.count + game.getNumberOfFixedDice() > 4){
+            print("Warning: tried to fix all dice, ABORT ABORT")
+            return
+        }
+        game.fixDice(toBeFixed)
+        
     }
     
     // testing
@@ -525,13 +545,14 @@ class OpponentModel: Model{
         // check if player was bluffing
         if(game.isBidABluff()){
             incrementPlayerBluff()
+        } else{
+            decrementPlayerBluff()
         }
         
         fixDice()
         game.rollDice()
         //makeBid()
-        print("i am calculating, here is my roll")
-        print(game.getRoll())
+        
         
         makeBid()
         _ = game.toggleTurn()
