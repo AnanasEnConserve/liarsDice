@@ -102,7 +102,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             print("before calculate turn")
             print(game.getLastBid())
             if (opponentModel.calculateTurn()){
-            let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
+                let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
+                opponentModel.updatePlayerProfile()
                 if didPlayerWin{
                     print("Player won")
                     roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
@@ -549,8 +550,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         rollButton.isEnabled = false
         bidButton.isHidden = true
         holdButton.isHidden = true
-        
-        
+        // at the end of game, write gul/bluff/turncount
+        opponentModel.updatePlayerProfile()
         if didPlayerWin{
             print("Player won")
             roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"

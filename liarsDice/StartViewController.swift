@@ -49,7 +49,7 @@ class StartViewController: UIViewController, UITextFieldDelegate, InstructionsVi
        // let game = LiarsDiceGame(pName: playerName)
         let mainScreen = segue.destination as! ViewController
         //let game = LiarsDiceGame(pName: textBox.text!)
-        let game = LiarsDiceGame(pName: playerName)
+        let game = LiarsDiceGame(pName: textBox.text!)
         mainScreen.game = game
         mainScreen.opponentModel = OpponentModel(game: game)
         }
