@@ -379,12 +379,7 @@ class OpponentModel: Model{
             // that one automatically gets better odds
             if fixedNumber > 0 && fixedNumber < 4{
                 pairValue = Int(fixed[Int(arc4random_uniform(UInt32(fixedNumber)))])!
-                if fixedNumber < 3{
-                    // todo: proper math?
-                    if arc4random_uniform(100) < 100 - fixedNumber*20{
-                        pairValue = rollDie()
-                    }
-                }
+                
             } else {
                 pairValue = rollDie()
             }
