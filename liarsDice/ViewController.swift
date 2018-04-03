@@ -59,17 +59,27 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             rollButton.isEnabled = true
             rollButton.isHidden = false
             
+            //Check if bid was true, only then allow to hold dice
+            if game.isBidABluff() == false {
+                holdButton.isHidden = false
+                holdButton.isEnabled = true
+            }
+            //Perhaps disable interaction with dice if they cannot be fixed
+            
             //show AllDice
             for index in 0..<5 {
                if(game.isInPlay(i: index)){
-                    allDice[index].isEnabled = true
+                    if game.isBidABluff() == false{
+                        allDice[index].isEnabled = true
+                    }
                     allDice[index].isHidden = false
                 }
             }
             resetButton.isEnabled = true
             resetButton.isHidden = false
-            holdButton.isHidden = false
-            holdButton.isEnabled = true
+            
+          
+         
             opponentBid.isHidden = true
             
         }
@@ -105,17 +115,19 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
                 if didPlayerWin{
                     print("Player won")
-                    roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
+                    roundResult.text = "You win the round! The opponent falsely accused you of bluffing! 🤣"
                     roundResult.isHidden = false
                     continueButton.isEnabled = true
                     continueButton.isHidden = false
+                    endRound()
                 }
                 else{
                     print("Opponent won")
-                    roundResult.text = "You lost. Too bad"
+                    roundResult.text = "You were caught bluffing!"
                     roundResult.isHidden = false
                     continueButton.isEnabled = true
                     continueButton.isHidden = false
+                    endRound()
                 }
                 self.updateScores()
                 game.reset()
@@ -180,7 +192,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         let joinedOpponentBid = displayOpponentBid.joined(separator: " ")
         
         //Set the label to display the bid for the opponent
-        opponentBid.text = "Opponent has bid: " + joinedOpponentBid
+        opponentBid.text = """
+ Opponent has bid:
+ """ + joinedOpponentBid
         showBid.text = "Current Bid: " + joinedOpponentBid
         opponentBid.isHidden =  false
         
@@ -224,7 +238,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var bluffButton: UIButton!
     
-    let colorNormal = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    let colorNormal = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     let colorHighlighted = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
     
     var removedDice = [String]()
@@ -282,11 +296,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             if idx < 4 {
             diceTakenOut[idx].setTitle(" ", for: UIControlState.normal)
             allDice[idx].isEnabled = false
-            allDice[idx].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            allDice[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             }
             else {
                 allDice[idx].isEnabled = false
-                allDice[idx].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+                allDice[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             }
         }
         showBid.text = " "
@@ -545,15 +559,13 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             // our modeller decided that being wrong counts towards being gullible
             opponentModel.incrementPlayerGul()
         }
-        rollButton.isHidden = true
-        rollButton.isEnabled = false
-        bidButton.isHidden = true
-        holdButton.isHidden = true
+        print("updating")
+        opponentModel.updatePlayerProfile()
         
         
         if didPlayerWin{
             print("Player won")
-            roundResult.text = "YOU WON!!!!!! PRESS CONTINUE TO... WELL CONTINUE OBVIOUSLY"
+            roundResult.text = "You caught the opponent bluffing!"
             roundResult.isHidden = false
             continueButton.isEnabled = true
             continueButton.isHidden = false
@@ -561,7 +573,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         }
         else{
             print("Opponent won")
-            roundResult.text = "You lost. Too bad"
+            roundResult.text = "You lose. You wrongfully accused the opponent of bluffing"
             roundResult.isHidden = false
             continueButton.isEnabled = true
             continueButton.isHidden = false
@@ -574,10 +586,16 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     }
     
     func endRound() {
+        if game.toggleTurn() == false {
+            game.toggleTurn()
+        }
         acceptButton.isHidden = true
         bluffButton.isHidden = true
+        activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
+        opponentBid.text = ""
         opponentBid.isHidden = true
+        
         
         for idx in 0..<4 {
             diceTakenOut[idx].setTitle("", for: UIControlState.normal)

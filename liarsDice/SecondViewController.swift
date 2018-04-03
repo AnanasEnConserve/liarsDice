@@ -84,7 +84,7 @@ class SecondViewController: UIViewController {
         else {
             for index in 0..<rowTwo.count {
                 if selectedDie != index {
-                    rowTwo[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                    rowTwo[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                 }
                 else {
                     rowTwo[index].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
@@ -99,7 +99,7 @@ class SecondViewController: UIViewController {
         print(isValidBid)
         if singleSelected == true && selectedRank == true && isValidBid {
             submitBid.setTitle("Submit", for: UIControlState.normal)
-            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
             submitBid.isHidden = false
             tooLowAlert.isHidden = true
@@ -131,7 +131,7 @@ class SecondViewController: UIViewController {
         else {
             for index in 0...5 {
                 if selectedOne != index {
-                    rowOne[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                    rowOne[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                     rowThree[index].isEnabled = true
                     //rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
                         
@@ -150,7 +150,7 @@ class SecondViewController: UIViewController {
         print(isValidBid)
         if selectedFirst == true && selectedSecond == true && selectedRank == true && isValidBid{
             submitBid.setTitle("Submit", for: UIControlState.normal)
-            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
             submitBid.isHidden = false
             tooLowAlert.isHidden = true
@@ -183,7 +183,7 @@ class SecondViewController: UIViewController {
                 //rowThree[index].setTitle(eyes[index], for: UIControlState.normal)
                 if index != selectedTwo {
 
-                    rowThree[index].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                    rowThree[index].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                 }
                 else {
                     rowThree[index].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
@@ -199,7 +199,7 @@ class SecondViewController: UIViewController {
         if selectedFirst == true && selectedSecond == true && selectedRank == true && isValidBid
             {
             submitBid.setTitle("Submit", for: UIControlState.normal)
-            submitBid.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            submitBid.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             submitBid.isEnabled = true
             submitBid.isHidden = false
             tooLowAlert.isHidden = true
@@ -233,7 +233,7 @@ class SecondViewController: UIViewController {
             for idx in 0..<rankButtons.count {
                 if !rankButtons[idx].isEnabled {continue}
                 if selectedButton != idx {
-                    rankButtons[idx].setTitleColor(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), for: UIControlState.normal)
+                    rankButtons[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                 }
                 else  {
                     rankButtons[idx].setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: UIControlState.normal)
@@ -254,10 +254,10 @@ class SecondViewController: UIViewController {
                 rowTwo[idx].isEnabled = false
                 
                 rowOne[idx].isEnabled = true
-                rowOne[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                rowOne[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                 
                 rowThree[idx].isEnabled = true
-                rowThree[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                rowThree[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             }
         } else if selectedButton == 4 {
             for idx in 0..<rowTwo.count {
@@ -265,8 +265,8 @@ class SecondViewController: UIViewController {
                 rowTwo[idx].isEnabled = false
                 rowOne[idx].isEnabled = true
                 rowThree[idx].isEnabled = true
-                rowOne[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
-                rowThree[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                rowOne[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
+                rowThree[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             }
         }
         else {
@@ -277,7 +277,7 @@ class SecondViewController: UIViewController {
                 rowThree[idx].isEnabled = false
                 
                 rowTwo[idx].isEnabled = true
-                rowTwo[idx].setTitleColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: UIControlState.normal)
+                rowTwo[idx].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
                 
             }
         }
@@ -359,7 +359,7 @@ class SecondViewController: UIViewController {
         }
         // in case of reset, we need to re-enable previously disabled bids
         for i in disableUpTo..<7{
-            rankButtons[i].setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState.normal)
+            rankButtons[i].setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: UIControlState.normal)
             rankButtons[i].isEnabled = true
         }
         //String(describing: currentRoll)
