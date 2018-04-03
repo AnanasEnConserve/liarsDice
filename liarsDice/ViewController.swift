@@ -365,8 +365,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         
         print("Current roll for cheaters (REMOVEDICE): ")
         print(game.getRoll())
-        if removed.count + selected.count == 5 {
+        if removed.count + selected.count == 5 || game.getNumberOfFixedDice() == 4 || game.getNumberOfFixedDice() + selected.count == 5 {
             print("I'm afraid I can't let you do that Dave")
+            opponentBid.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            opponentBid.text = "Taking out all dice is not allowed."
+            opponentBid.isHidden = false
             return
         }
         // fix dice in the model
@@ -463,10 +466,14 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
    
     func rollDice() {
+        opponentBid.isHidden = true
+        opponentBid.text = ""
+        opponentBid.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         game.rollDice()
         for j in 0..<5{
             self.allDice[j].setTitle(" ", for: UIControlState.normal)
+            self.allDice[j].setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: UIControlState.normal)
         }
         for i in 0..<6{
              DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)*0.1) {
