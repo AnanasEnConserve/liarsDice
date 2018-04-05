@@ -571,8 +571,8 @@ class OpponentModel: Model{
     
     func incrementPlayerGul(){
         playerGul += 1
-        if(playerGul > 2){
-            playerGul = 2
+        if(playerGul > 3){
+            playerGul = 3
         }
     }
     func decrementPlayerGul(){

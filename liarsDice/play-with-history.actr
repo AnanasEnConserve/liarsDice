@@ -255,6 +255,23 @@
     state start
 )
 
+;;some believe cases for 3
+(p believe-112
+ =goal>
+    isa initiate-game
+    state decide
+    playerbid 3
+    playerBluff 0
+ <= fix 1
+ >= influence 1
+    turn player
+==>
+ +action>
+    isa decision
+    response believe
+ =goal>
+    state start
+)
 
 ;;bluff cases for 6
 (p call-bluff-1
@@ -281,7 +298,7 @@
     state decide
  >= playerbid 3
  <= playerbid 5
- <= playerBluff 0
+ <= playerBluff -1
  <= fix 1
  >= influence 1 
     turn player
@@ -760,6 +777,7 @@
  =goal>
     isa initiate-game
     state decide
+    - playerbid 6
     playerbid =val
  <= modelbid =val
     - turn player
@@ -767,6 +785,21 @@
  +action>
     isa decision
     response lastresort
+ =goal>
+    isa initiate-game
+    state start
+)
+
+(p call-bluff-for6
+=goal>
+    isa initiate-game
+    state decide
+    playerbid 6
+    - turn player
+==>
+ +action>
+    isa decision
+    response callBluff
  =goal>
     isa initiate-game
     state start
