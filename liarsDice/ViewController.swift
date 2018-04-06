@@ -260,6 +260,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         bidButton.isEnabled = true
         holdButton.isHidden = true
         holdButton.isEnabled = false
+        selected.removeAll()
     }
     
     //TODO:
@@ -435,6 +436,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func resetGame(_ sender: UIButton) {
         reset()
+        game.reset()
+        selected.removeAll()
+        opponentBid.text = ""
     }
     var playerHasWon = false
     //Function to reset the game (start new round && reset scores)
