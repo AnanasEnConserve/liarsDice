@@ -102,14 +102,43 @@
                                         <rect key="frame" x="0.0" y="-10" width="375" height="750"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-Mi-T3x">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-Mi-T3x">
+                                        <rect key="frame" x="8" y="10" width="359" height="400"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="750" id="sKX-Y0-bG0"/>
+                                            <constraint firstAttribute="height" constant="400" id="sKX-Y0-bG0"/>
                                         </constraints>
-                                        <string key="text">The game revolves around rolling dice and forming pairs. Players will bid on what they have rolled, and have the opportunity to bluff. The opponent can then either accept the bid or call bluff. Upon accepting a bid you get the opportunity to roll the dice once, and will then have to bid. Each consecutive bid will have to be higher than the previous bid, until the highest possible bid has been made.
+                                        <mutableString key="text">
+The player always starts the round, and can do so by rolling the dice. Afterwards, the player makes a bid based on what he has rolled. You have the opportunity to lie about your roll. Be careful though, as you will lose the round when your bluff is called! 
 
-The rankings of patterns one can bid is as follows (from high to low):
+The opponent will then choose to accept the bid or call bluff. When accepting, the opponent will make a bid. Note that each bid has to be higher than the previous bid.
+
+When accepting a bid that is truthful, you are granted the opportunity to fix dice, taking them out of play until the end of the round. Removed dice will appear on the left side of the screen. Think carefully on which dice to remove, as removed dice can not be brought back into play!
+
+Calling a bluff will always end the current round. If calling out an actual bluff, you will win the round. When calling bluff on a truthful bid, you will lose the round. One point is always awarded at the end of a round to the winning player, and both scores and streaks are kept so you can challenge yourself to get the highest win streak possible!</mutableString>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gameplay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCu-72-MLJ">
+                                        <rect key="frame" x="127" y="-3" width="120" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rank Patterns" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wc2-2H-5YJ">
+                                        <rect key="frame" x="123" y="420" width="129" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1z-Pt-7SG">
+                                        <rect key="frame" x="0.0" y="440" width="375" height="300"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">The rankings of patterns one can bid is as follows 
+(from high to low):
+
 Five of a kind
 Four of a kind
 Full house
@@ -120,29 +149,21 @@ Single die
 
 The rankings of eyes is as follows (from high to low):
 1, 6, 5, 4, 3, 2.
-Note that the one is treated as an ace and is the highest value. A pair of ones is therefore the highest possible pair and will beat a pair of sixes.
 
-Each player can roll the dice once. After rolling, the player should make a bid which can either be truthful or a bluff.
-
-The opponent can then decide either to accept or challenge the bid.
-When accepting a truthful bid, you are given the opportunity to hold dice, taking them out of play. Dice can be selected by tapping on them. Selected dice will turn red. Removed dice will be displayed in blue, on the left of the screen.                                                                                                 Note that these dice can not be brought back into play and will remain fixed until the end of the round. So think carefully which dice to take out of play, and use it to your advantage! 
-You are not able to remove dice after accepting a bid that turns out to be a bluff. 
-
-Challenging a bid will always end the round. 
-If the bid was indeed a bluff, the person challenging will win the round. Upon challenging a truthful bid, the opponent will win the round.</string>
+Note that the one is treated as an ace and is the highest value. A pair of ones is therefore the highest possible pair and will beat a pair of sixes.</string>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="1"/>
                                 <constraints>
-                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="top" id="1qb-JP-pVn"/>
-                                    <constraint firstAttribute="trailing" secondItem="Q9m-Mi-T3x" secondAttribute="trailing" id="8Hg-Up-jl8"/>
-                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" id="8IP-48-xDc"/>
-                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" id="OQw-Cc-wg9"/>
-                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="leading" secondItem="rK1-FE-11f" secondAttribute="leadingMargin" constant="-8" id="W7p-CK-d0u"/>
-                                    <constraint firstAttribute="bottom" secondItem="Q9m-Mi-T3x" secondAttribute="bottom" constant="-20" id="Z9v-Zf-9Vk">
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="top" secondItem="rK1-FE-11f" secondAttribute="top" constant="10" id="1qb-JP-pVn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q9m-Mi-T3x" secondAttribute="trailing" constant="8" id="8Hg-Up-jl8"/>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" constant="-16" id="8IP-48-xDc"/>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="rK1-FE-11f" secondAttribute="width" constant="-16" id="OQw-Cc-wg9"/>
+                                    <constraint firstItem="Q9m-Mi-T3x" firstAttribute="leading" secondItem="rK1-FE-11f" secondAttribute="leadingMargin" id="W7p-CK-d0u"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q9m-Mi-T3x" secondAttribute="bottom" constant="320" id="Z9v-Zf-9Vk">
                                         <string key="userLabel">bottom = Bent double, like old beggars under sacks,  Knock-kneed, coughing like hags, we cursed through sludge,  Till on the haunting flares we turned our backs,  And towards our distant rest began to trudge.  Men marched asleep. Many had lost their boots,  But limped on, blood-shod. All went lame; all blind;  Drunk with fatigue; deaf even to the hoots  Of gas-shells dropping softly behind.   Gas! GAS! Quick, boys!—An ecstasy of fumbling  Fitting the clumsy helmets just in time,  But someone still was yelling out and stumbling  And flound’ring like a man in fire or lime.— Dim through the misty panes and thick green light,  As under a green sea, I saw him drowning.   In all my dreams before my helpless sight,  He plunges at me, guttering, choking, drowning.   If in some smothering dreams, you too could pace  Behind the wagon that we flung him in,  And watch the white eyes writhing in his face,  His hanging face, like a devil’s sick of sin;  If you could hear, at every jolt, the blood  Come gargling from the froth-corrupted lungs,  Obscene as cancer, bitter as the cud  Of vile, incurable sores on innocent tongues,—  My friend, you would not tell with such high zest  To children ardent for some desperate glory,  The old Lie: Dulce et decorum est  Pro patria mori..bottom + 8</string>
                                     </constraint>
                                 </constraints>
@@ -158,7 +179,7 @@ If the bid was indeed a bluff, the person challenging will win the round. Upon 
                             <constraint firstAttribute="bottom" secondItem="f3w-FP-7pn" secondAttribute="bottom" constant="20" symbolic="YES" id="oB5-K0-yn6"/>
                             <constraint firstItem="rK1-FE-11f" firstAttribute="width" secondItem="DOQ-Xt-xQY" secondAttribute="width" id="qQG-Et-dL5"/>
                             <constraint firstItem="rK1-FE-11f" firstAttribute="leading" secondItem="YEE-29-Jja" secondAttribute="leading" id="sOC-jG-Dgz"/>
-                            <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="DOQ-Xt-xQY" secondAttribute="width" id="vq8-h2-wJQ"/>
+                            <constraint firstItem="Q9m-Mi-T3x" firstAttribute="width" secondItem="DOQ-Xt-xQY" secondAttribute="width" constant="-16" id="vq8-h2-wJQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YEE-29-Jja"/>
                     </view>
@@ -228,14 +249,14 @@ If the bid was indeed a bluff, the person challenging will win the round. Upon 
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qb8-fa-9gl">
-                                <rect key="frame" x="292" y="13" width="67" height="39"/>
+                                <rect key="frame" x="300" y="11" width="67" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Streak: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysn-ii-qOq">
-                                <rect key="frame" x="288" y="60" width="69" height="21"/>
+                                <rect key="frame" x="298" y="50" width="69" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -246,13 +267,6 @@ If the bid was indeed a bluff, the person challenging will win the round. Upon 
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Streak : 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-A8-gsA">
-                                <rect key="frame" x="283" y="626" width="74" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zmh-lS-35z">
@@ -392,7 +406,7 @@ If the bid was indeed a bluff, the person challenging will win the round. Upon 
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYj-6y-yO2">
-                                <rect key="frame" x="293" y="597" width="64" height="21"/>
+                                <rect key="frame" x="303" y="595" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -442,6 +456,13 @@ If the bid was indeed a bluff, the person challenging will win the round. Upon 
                                     <segue destination="sgu-gD-pHR" kind="show" id="VIf-Ac-tsA"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Streak : 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-A8-gsA">
+                                <rect key="frame" x="293" y="624" width="74" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
