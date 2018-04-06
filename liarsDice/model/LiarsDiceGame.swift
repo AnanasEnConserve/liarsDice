@@ -123,7 +123,7 @@ class LiarsDiceGame {
     
     // converts a string of dice values into the desired format
     // bids are stored as strings, and elements in string are sorted by (1) frequency and (2) number rank
-    func normalizeBid(_ bid: String) -> String{
+    private func normalizeBid(_ bid: String) -> String{
         // replace 1 with 7 for sorting purposes
         let newBid = bid.replacingOccurrences(of: "1", with: "7")
         var counts: [Character:Int] = [:]
@@ -171,7 +171,7 @@ class LiarsDiceGame {
         return calculateRank(getRoll())
     }
     
-    func calculateRank(_ bid: String) -> Int{
+    private func calculateRank(_ bid: String) -> Int{
         let normalizedBid = normalizeBid(bid)
         // print("normalized bid: " + normalizedBid)
         var pattern = [Int]()

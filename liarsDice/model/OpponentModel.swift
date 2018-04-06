@@ -107,7 +107,6 @@ class OpponentModel: Model{
 
     }
     
-    
     private func influence() -> Int{
         if playerTotalTurnCount <= 10 {
             return 1
@@ -119,6 +118,7 @@ class OpponentModel: Model{
             return 3
         }
     }
+    
     func believePlayer() -> Bool{
         // check if the bid is possible at all given the fixedDice
         if(isConflicting(bid: game.getLastBid(), fixed: game.getFixedDice())){
@@ -147,7 +147,7 @@ class OpponentModel: Model{
         
     }
     
-    func fixDice(){
+    private func fixDice(){
         if(game.getNumberOfFixedDice() >= 4) {return}
         let Decider = diceDecider();
         print("-------- DICE DECIDER ------------")
@@ -165,7 +165,10 @@ class OpponentModel: Model{
         
     }
     
-    func makeBid(){
+    /**
+     * Makes a bid. First calls ACT-R to get the desired bid rank, then calls createValidBid for the particular bid
+     */
+    private func makeBid(){
         let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: \(game.calculateRankOfRoll()), fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: model, influence: " + String(influence())
         print(msg)
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
@@ -217,7 +220,7 @@ class OpponentModel: Model{
         
     }
     
-    public func generateAllBidsOfRankInOrder(rank : Int) -> [String]{
+    private func generateAllBidsOfRankInOrder(rank : Int) -> [String]{
         var bids = [String]()
         let eyesFromLowToHigh = "234567"
         switch rank {
@@ -276,7 +279,7 @@ class OpponentModel: Model{
     }
     
     // filters out all bids from a list that aren't valid at this point of the game
-    func filterValidBids(_ bids: [String]) -> [String]{
+    private func filterValidBids(_ bids: [String]) -> [String]{
         return bids.filter{
             game.bidIsHigher($0)
         }
@@ -310,7 +313,7 @@ class OpponentModel: Model{
         
     }
     
-    func filterPlausibleBids(_ bids: [String]) -> [String]{
+    private func filterPlausibleBids(_ bids: [String]) -> [String]{
         let fixed = game.getFixedDice()
         return bids.filter{!isConflicting(bid: $0, fixed: fixed)}
     }
@@ -324,7 +327,9 @@ class OpponentModel: Model{
         //print("n: \(n), k: \(k), n choose k: \(nchoosek)")
         return Decimal(nchoosek) * pow((1/6),k) * pow((5/6),n-k)
     }
-    func factorial(_ number : Int) -> Int{
+    
+    // a separate class for this math stuff would be cleaner?
+    private func factorial(_ number : Int) -> Int{
         var fact: Int = 1
         let n: Int = number + 1
         for i in 1..<n{
@@ -333,7 +338,7 @@ class OpponentModel: Model{
         return fact
     }
     
-    func getOddsForBids(plausibleBids: [String]) -> [(String,Decimal)]{
+    private func getOddsForBids(plausibleBids: [String]) -> [(String,Decimal)]{
                          // v--- beautiful
         //let plausibleBids = filterPlausibleBids(filterValidBids(generateAllBidsOfRankInOrder(rank: rank)))
         var bidsWithOdds = [(String,Decimal)]()
@@ -345,7 +350,7 @@ class OpponentModel: Model{
         return bidsWithOdds
     }
     
-    func maximumOverlap(bids: [String], fixed: String) -> String{
+    private func maximumOverlap(bids: [String], fixed: String) -> String{
         let allOverlaps = bids.map{return (calculateCommon(bid: $0, bid2: fixed),$0)}.sorted(by: {
             $0.0 > $1.0
         })
@@ -355,7 +360,7 @@ class OpponentModel: Model{
         return maxOverlaps[randomIndex].1
     }
     
-    func createValidBid(rank: Int) -> String{
+    private func createValidBid(rank: Int) -> String{
         // first check if we can bid truthfully
         if rank == -1 {
             var bid = game.getRoll()
@@ -404,53 +409,6 @@ class OpponentModel: Model{
         }
         return chosenBid
     }
-    
-    
-    private func rollDie() -> Int{
-        return Int(arc4random_uniform(UInt32(6))) + 1
-    }
-    // returns number of unique values in bid
-    private func uniqueValuesInBid(bid : String) -> String{
-        var set = Set<Character>()
-        let uniqueVals = String(bid.filter{ set.insert($0).inserted } )
-        return uniqueVals
-    }
-    private func uniqueFixedValuesHigherThan(uniqueBid: String, n: Int) -> String{
-        var result = ""
-        for i in 0..<uniqueBid.length{
-            if Int(uniqueBid[i])! > n {
-                result.append(uniqueBid[i])
-            }
-        }
-        return result
-    }
-    private func chooseRandom(from list: String) -> Int{
-        return Int(list[Int(arc4random_uniform(UInt32(list.length)))])!
-    }
-    
-    // default action for non-truthful
-    private func createBidFromDecision(_ newBidRank: Int) -> String{
-        
-        return ""
-    }
-    
-    // cant roll higher than 1
-    func rollHigherThan(n: Int) -> Int{
-        let bounds = UInt32(7 - n - 1)
-        let randomN = Int(arc4random_uniform(bounds))
-        let result = n + randomN + 1
-        return result == 7 ? 1 : result
-    }
-    
-    func rollExcept(n: Int) -> Int{
-        let randomN = Int(arc4random_uniform(5)) + 1
-        if randomN >= n{
-            return randomN+1
-        } else{
-            return randomN
-        }
-    }
-    
     
     func calculateTurn() -> Bool{
         // call bluff and end turn if the player is believed to bluff
