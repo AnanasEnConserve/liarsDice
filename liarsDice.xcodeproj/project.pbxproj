@@ -159,6 +159,7 @@
 				19CCF661203F09FB0078F878 /* Info.plist */,
 				D9ADB6C2204FEE60007CB047 /* model */,
 				D9BB055C2051893300F07073 /* String+Index.swift */,
+				D9C8BAA42077B7C1000565F4 /* UIButton+Fancy.swift */,
 				D9963504207394FC0009D17E /* UILabel+Fancy.swift */,
 			);
 			path = liarsDice;
@@ -207,7 +208,6 @@
 				D9ADB6C7204FF073007CB047 /* Player.swift */,
 				D93D70292052770600C95FA4 /* EBid.swift */,
 				D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */,
-				D9C8BAA42077B7C1000565F4 /* UIButton+Fancy.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";

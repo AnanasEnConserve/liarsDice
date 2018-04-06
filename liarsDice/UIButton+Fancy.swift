@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UILabel {
+extension UIButton {
     func glow(){
         self.layer.shadowColor = UIColor.white.cgColor
         self.layer.shadowRadius = 4.0
