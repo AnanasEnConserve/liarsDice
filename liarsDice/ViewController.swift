@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController,SecondViewControllerDelegate {
 
     
+    @IBOutlet weak var holdHelp: UILabel!
     
     // model that contains all data
     //
@@ -61,8 +62,16 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             if game.isBidABluff() == false {
                 holdButton.isHidden = false
                 holdButton.isEnabled = true
+                holdHelp.isHidden = false
+                
+                for index in 0..<allDice.count {
+                    allDice[index].isHighlighted = true
+                }
+                
             }
             //Perhaps disable interaction with dice if they cannot be fixed
+            
+            
             
             //show AllDice
             for index in 0..<5 {
@@ -100,6 +109,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             resetButton.isHidden = true
             holdButton.isHidden = true
             holdButton.isEnabled = false
+            holdHelp.isHidden = true
             
             //Show the activity indicator
             activityIndicator.startAnimating()
@@ -260,6 +270,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         bidButton.isEnabled = true
         holdButton.isHidden = true
         holdButton.isEnabled = false
+        holdHelp.isHidden = true
         selected.removeAll()
         
         for index in 0..<allDice.count {
@@ -347,7 +358,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             opponentBid.isHidden = true
             rollButton.isEnabled = true
            rollButton.isHidden = false
-        
+           holdHelp.isHidden = true
         
         
         }
@@ -467,6 +478,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         holdButton.isEnabled = false
         bidButton.isHidden = true
         bidButton.isEnabled = false
+        holdHelp.isHidden = true
         startGame()
         //Revert colors && enable buttons for dice
 //        for index in 0..<allDice.count {
