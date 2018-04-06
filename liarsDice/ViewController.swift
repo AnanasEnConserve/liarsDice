@@ -281,8 +281,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         rollDice()
         rollButton.isHidden = true
         rollButton.isEnabled = false
-        bidButton.isHidden = false
-        bidButton.isEnabled = true
+//        bidButton.isHidden = false
+//        bidButton.isEnabled = true
         holdButton.isHidden = true
         holdButton.isEnabled = false
         holdHelp.isHidden = true
@@ -548,6 +548,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                         let value = self.game.getDiceNumber(j)
                         self.allDice[j].setTitle(self.diceValues[value-1], for: UIControlState.normal)
                         self.currentRoll[j] = self.diceValues[value-1]
+                        self.bidButton.isHidden = false
+                        self.bidButton.isEnabled = true
                     }
                 }
              }
