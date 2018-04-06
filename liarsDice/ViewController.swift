@@ -55,17 +55,20 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             activityIndicator.stopAnimating()
             activityIndicator.hidesWhenStopped = true
             //Set game up for players turn
+            
+           
+            
             rollButton.isEnabled = true
             rollButton.isHidden = false
             
             //Check if bid was true, only then allow to hold dice
-            if game.isBidABluff() == false {
+            if game.isBidABluff() == false && game.getNumberOfFixedDice() <= 3 {
                 holdButton.isHidden = false
                 holdButton.isEnabled = true
                 holdHelp.isHidden = false
                 
                 for index in 0..<allDice.count {
-                    allDice[index].isHighlighted = true
+                    allDice[index].glow()
                 }
                 
             }
@@ -110,6 +113,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             holdButton.isHidden = true
             holdButton.isEnabled = false
             holdHelp.isHidden = true
+            
+            for index in 0..<allDice.count {
+                allDice[index].removeGlow()
+            }
+            
             
             //Show the activity indicator
             activityIndicator.startAnimating()
@@ -278,6 +286,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         holdButton.isHidden = true
         holdButton.isEnabled = false
         holdHelp.isHidden = true
+        
+        for index in 0..<allDice.count {
+            allDice[index].removeGlow()
+        }
+        
         selected.removeAll()
         
         for index in 0..<allDice.count {
@@ -366,6 +379,10 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             rollButton.isEnabled = true
            rollButton.isHidden = false
            holdHelp.isHidden = true
+        
+        for index in 0..<allDice.count {
+            allDice[index].removeGlow()
+        }
         
         
         }
@@ -486,6 +503,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         bidButton.isHidden = true
         bidButton.isEnabled = false
         holdHelp.isHidden = true
+        
+        for index in 0..<allDice.count {
+            allDice[index].removeGlow()
+        }
+        
         startGame()
         //Revert colors && enable buttons for dice
 //        for index in 0..<allDice.count {
