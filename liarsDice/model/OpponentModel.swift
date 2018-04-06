@@ -473,10 +473,6 @@ class OpponentModel: Model{
             } else{
                 pairValue = Int(uniqueFixed[0])!
             }
-            // not sure why it happens
-            if(pairValue == 0){
-                pairValue = 1
-            }
             bid = String(repeating: String(pairValue),count: 5)
             
             break
@@ -485,7 +481,7 @@ class OpponentModel: Model{
             return "11111"
         }
         // if something went wrong with the creation of the bid, go full panic and surrender by making absurd bid
-        if(game.calculateRank(bid) < rank){
+        if(game.calculateRank(bid) < rank || bid == "00000"){
             bid = "11111"
         }
         return bid
@@ -575,8 +571,8 @@ class OpponentModel: Model{
     
     func incrementPlayerGul(){
         playerGul += 1
-        if(playerGul > 2){
-            playerGul = 2
+        if(playerGul > 3){
+            playerGul = 3
         }
     }
     func decrementPlayerGul(){

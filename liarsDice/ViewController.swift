@@ -86,7 +86,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             bidButton.isEnabled = false
             
             print("It is now the Opponent's turn")
-            opponentBid.text = "Dumb AI is considering his options..."
+            opponentBid.text = "The opponent is considering his options..."
             opponentBid.isHidden = false
             
             //hide AllDice
