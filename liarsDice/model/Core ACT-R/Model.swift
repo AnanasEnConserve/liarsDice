@@ -89,11 +89,11 @@ class Model {
 
         
         for (_,chunk) in dm.chunks {
-            print("\(chunk)")
+            //print("\(chunk)")
         }
         print("")
         for (_,prod) in procedural.productions {
-            print("\(prod)")
+            //print("\(prod)")
         }
     }
     
