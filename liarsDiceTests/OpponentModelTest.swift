@@ -47,31 +47,31 @@ class OpponentModelTest: XCTestCase {
         model.makeBid()
         _ = model.believePlayer()
         model.makeBid()
-        var n = 0
-        for _ in 1..<1000{
-            n = model.rollHigherThan(n: 2)
-            assert(n == 1 ||  n > 2 && n <= 6)
-            n = model.rollHigherThan(n: 6)
-            assert(n == 1)
-        }
+        
+    }
+    func testConflicts(){
+        
+        let game = LiarsDiceGame(pName: "UnitTester")
+        let model = OpponentModel(game: game)
+//        model.isConflicting(bid: "11111", fixed: "11111")
+//        model.isConflicting(bid: "123", fixed: "45")
+//        model.isConflicting(bid: "11222", fixed: "1132")
+//        model.isConflicting(bid: "11111", fixed: "1112")
+        game.setBid("11")
+        game.fixDice([0,3])
+        model.makeBid2(rank: 2)
+        
         
     }
     
-    func testBidding(){
-        let game = LiarsDiceGame(pName: "HonestPlayer")
-        let model = OpponentModel(game: game)
-        game.rollDice()
-        game.setBid("2")
-        for i in 0..<4{
-            print(model.createValidBid(rank: 1))
-            print(model.createValidBid(rank: 2))
-            print(model.createValidBid(rank: 3))
-            print(model.createValidBid(rank: 4))
-            print(model.createValidBid(rank: 5))
-            print(model.createValidBid(rank: 6))
-            game.fixDice([i])
-        }
+    func testOverlaps(){
         
+        let game = LiarsDiceGame(pName: "UnitTester")
+        let model = OpponentModel(game: game)
+        
+        print(model.maximumOverlap(bids: ["11122","22233","11133"], fixed: "23"))
+        print(model.maximumOverlap(bids: ["11122","22233","11133"], fixed: "12"))
+        print(model.maximumOverlap(bids: ["11122","22233","11133","1212"], fixed: "12"))
     }
     
     func testPerformanceExample() {

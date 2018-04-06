@@ -104,7 +104,7 @@ class OpponentModel: Model{
             }
             
         }
-        
+
     }
     
     
@@ -120,6 +120,14 @@ class OpponentModel: Model{
         }
     }
     func believePlayer() -> Bool{
+        // check if the bid is possible at all given the fixedDice
+        if(isConflicting(bid: game.getLastBid(), fixed: game.getFixedDice())){
+            return false
+        }
+        // also always call bullshit if rank is 6 (model should take care of it but seems buggy)
+        if(game.getLastBidRank() == 6){
+            return false
+        }
         
         let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: player, influence: " + String(influence())
         print(msg)
@@ -139,8 +147,6 @@ class OpponentModel: Model{
         
     }
     
-    // TODO call machine learning part
-    // just be a dumb AI and fix the first one (if it isnt yet)
     func fixDice(){
         if(game.getNumberOfFixedDice() >= 4) {return}
         let Decider = diceDecider();
@@ -159,9 +165,8 @@ class OpponentModel: Model{
         
     }
     
-    // teing
     func makeBid(){
-        let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: 0, fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: model, influence: " + String(influence())
+        let msg = "playerbid: " + String(game.getLastBidRank()) + ", modelbid: \(game.calculateRankOfRoll()), fix: " + String(game.getNumberOfFixedDice()) + ", playerBluff: " + String(playerBluff) + ", playerGul: " + String(playerGul) + ", turn: model, influence: " + String(influence())
         print(msg)
         self.modifyLastAction(slot: "playerbid", value: String(game.getLastBidRank()))
         self.modifyLastAction(slot: "modelbid", value: String(game.calculateRankOfRoll()))
@@ -175,7 +180,7 @@ class OpponentModel: Model{
         print("WHAT TO BID: ")
         let response = self.lastAction(slot: "response")
         print(String(describing: response))
-        var newBidRank = game.getLastBidRank()
+        var newBidRank = min(game.getLastBidRank(),game.calculateRankOfRoll())
         // model only works if it runs again after response...
         self.run()
         if(response == nil){
@@ -198,7 +203,12 @@ class OpponentModel: Model{
                 newBidRank = -1
                 break
             default: // lastresort OR model fails and returns nil
-                newBidRank += 1
+                // try to stay within same rank if there are plausible bids, otherwise increase
+                print("last resort: last bid is \(game.getLastBid()), fixed dice are \(game.getFixedDice())" )
+                let canStayInRank = filterPlausibleBids(filterValidBids(generateAllBidsOfRankInOrder(rank: newBidRank))).count != 0
+                if(!canStayInRank){
+                    newBidRank += 1
+                }
             
             }
         }
@@ -206,286 +216,195 @@ class OpponentModel: Model{
         game.setBid(createValidBid(rank: newBidRank))
         
     }
-    func makeBid2(){
-        // very smart bids
-        switch game.getLastBidRank() {
-        case 0:
-            game.setBid("22")
-        case 1:
-            game.setBid("2233")
-        case 2:
-            game.setBid("222")
-        case 3:
-            game.setBid("22233")
-        case 4:
-            game.setBid("2222")
+    
+    public func generateAllBidsOfRankInOrder(rank : Int) -> [String]{
+        var bids = [String]()
+        let eyesFromLowToHigh = "234567"
+        switch rank {
+        case 0: // single
+            for i in eyesFromLowToHigh{
+                bids.append(String(i))
+            }
+            break
+        case 1: // 1 pair
+            for i in eyesFromLowToHigh{
+                bids.append(String(repeating: String(i), count: 2))
+            }
+            break
+        case 2: // 2 pair
+            for i in eyesFromLowToHigh{
+                let tmpFirstValue = String(repeating: String(i), count: 2)
+                for j in eyesFromLowToHigh{
+                    if(j < i){ // avoid symmetrical (1122 and 2211), so w.l.o.g. j < i
+                        bids.append(tmpFirstValue + String(repeating: String(j), count: 2))
+                    }
+                }
+            }
+            break
+        case 3: // 3 of a kind
+            for i in eyesFromLowToHigh{
+                bids.append(String(repeating: String(i), count: 3))
+            }
+            break
+        case 4: // Full house
+            for i in eyesFromLowToHigh{
+                let tmpFirstValue = String(repeating: String(i), count: 3)
+                for j in eyesFromLowToHigh{
+                    if(j != i){ // no symmetry occurs in Full House (33322 != 22233)
+                        bids.append(tmpFirstValue + String(repeating: String(j), count: 2))
+                    }
+                }
+            }
+            break
+        case 5: // 4 of a kind
+            for i in eyesFromLowToHigh{
+                bids.append(String(repeating: String(i), count: 4))
+            }
+            break
+        case 6: // 5 of a kind
+            for i in eyesFromLowToHigh{
+                bids.append(String(repeating: String(i), count: 5))
+            }
+            break
         default:
-            game.setBid("11111")
+            print("if you see this something went terribly horribly wrong")
+            return []
+        }
+        
+        bids = bids.map{$0.replacingOccurrences(of: "7", with: "1")}
+        return bids
+    }
+    
+    // filters out all bids from a list that aren't valid at this point of the game
+    func filterValidBids(_ bids: [String]) -> [String]{
+        return bids.filter{
+            game.bidIsHigher($0)
         }
     }
     
-    // makes a bid that is guaranteed to be valid if the input rank is higher (or equal) than the last bid
-    // this method does NOT cover all cases (absurd ones such as 4 dice fixed but bid rank 0)
-    // in those cases there will still be a bid but there is a chance for them to be impossible due to
-    // contradicting the visible dice
-    // most of these have a randomness factor for believability, but they do not correspond to the
-    // actual probabilities
-    // todo make private after testing
-    // truthful bids are not checked btw
-    public func createValidBid(rank: Int) -> String{
-        print("creating bid of higher/eq rank: " + String(rank))
-                if rank == -1 {
-                    var bid = game.getRoll()
-                    var counts: [Character:Int] = [:]
-                    for i in bid {
-                        counts[i] = (counts[i] ?? 0) + 1
-                    }
-                    var toFilterOut = ""
-                    for idx in counts.keys{
-                        if counts[idx] == 1{
-                            toFilterOut.append(idx)
-                        }
-                    }
-                    bid = bid.filter {!toFilterOut.contains($0)}
-                    return bid
-                }
+    private func calculateCommon(bid: String, bid2: String) -> Int{
+        // count each element in both to calculate common elements including duplicates
+        var counts1: [Character: Int] = [:]
+        for c in bid{
+            counts1[c] = (counts1[c] ?? 0) + 1
+        }
+        var counts2: [Character: Int] = [:]
+        for c in bid2{
+            counts2[c] = (counts2[c] ?? 0) + 1
+        }
+        var common = ""
+        for c in "234561"{
+            common += String(repeating: String(c),count: min(counts1[c] ?? 0,counts2[c] ?? 0))
+        }
+        return common.count
         
-        if(rank < game.getLastBidRank()){
-            print("create bid of higher rank: invalid rank (lower than last bid)")
-        }
-        // the bid to be returned
-        var bid = ""
-        // variables for rolling randoms
-        var pairValue = 0
-        // variable for keeping track of excluded rolls
-        // (eg we want to make 2 pair, first pair is already 22,
-        // so when randomly rolling another pair, exclude 2)
-        var excluding = 0
-        // the basis of new bid is the dice that are already visible (fixed) to the player for plausibility
-        // fixed is normalized so that the most frequent value is always at index 0
-        let fixed = game.normalizeBid(game.getFixedDice())
-        let fixedRank = game.calculateRank(fixed)
-        let fixedNumber = game.getNumberOfFixedDice()
-        let uniqueFixed = uniqueValuesInBid(bid: fixed) // used to check if full house and above are possible
-        var uniqueHigherThan = ""
-        let lastBid = game.getLastBid()
-        let lastBidRank = game.getLastBidRank()
-        let msg = "fixed: " + String(fixed) + " (rank of fixed dice only: " + String(fixedRank) + "; last bid was " + lastBid + " (rank " + String(lastBidRank) + ")"
-        print(msg)
-        // ugly part begins here, consider all possible cases.
-        // some cases are not possible, e.g. 3 dice are fixed and aren't equal, then four/five of a kind
-        // are ruled out.
-        // also case 0 is never needed in this function since it can't be higher than anything (equal rank bids are somewhere else)
-        switch rank {
-        // rank 0: ignore fixed dice (why should there be any), just roll higher than last bid
-        case 0:
-            if(lastBid.length >= 0){
-                bid = String(rollHigherThan(n: Int(lastBid[0])!))
-            } else {
-                bid = String(rollDie())
-            }
-        case 1: // one pair
-            if(lastBidRank == 1){
-                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: fixed, n: Int(lastBid[0])!)
-                // if there are fixed dice that are higher in value than the pair, 50% chance of using them
-                if(uniqueHigherThan.length > 0 && arc4random_uniform(2) == 0){
-                    // beautiful
-                    pairValue = chooseRandom(from: uniqueHigherThan)
-                } else{
-                    pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
-                }
-            } else {
-                if fixedNumber > 0 {
-                
-                    pairValue = chooseRandom(from: fixed)
-                    // if we have 3 or less dice fixed we can just reroll for any
-                    if fixedNumber < 4{
-                        // todo: proper math?
-                        if arc4random_uniform(100) < 100 - fixedNumber*20{
-                            pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
-                        }
-                    }
-                } else {
-                    pairValue = Int(rollHigherThan(n: Int(lastBid[0])!))
-                }
-                
-            }
-            bid = String(repeating: String(pairValue), count:2)
-            break
-            // for rank 2, we check if there is already a pair. If so, add another pair.
-            // if there are more than 2 fixed (eg 112) give a higher probability for 1122 than 1133 etc
-        case 2: // two pair
-            
-            if lastBidRank == 2{
-                print("LAST BID WAS RANK 2 --------------------")
-                // make sure the bid is valid by rolling one higher value
-                pairValue = rollHigherThan(n: Int(lastBid[0])!)
-                bid = String(repeating: String(pairValue), count: 2)
-                // todo have a look at fixed dice?
-                bid += String(repeating: String(rollExcept(n: pairValue)), count: 2)
-                break
-            }
-            
-            // already a fixed pair
-            if fixedRank == 1{
-                excluding = Int(fixed[0])!
-                if fixedNumber > 2{
-                    // guaranteed the first non-pair unless bid was lower than the fixed dice which is bull
-                    // and should never happen. Add the case when there is time otherwise leave it
-                    pairValue = Int(fixed[2])!
-                    if(arc4random_uniform(2) == 0){
-                        // note that this can still be the the pair value, so overall odds is above 50%
-                        pairValue = rollExcept(n: excluding)
-                    }
-                }
-                else{
-                    pairValue = rollExcept(n: excluding)
-                }
-                bid = fixed.substring(from: 0, to: 2) + String(repeating: String(pairValue), count: 2)
-            }
-                // guaranteed rank 0 then
-            else {
-                if(fixedNumber > 0){
-                    pairValue = chooseRandom(from: fixed)
-                    if fixedNumber < 5{
-                        // todo: proper math?
-                        if arc4random_uniform(100) < 100 - fixedNumber*10{
-                            pairValue = rollDie()
-                        }
-                    }
-                } else{
-                    pairValue = rollDie()
-                }
-                bid = String(pairValue) + String(pairValue)
-                // just roll another
-                excluding = pairValue
-                pairValue = rollExcept(n: excluding)
-                bid += String(pairValue) + String(pairValue)
-            }
-            break
-        case 3: // three of a kind
-            if (lastBidRank == 3){
-                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
-                if(uniqueHigherThan.length > 0){
-                    pairValue = chooseRandom(from: uniqueHigherThan)
-                } else {
-                    pairValue = rollHigherThan(n: Int(lastBid[0])!)
-                }
-                bid = String(repeating: String(pairValue), count:3)
-                break
-            }
-            
-            // if we still have at least one fixed and 2 non-fixed, we can take any
-            // of the fixed ones and make 3 of them. Note that if 3 are fixed and one is a pair,
-            // that one automatically gets better odds
-            if fixedNumber > 0 && fixedNumber < 4{
-                pairValue = Int(fixed[Int(arc4random_uniform(UInt32(fixedNumber)))])!
-                
-            } else {
-                pairValue = rollDie()
-            }
-            bid = String(repeating: String(pairValue),count: 3)
-            break
-        case 4: // full house
-            // check if there are more than 3 different dice fixed because it means impossible
-            if uniqueFixed.length > 2{
-                print("PANIC! TRIED TO FULL HOUSE when there are more than 2 fixed dice of different values")
-                return "11111"
-            }
-            if(lastBidRank == 4){
-                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: fixed, n: Int(lastBid[0])!)
-                if uniqueHigherThan.length >= 0{
-                    pairValue = Int(uniqueHigherThan[0])!
-                    
-                }
-                else{
-                    pairValue = rollHigherThan(n: Int(lastBid[0])!)
-                }
-                bid = String(repeating: String(pairValue), count: 3)
-                if uniqueHigherThan.length == 1{
-                    bid += String(repeating: uniqueHigherThan[1], count: 2)
-                }else {
-                    bid += String(repeating: String(rollExcept(n: pairValue)), count: 2)
-                }
-                break
-            }
-            
-            if uniqueFixed.length > 0{
-                print("trying to make full house: there are so many different fixed dice: " + uniqueFixed)
-                print("uniqueFixed: \(uniqueFixed)")
-                pairValue = Int(uniqueFixed[0])!
-                bid = String(repeating: String(pairValue), count: 3 )
-                if uniqueFixed.length == 1{
-                    excluding = pairValue
-                    pairValue = rollExcept(n: excluding)
-                    bid += String(repeating: String(pairValue), count: 2 )
-                }
-                else if uniqueFixed.length == 2{
-                    pairValue = Int(uniqueFixed[1])!
-                    bid += String(repeating: String(pairValue), count: 2 )
-                    }
-                
-            }
-            // 0 fixed, any full house will do
-            else {
-                pairValue = rollDie()
-                bid = String(repeating: String(pairValue), count: 3)
-                excluding = pairValue
-                bid += String(repeating: String(rollExcept(n: excluding)), count:2)
-            }
-            break
-        case 5: // four of a kind
-            if uniqueFixed.length > 2{
-                print("HELP HOW CAN I MAKE 4 OF A KIND IF MORE THAN 2 VALUES ARE FIXED")
-                return "11111"
-            }
-            if(lastBidRank == 5){
-                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
-                if(uniqueHigherThan.length > 0){
-                    pairValue = Int(uniqueHigherThan[0])!
-                }
-                bid = String(repeating: String(pairValue), count: 4)
-                break
-            }
-            if(uniqueFixed.length == 0){
-                pairValue = rollDie()
-            } else{
-                pairValue = Int(uniqueFixed[0])!
-            }
-            bid = String(repeating: String(pairValue),count: 4)
-            break
-        case 6: // five of a kind
-            if uniqueFixed.length > 1{
-                print("HELP I AM HAVING A HEART ATTACK (five of a kind not possible)")
-                return "11111"
-            }
-            
-            if(lastBidRank == 5){
-                uniqueHigherThan = uniqueFixedValuesHigherThan(uniqueBid: uniqueFixed, n: Int(lastBid[0])!)
-                if(uniqueHigherThan.length > 0){
-                    pairValue = Int(uniqueHigherThan[0])!
-                }
-                bid = String(repeating: String(pairValue), count: 5)
-                break
-            }
-            if(uniqueFixed.length == 0){
-                pairValue = rollDie()
-            } else{
-                pairValue = Int(uniqueFixed[0])!
-            }
-            bid = String(repeating: String(pairValue),count: 5)
-            
-            break
-        default:
-            print("how the fuck did I end up in the default case (createbidofhigherrank)")
-            return "11111"
-        }
-        // if something went wrong with the creation of the bid, go full panic and surrender by making absurd bid
-        if(game.calculateRank(bid) < rank || bid == "00000"){
-            bid = "11111"
-        }
-        return bid
     }
+    private func isConflicting(bid : String, fixed: String) -> Bool{
+        let bidLength = bid.count
+        let fixedLength = fixed.count
+        let common = calculateCommon(bid: bid, bid2: fixed)
+        //print("common elements of \(bid) and \(fixed): \(common)")
+        let conflicting = fixedLength + bidLength - common > 5
+        //print("Is conflicting: \(conflicting)")
+        return conflicting
+        
+    }
+    
+    func filterPlausibleBids(_ bids: [String]) -> [String]{
+        let fixed = game.getFixedDice()
+        return bids.filter{!isConflicting(bid: $0, fixed: fixed)}
+    }
+    
+    private func oddsOfBid(bid: String) -> Decimal{
+        print(calculateCommon(bid: bid, bid2: game.getFixedDice()))
+        let k = bid.count - calculateCommon(bid: bid, bid2: game.getFixedDice())
+        let n = 5 - game.getFixedDice().count
+       
+        let nchoosek = factorial(n)/(factorial(k)*factorial(n-k))
+        //print("n: \(n), k: \(k), n choose k: \(nchoosek)")
+        return Decimal(nchoosek) * pow((1/6),k) * pow((5/6),n-k)
+    }
+    func factorial(_ number : Int) -> Int{
+        var fact: Int = 1
+        let n: Int = number + 1
+        for i in 1..<n{
+            fact = fact * i
+        }
+        return fact
+    }
+    
+    func getOddsForBids(plausibleBids: [String]) -> [(String,Decimal)]{
+                         // v--- beautiful
+        //let plausibleBids = filterPlausibleBids(filterValidBids(generateAllBidsOfRankInOrder(rank: rank)))
+        var bidsWithOdds = [(String,Decimal)]()
+        var lastOdds = Decimal()
+        for b in plausibleBids{
+            lastOdds += oddsOfBid(bid: b)
+            bidsWithOdds.append((b,lastOdds))
+        }
+        return bidsWithOdds
+    }
+    
+    func maximumOverlap(bids: [String], fixed: String) -> String{
+        let allOverlaps = bids.map{return (calculateCommon(bid: $0, bid2: fixed),$0)}.sorted(by: {
+            $0.0 > $1.0
+        })
+        let max = allOverlaps[0].0
+        let maxOverlaps = allOverlaps.filter{$0.0 == max}
+        let randomIndex = Int(arc4random_uniform(UInt32(maxOverlaps.count)))
+        return maxOverlaps[randomIndex].1
+    }
+    
+    func createValidBid(rank: Int) -> String{
+        // first check if we can bid truthfully
+        if rank == -1 {
+            var bid = game.getRoll()
+            var counts: [Character:Int] = [:]
+            for i in bid {
+                counts[i] = (counts[i] ?? 0) + 1
+            }
+            var toFilterOut = ""
+            for idx in counts.keys{
+                if counts[idx] == 1{
+                    toFilterOut.append(idx)
+                }
+            }
+            bid = bid.filter {!toFilterOut.contains($0)}
+            return bid
+        }
+        let validBids = filterValidBids(generateAllBidsOfRankInOrder(rank: rank))
+        //print("valid bids: \(validBids)")
+        let plausibleBids = filterPlausibleBids(validBids)
+        if(plausibleBids.isEmpty){
+            // if plausible bid on the same tier isnt possible go one higher if possible
+            if (rank < 6){
+                return createValidBid(rank: rank+1)
+            }
+                return maximumOverlap(bids: validBids, fixed: game.getFixedDice())
+            }
+        
+        //print("fixed dice: \(game.getFixedDice()), plausible: \(plausibleBids)")
+        //print("with odds (cumulative)")
+        let bidsWithOdds = getOddsForBids(plausibleBids: plausibleBids)
+        let (_,totalOdds) = bidsWithOdds.last!
+        let random = Decimal(arc4random()) / Decimal(UINT32_MAX) * totalOdds
+        var chosenBid = ""
+        for (bid,odds) in bidsWithOdds{
+            if(odds <= random){
+                continue
+            }
+            else {
+                chosenBid = bid
+                break
+            }
+        }
+        // in case something goes wrong; it shouldnt but we are paranoid
+        if(chosenBid == ""){
+            return plausibleBids[0]
+        }
+        return chosenBid
+    }
+    
     
     private func rollDie() -> Int{
         return Int(arc4random_uniform(UInt32(6))) + 1
