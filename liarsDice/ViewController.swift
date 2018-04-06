@@ -42,7 +42,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             }
             
             print("Debug Array:: " , debugArray)
-            debugArray.sort()
+            debugArray = debugArray.sorted()
             for index in 0..<debugArray.count {
                 diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
             }
@@ -161,7 +161,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     }
                 }
                 print("Debug Array:: " , self.debugArray)
-                //debugArray.sort()
+                self.debugArray.sort()
                 for index in 0..<self.debugArray.count {
                     self.diceTakenOut[index].setTitle(self.debugArray[index], for: UIControlState.normal)
                 }
