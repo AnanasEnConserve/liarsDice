@@ -367,7 +367,7 @@ class SecondViewController: UIViewController {
         print("disabling everything up to " + String(disableUpTo))
 
         for i in 0..<disableUpTo{
-            rankButtons[i].setTitleColor(#colorLiteral(red: 0.8230279496, green: 0.8088910749, blue: 0.835492228, alpha: 1), for: UIControlState.normal)
+            rankButtons[i].setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 0.2018045775), for: UIControlState.normal)
             rankButtons[i].isEnabled = false
         }
         // in case of reset, we need to re-enable previously disabled bids

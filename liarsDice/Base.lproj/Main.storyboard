@@ -107,14 +107,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="400" id="sKX-Y0-bG0"/>
                                         </constraints>
-                                        <mutableString key="text">
+                                        <string key="text">
 The player always starts the round, and can do so by rolling the dice. Afterwards, the player makes a bid based on what he has rolled. You have the opportunity to lie about your roll. Be careful though, as you will lose the round when your bluff is called! 
 
 The opponent will then choose to accept the bid or call bluff. When accepting, the opponent will make a bid. Note that each bid has to be higher than the previous bid.
 
 When accepting a bid that is truthful, you are granted the opportunity to fix dice, taking them out of play until the end of the round. Removed dice will appear on the left side of the screen. Think carefully on which dice to remove, as removed dice can not be brought back into play!
 
-Calling a bluff will always end the current round. If calling out an actual bluff, you will win the round. When calling bluff on a truthful bid, you will lose the round. One point is always awarded at the end of a round to the winning player, and both scores and streaks are kept so you can challenge yourself to get the highest win streak possible!</mutableString>
+Calling a bluff will always end the current round. If calling out an actual bluff, you will win the round. When calling bluff on a truthful bid, you will lose the round. One point is always awarded at the end of a round to the winning player, and both scores and streaks are kept so you can challenge yourself to get the highest win streak possible!</string>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -268,13 +268,6 @@ Note that the one is treated as an ace and is the highest value. A pair of ones
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Streak : 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-A8-gsA">
-                                <rect key="frame" x="293" y="624" width="74" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zmh-lS-35z">
@@ -473,6 +466,13 @@ Note that the one is treated as an ace and is the highest value. A pair of ones
                                     <segue destination="GJN-Ms-1cc" kind="show" identifier="goToBidding" id="vYc-gz-fgz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Streak : 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-A8-gsA">
+                                <rect key="frame" x="293" y="624" width="74" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

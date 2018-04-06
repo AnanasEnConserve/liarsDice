@@ -71,20 +71,26 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     allDice[index].glow()
                 }
                 
+                //show AllDice
+                for index in 0..<5 {
+                    if(game.isInPlay(i: index)){
+                        if game.isBidABluff() == false{
+                            allDice[index].isEnabled = true
+                        }
+                        allDice[index].isHidden = false
+                    }
+                }
+                
             }
             //Perhaps disable interaction with dice if they cannot be fixed
             
-            
-            
-            //show AllDice
             for index in 0..<5 {
-               if(game.isInPlay(i: index)){
-                    if game.isBidABluff() == false{
-                        allDice[index].isEnabled = true
-                    }
+                if(game.isInPlay(i: index)){
                     allDice[index].isHidden = false
                 }
             }
+            
+      
             resetButton.isEnabled = true
             resetButton.isHidden = false
             
@@ -127,7 +133,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
             print("before calculate turn")
             print(game.getLastBid())
-            if (opponentModel.calculateTurn()){
+            var didGameEnd = opponentModel.calculateTurn()
+            if (didGameEnd){
+                
                 let didPlayerWin = !game.callBluff() // falsely called bluff = player wins win
                 //opponentModel.updatePlayerProfile()
                 if didPlayerWin{
@@ -137,6 +145,9 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     continueButton.isEnabled = true
                     continueButton.isHidden = false
                     endRound()
+                    
+            
+                    
                 }
                 else{
                     print("Opponent won")
@@ -145,12 +156,17 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                     continueButton.isEnabled = true
                     continueButton.isHidden = false
                     endRound()
+                    
+            
+                    
                 }
                 self.updateScores()
                 game.reset()
                 self.highlightTurn()
                 rollButton.isEnabled = false
                 rollButton.isHidden = true
+                
+                if(!didGameEnd){
                 
                 for index in 0..<5 {
                     if game.isFixed(i: index) == true { // && debugIndex.contains(index) == false {
@@ -161,6 +177,8 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                 debugArray.sort()
                 for index in 0..<debugArray.count {
                     diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
+                    }
+                    
                 }
                 
                 return
@@ -448,6 +466,18 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         // clear selection
         selected.removeAll()
         
+        if game.getNumberOfFixedDice() == 4 {
+            holdButton.isHidden = true
+            holdButton.isEnabled = false
+            holdHelp.isHidden = true
+            
+            for index in 0..<allDice.count {
+                allDice[index].isEnabled = false
+                allDice[index].removeGlow()
+            }
+            
+        }
+        
 
     }
       //TODO: Only allow to Hold once per turn;
@@ -641,6 +671,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             continueButton.isEnabled = true
             continueButton.isHidden = false
             rollButton.isHidden = true
+            
+            for index in 0..<4 {
+                diceTakenOut[index].setTitle("", for: UIControlState.normal)
+            }
+            
         }
         else{
             print("Opponent won")
@@ -649,6 +684,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             continueButton.isEnabled = true
             continueButton.isHidden = false
             rollButton.isHidden = true
+            
+            for index in 0..<4 {
+                diceTakenOut[index].setTitle("", for: UIControlState.normal)
+            }
+            
         }
         self.updateScores()
         //game.reset()
@@ -664,6 +704,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             diceTakenOut[index].setTitle("", for: UIControlState.normal)
         }
         game.reset()
+        selected.removeAll()
         
         acceptButton.isHidden = true
         bluffButton.isHidden = true
