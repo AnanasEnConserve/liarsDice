@@ -49,20 +49,6 @@ class OpponentModelTest: XCTestCase {
         model.makeBid()
         
     }
-    func testConflicts(){
-        
-        let game = LiarsDiceGame(pName: "UnitTester")
-        let model = OpponentModel(game: game)
-//        model.isConflicting(bid: "11111", fixed: "11111")
-//        model.isConflicting(bid: "123", fixed: "45")
-//        model.isConflicting(bid: "11222", fixed: "1132")
-//        model.isConflicting(bid: "11111", fixed: "1112")
-        game.setBid("11")
-        game.fixDice([0,3])
-        model.makeBid2(rank: 2)
-        
-        
-    }
     
     func testOverlaps(){
         

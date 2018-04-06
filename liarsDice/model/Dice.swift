@@ -12,7 +12,6 @@ class Dice {
     private var eyes = 1
     private var inPlay = true
     
-    
     init() {
         roll()
     }

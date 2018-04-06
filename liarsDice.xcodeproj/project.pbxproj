@@ -32,6 +32,7 @@
 		D9ADB6C4204FF03B007CB047 /* LiarsDiceGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */; };
 		D9ADB6C8204FF073007CB047 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADB6C7204FF073007CB047 /* Player.swift */; };
 		D9BB055D2051893300F07073 /* String+Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BB055C2051893300F07073 /* String+Index.swift */; };
+		D9C8BAA52077B7C1000565F4 /* UIButton+Fancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C8BAA42077B7C1000565F4 /* UIButton+Fancy.swift */; };
 		D9EE0A16205BCC0000F4B7E3 /* OpponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */; };
 		D9F7A08220614E4A000EC7CC /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7A08120614E4A000EC7CC /* Chunk.swift */; };
 		D9F7A09020614E53000EC7CC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7A08320614E52000EC7CC /* Model.swift */; };
@@ -89,6 +90,7 @@
 		D9ADB6C3204FF03B007CB047 /* LiarsDiceGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiarsDiceGame.swift; sourceTree = "<group>"; };
 		D9ADB6C7204FF073007CB047 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D9BB055C2051893300F07073 /* String+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Index.swift"; sourceTree = "<group>"; };
+		D9C8BAA42077B7C1000565F4 /* UIButton+Fancy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Fancy.swift"; sourceTree = "<group>"; };
 		D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentModel.swift; sourceTree = "<group>"; };
 		D9F7A08120614E4A000EC7CC /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
 		D9F7A08320614E52000EC7CC /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				D9ADB6C7204FF073007CB047 /* Player.swift */,
 				D93D70292052770600C95FA4 /* EBid.swift */,
 				D9EE0A15205BCC0000F4B7E3 /* OpponentModel.swift */,
+				D9C8BAA42077B7C1000565F4 /* UIButton+Fancy.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				19CCF658203F09FB0078F878 /* ViewController.swift in Sources */,
 				D9F7A09020614E53000EC7CC /* Model.swift in Sources */,
 				D9EE0A16205BCC0000F4B7E3 /* OpponentModel.swift in Sources */,
+				D9C8BAA52077B7C1000565F4 /* UIButton+Fancy.swift in Sources */,
 				D99634FD20736CD20009D17E /* diceDecider.swift in Sources */,
 				D9ADB6C1204FEE5D007CB047 /* Dice.swift in Sources */,
 				19F15468205C077F00B620D5 /* StartViewController.swift in Sources */,

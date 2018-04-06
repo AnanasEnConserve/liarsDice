@@ -134,8 +134,15 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
                 rollButton.isEnabled = false
                 rollButton.isHidden = true
                 
-                for idx in 0..<4 {
-                    diceTakenOut[idx].setTitle("", for: UIControlState.normal)
+                for index in 0..<5 {
+                    if game.isFixed(i: index) == true { // && debugIndex.contains(index) == false {
+                        debugArray.append(allDice[index].title(for: UIControlState.normal)!)
+                        debugIndex.append(index)
+                    }
+                }
+                debugArray.sort()
+                for index in 0..<debugArray.count {
+                    diceTakenOut[index].setTitle(debugArray[index], for: UIControlState.normal)
                 }
                 
                 return
