@@ -136,19 +136,20 @@ Calling a bluff will always end the current round. If calling out an actual bluf
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1z-Pt-7SG">
                                         <rect key="frame" x="0.0" y="440" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">The rankings of patterns one can bid is as follows 
-(from high to low):
+                                        <string key="text">
+The rankings of patterns one can bid is as follows 
+(in ascending order):
 
-Five of a kind
-Four of a kind
-Full house
-Three of a kind
-Two pair
-One pair
 Single die
+One pair
+Two pair
+Three of a kind
+Full house
+Four of a kind
+Five of a kind
 
-The rankings of eyes is as follows (from high to low):
-1, 6, 5, 4, 3, 2.
+The rankings of eyes is as follows (in ascending order):
+2, 3, 4, 5, 6, 1.
 
 Note that the one is treated as an ace and is the highest value. A pair of ones is therefore the highest possible pair and will beat a pair of sixes.</string>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
