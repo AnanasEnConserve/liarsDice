@@ -260,6 +260,12 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
         bidButton.isEnabled = true
         holdButton.isHidden = true
         holdButton.isEnabled = false
+        selected.removeAll()
+        
+        for index in 0..<allDice.count {
+            allDice[index].isEnabled = false
+        }
+        
     }
     
     //TODO:
@@ -435,6 +441,11 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
     
     @IBAction func resetGame(_ sender: UIButton) {
         reset()
+        game.reset()
+        selected.removeAll()
+        opponentBid.text = ""
+        labelPlayerStreak.text = "Streak: 0"
+        labelOpponentStreak.text = "Streak: 0"
     }
     var playerHasWon = false
     //Function to reset the game (start new round && reset scores)
@@ -506,6 +517,7 @@ class ViewController: UIViewController,SecondViewControllerDelegate {
             allDice[i].setTitle(diceValues[value-1], for: UIControlState.normal)
             currentRoll[i] = diceValues[value-1]
         }
+        currentRoll = currentRoll.sorted()
         print("currentroll:: " , currentRoll)
         currentRollAsString = currentRoll.joined(separator: " ")
         print(currentRollAsString)
